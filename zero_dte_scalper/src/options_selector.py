@@ -110,9 +110,12 @@ def select_best_contract(
         "targets": {
             "stop_loss_pct": stop_loss_pct,
             "stop_loss_price": stop_loss_price,
+            "stop_price": stop_loss_price,
             "tp1_pct": tp1_pct,
             "tp1_price": tp1_price,
+            "target_1": tp1_price,
             "tp2_pct": tp2_pct,
             "tp2_price": tp2_price,
+            "target_2": tp2_price,
         }
     }

@@ -946,6 +946,34 @@
         </div>
       </div>
 
+      <!-- Closed Scalp Trade History & Execution Journal -->
+      <div class="card" style="margin-bottom:20px;">
+        <div class="section-title">
+          <span>Today's Scalp Trade History &amp; Execution Journal</span>
+          <span class="mono val-green" style="font-size:11px; font-weight:700;" id="history-pnl-label">+$0.00 Realized</span>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Contract</th>
+                <th>Action</th>
+                <th>Qty</th>
+                <th>Entry</th>
+                <th>Exit</th>
+                <th>Realized P&amp;L</th>
+                <th>Exit Reason</th>
+                <th>Technical Setup</th>
+              </tr>
+            </thead>
+            <tbody id="history-table-body">
+              <tr><td colspan="9" style="text-align:center; color:var(--text-muted); padding:20px;">No closed scalp trades yet today.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- Option Chain Preview Table -->
       <div class="split-grid">
         <div class="card">
@@ -1710,12 +1738,18 @@
       const rec = cur.recommendation;
       if (rec && rec.contract) {
         const c = rec.contract;
-        $('rec-contract-symbol').textContent = `${c.contract_symbol} ($${c.strike.toFixed(2)} ${c.option_type})`;
-        $('rec-sub-info').textContent = `Bid: $${c.bid.toFixed(2)} | Ask: $${c.ask.toFixed(2)} | Spread: $${c.spread.toFixed(2)} | Qty: ${rec.sizing ? rec.sizing.contracts : 1}`;
-        $('rec-greeks').textContent = `Δ ${c.delta.toFixed(2)} | Θ $${c.theta_hour.toFixed(3)}/hr`;
-        $('rec-stop-px').textContent = `$${rec.targets.stop_price.toFixed(2)}`;
-        $('rec-tgt1-px').textContent = `$${rec.targets.target_1.toFixed(2)}`;
-        $('rec-tgt2-px').textContent = `$${rec.targets.target_2.toFixed(2)}`;
+        const targets = rec.targets || {};
+        const stopPx = Number(targets.stop_loss_price || targets.stop_price || ((rec.entry_price || c.ask || 0.50) * 0.85));
+        const tp1Px = Number(targets.tp1_price || targets.target_1 || ((rec.entry_price || c.ask || 0.50) * 1.20));
+        const tp2Px = Number(targets.tp2_price || targets.target_2 || ((rec.entry_price || c.ask || 0.50) * 1.40));
+        const qty = (rec.sizing && (rec.sizing.suggested_contracts || rec.sizing.contracts)) || 1;
+
+        $('rec-contract-symbol').textContent = `${c.contract_symbol} ($${(c.strike || 0).toFixed(2)} ${(c.option_type || '').toUpperCase()})`;
+        $('rec-sub-info').textContent = `Bid: $${Number(c.bid || 0).toFixed(2)} | Ask: $${Number(c.ask || 0).toFixed(2)} | Spread: $${Number(c.spread || 0).toFixed(2)} | Qty: ${qty}`;
+        $('rec-greeks').textContent = `Δ ${Number(c.delta || 0).toFixed(2)} | Θ $${Number(c.theta_hour || 0).toFixed(3)}/hr`;
+        $('rec-stop-px').textContent = `$${stopPx.toFixed(2)}`;
+        $('rec-tgt1-px').textContent = `$${tp1Px.toFixed(2)}`;
+        $('rec-tgt2-px').textContent = `$${tp2Px.toFixed(2)}`;
         $('btn-paper-enter').disabled = false;
       } else {
         $('rec-contract-symbol').textContent = 'No Active Setup Found';
@@ -1734,23 +1768,62 @@
         $('pos-table-body').innerHTML = '<tr><td colspan="10" style="text-align:center; color:var(--text-muted); padding:20px;">No active 0DTE scalp positions open right now.</td></tr>';
       } else {
         $('pos-table-body').innerHTML = active.map(p => {
-          const pnlVal = p.unrealized_pnl_usd || 0;
-          const pnlPct = p.unrealized_pnl_pct || 0;
+          const qty = p.current_quantity || p.initial_quantity || p.contracts || 1;
+          const entryPx = Number(p.entry_price || 0);
+          const currPx = Number(p.current_price || p.current_quote || entryPx);
+          const pnlVal = Number(p.unrealized_pnl_usd || 0);
+          const pnlPct = Number(p.unrealized_pnl_pct || 0);
           const pnlClass = pnlVal >= 0 ? 'val-green' : 'val-red';
           const pnlSign = pnlVal >= 0 ? '+' : '';
+          const stopPx = Number(p.stop_loss_price || p.stop_price || (entryPx * 0.85));
+          const tp1Px = Number(p.tp1_price || p.target_1 || (entryPx * 1.20));
+
           return `<tr>
             <td class="mono" style="font-weight:700;">${p.contract_symbol}</td>
             <td><span class="badge ${p.action === 'CALL' ? 'badge-call' : 'badge-put'}">${p.action}</span></td>
-            <td class="mono">${p.contracts}</td>
-            <td class="mono">$${p.entry_price.toFixed(2)}</td>
-            <td class="mono">$${(p.current_quote || p.entry_price).toFixed(2)}</td>
+            <td class="mono">${qty}</td>
+            <td class="mono">$${entryPx.toFixed(2)}</td>
+            <td class="mono">$${currPx.toFixed(2)}</td>
             <td class="mono ${pnlClass}" style="font-weight:700;">${pnlSign}${fmtUSD(pnlVal)} (${pnlSign}${pnlPct.toFixed(1)}%)</td>
-            <td class="mono val-red">$${p.stop_price.toFixed(2)}</td>
-            <td class="mono val-green">$${p.target_1.toFixed(2)}</td>
+            <td class="mono val-red">$${stopPx.toFixed(2)}</td>
+            <td class="mono val-green">$${tp1Px.toFixed(2)}</td>
             <td class="mono">${p.minutes_held || 0}m</td>
-            <td><button class="btn-danger" onclick="closeZeroPosition('${p.contract_symbol}')">Close</button></td>
+            <td><button class="btn-danger" onclick="closeZeroPosition('${p.id}', '${p.contract_symbol}')">Close</button></td>
           </tr>`;
         }).join('');
+      }
+
+      // Closed Scalp Trade History
+      const hist = zd.history || [];
+      if ($('history-table-body')) {
+        const stats = zd.today_stats || {};
+        const pnl = Number(stats.realized_pnl_usd || 0);
+        if ($('history-pnl-label')) {
+          $('history-pnl-label').textContent = `${pnl >= 0 ? '+' : ''}${fmtUSD(pnl)} Realized Today`;
+          $('history-pnl-label').className = 'mono ' + (pnl >= 0 ? 'val-green' : 'val-red');
+        }
+        if (hist.length === 0) {
+          $('history-table-body').innerHTML = '<tr><td colspan="9" style="text-align:center; color:var(--text-muted); padding:20px;">No closed scalp trades yet today.</td></tr>';
+        } else {
+          $('history-table-body').innerHTML = hist.map(h => {
+            const trPnl = Number(h.realized_pnl_usd || 0);
+            const trPnlPct = Number(h.realized_pnl_pct || 0);
+            const trClass = trPnl >= 0 ? 'val-green' : 'val-red';
+            const trSign = trPnl >= 0 ? '+' : '';
+            const timeStr = h.exit_timestamp ? h.exit_timestamp.split(' ')[1] : '--:--';
+            return `<tr>
+              <td class="mono" style="color:var(--text-muted); font-size:11px;">${timeStr}</td>
+              <td class="mono" style="font-weight:700;">${h.contract_symbol}</td>
+              <td><span class="badge ${h.action === 'CALL' ? 'badge-call' : 'badge-put'}">${h.action}</span></td>
+              <td class="mono">${h.quantity_closed || 1}</td>
+              <td class="mono">$${Number(h.entry_price || 0).toFixed(2)}</td>
+              <td class="mono">$${Number(h.exit_price || 0).toFixed(2)}</td>
+              <td class="mono ${trClass}" style="font-weight:700;">${trSign}${fmtUSD(trPnl)} (${trSign}${trPnlPct.toFixed(1)}%)</td>
+              <td><span class="badge ${trPnl >= 0 ? 'badge-won' : 'badge-waiting'}">${h.exit_reason || 'CLOSED'}</span></td>
+              <td style="font-size:11px; color:var(--text-sub);">${h.setup || '--'}</td>
+            </tr>`;
+          }).join('');
+        }
       }
 
       // Option Chains
@@ -1937,10 +2010,10 @@
       }
     }
 
-    async function closeZeroPosition(contract) {
+    async function closeZeroPosition(posId, contract) {
       if (!confirm(`Close position in ${contract}?`)) return;
       try {
-        const res = await fetch(`/api/0dte/close?contract=${encodeURIComponent(contract)}`);
+        const res = await fetch(`/api/0dte/close?id=${encodeURIComponent(posId)}&contract=${encodeURIComponent(contract)}`);
         const json = await res.json();
         if (json.ok) {
           pollState();

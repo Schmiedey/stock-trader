@@ -210,7 +210,12 @@ class ZeroDteScalperDaemon:
                         continue
 
                     entry_px = rec.get("entry_price", c.get("ask", 0.50))
-                    qty = max(1, rec.get("sizing", {}).get("contracts", 1))
+                    qty = max(1, rec.get("sizing", {}).get("suggested_contracts", rec.get("sizing", {}).get("contracts", 1)))
+
+                    t = rec.get("targets", {})
+                    stop_px = t.get("stop_loss_price") or t.get("stop_price") or round(entry_px * 0.85, 2)
+                    tp1_px = t.get("tp1_price") or t.get("target_1") or round(entry_px * 1.20, 2)
+                    tp2_px = t.get("tp2_price") or t.get("target_2") or round(entry_px * 1.40, 2)
 
                     # Open position on paper
                     pos = open_position(
@@ -221,15 +226,15 @@ class ZeroDteScalperDaemon:
                         expiration=rec["expiration"],
                         entry_price=entry_px,
                         quantity=qty,
-                        stop_loss_price=rec["targets"]["stop_price"],
-                        tp1_price=rec["targets"]["target_1"],
-                        tp2_price=rec["targets"]["target_2"],
+                        stop_loss_price=stop_px,
+                        tp1_price=tp1_px,
+                        tp2_price=tp2_px,
                         setup_name=sig.get("primary_setup", "Autonomous Scalp")
                     )
 
                     log("=" * 70)
                     log(f"⚡ [AUTONOMOUS 0DTE ENTRY] {qty}x {c['contract_symbol']} ({action})")
-                    log(f"   Entry: ${entry_px:.2f} | Stop: ${rec['targets']['stop_price']:.2f} (-15%) | TP1: ${rec['targets']['target_1']:.2f} (+20%) | TP2: ${rec['targets']['target_2']:.2f} (+40%)")
+                    log(f"   Entry: ${entry_px:.2f} | Stop: ${stop_px:.2f} (-15%) | TP1: ${tp1_px:.2f} (+20%) | TP2: ${tp2_px:.2f} (+40%)")
                     log("=" * 70)
 
                     # Update active positions list

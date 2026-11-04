@@ -375,10 +375,30 @@ class Handler(BaseHTTPRequestHandler):
                     action = "CALL"
 
                 rec = select_best_contract(symbol=symbol, action=action)
-                if not rec:
+                if not rec or not rec.get("contract"):
                     body = json.dumps({"ok": False, "error": f"No liquid 0DTE contract found for {symbol}"}).encode("utf-8")
                 else:
-                    pos = open_position(rec, setup_name=sig.get("primary_setup", "Manual UI trigger"))
+                    c = rec["contract"]
+                    entry_px = rec.get("entry_price", c.get("ask", 0.50))
+                    qty = max(1, rec.get("sizing", {}).get("suggested_contracts", rec.get("sizing", {}).get("contracts", 1)))
+                    t = rec.get("targets", {})
+                    stop_px = t.get("stop_loss_price") or t.get("stop_price") or round(entry_px * 0.85, 2)
+                    tp1_px = t.get("tp1_price") or t.get("target_1") or round(entry_px * 1.20, 2)
+                    tp2_px = t.get("tp2_price") or t.get("target_2") or round(entry_px * 1.40, 2)
+
+                    pos = open_position(
+                        symbol=symbol,
+                        action=action,
+                        contract_symbol=c["contract_symbol"],
+                        strike=c["strike"],
+                        expiration=rec["expiration"],
+                        entry_price=entry_px,
+                        quantity=qty,
+                        stop_loss_price=stop_px,
+                        tp1_price=tp1_px,
+                        tp2_price=tp2_px,
+                        setup_name=sig.get("primary_setup", "Manual UI trigger")
+                    )
                     body = json.dumps({"ok": True, "position": pos}).encode("utf-8")
             except Exception as e:
                 body = json.dumps({"ok": False, "error": str(e)}).encode("utf-8")
@@ -386,14 +406,24 @@ class Handler(BaseHTTPRequestHandler):
 
         elif url == "/api/0dte/close":
             try:
-                from zero_dte_scalper.src.tracker import close_position
+                from zero_dte_scalper.src.tracker import close_position, load_active_positions
                 query = self.path.split("?")[1] if "?" in self.path else ""
                 params = dict(qp.split("=") for qp in query.split("&") if "=" in qp)
                 contract_symbol = params.get("contract", "")
-                if not contract_symbol:
-                    body = json.dumps({"ok": False, "error": "contract parameter required"}).encode("utf-8")
+                position_id = params.get("id", "")
+
+                active_positions = load_active_positions()
+                target_pos = None
+                for p in active_positions:
+                    if (position_id and p.get("id") == position_id) or (contract_symbol and p.get("contract_symbol") == contract_symbol):
+                        target_pos = p
+                        break
+
+                if not target_pos:
+                    body = json.dumps({"ok": False, "error": f"Position not found for {contract_symbol or position_id}"}).encode("utf-8")
                 else:
-                    res = close_position(contract_symbol=contract_symbol, reason="Manual UI Close")
+                    curr_px = target_pos.get("current_price", target_pos.get("entry_price", 0.50))
+                    res = close_position(position_id=target_pos["id"], exit_price=curr_px, reason="Manual UI Close")
                     body = json.dumps({"ok": res is not None, "trade": res}).encode("utf-8")
             except Exception as e:
                 body = json.dumps({"ok": False, "error": str(e)}).encode("utf-8")
