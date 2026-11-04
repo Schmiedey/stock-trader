@@ -1099,7 +1099,8 @@
 
   <script>
     const $ = id => document.getElementById(id);
-    let currentDesk = localStorage.getItem('activeDesk') || 'spinach';
+    let currentDesk = (location.hash ? location.hash.replace('#', '') : null) || localStorage.getItem('activeDesk') || 'spinach';
+    if (!['spinach', '0dte', 'charts'].includes(currentDesk)) currentDesk = 'spinach';
     let currentZeroSym = 'SPY';
     let state = null;
 
@@ -1118,7 +1119,10 @@
 
     function switchDesk(desk) {
       currentDesk = desk;
-      try { localStorage.setItem('activeDesk', desk); } catch(e) {}
+      try {
+        localStorage.setItem('activeDesk', desk);
+        if (location.hash !== '#' + desk) history.replaceState(null, '', '#' + desk);
+      } catch(e) {}
       $('tab-btn-spinach').classList.toggle('active', desk === 'spinach');
       $('tab-btn-0dte').classList.toggle('active', desk === '0dte');
       if ($('tab-btn-charts')) $('tab-btn-charts').classList.toggle('active', desk === 'charts');
