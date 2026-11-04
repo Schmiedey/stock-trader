@@ -80,6 +80,27 @@ def main():
         [sys.executable, str(BASE_DIR / "dashboard/server.py"), port, host]
     )
 
+    # 4. Optional Cloud Keepalive Thread (prevents cloud container idle spin-down)
+    def keepalive_worker():
+        external_url = os.environ.get("RENDER_EXTERNAL_URL") or os.environ.get("PUBLIC_APP_URL")
+        if not external_url:
+            return
+        log(f"Cloud keepalive monitor started for {external_url} (interval: 10m)")
+        import urllib.request
+        while True:
+            time.sleep(600)
+            try:
+                target = f"{external_url.rstrip('/')}/api/state"
+                req = urllib.request.Request(target, headers={"User-Agent": "Cloud-Desk-KeepAlive/1.0"})
+                with urllib.request.urlopen(req, timeout=20) as resp:
+                    log(f"Keepalive ping delivered: {resp.status}")
+            except Exception as e:
+                log(f"Keepalive ping note: {e}")
+
+    import threading
+    t = threading.Thread(target=keepalive_worker, daemon=True)
+    t.start()
+
     # Supervisor loop
     while True:
         for name, item in list(processes.items()):
