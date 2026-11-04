@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: stock-trader
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: main
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 8791
