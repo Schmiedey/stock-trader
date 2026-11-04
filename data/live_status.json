@@ -1,19 +1,19 @@
 {
   "daemon_running": true,
   "pid": 14683,
-  "updated_at": "2026-11-03T19:52:57.762824",
-  "current_time_cst": "07:52:57 PM CST",
-  "today_date": "2026-11-03",
+  "updated_at": "2026-11-04T14:44:55.595697",
+  "current_time_cst": "02:44:55 PM CST",
+  "today_date": "2026-11-04",
   "is_trading_day": true,
   "next_run": {
     "target_datetime": "2026-11-04T14:55:00",
-    "countdown_seconds": 68521,
-    "countdown_str": "19h 2m 1s",
-    "note": "Wednesday, Nov 04 at 2:55 PM CST",
+    "countdown_seconds": 603,
+    "countdown_str": "10m 3s",
+    "note": "Today at 2:55 PM CST",
     "is_trading_day": true
   },
   "last_execution_date": null,
-  "account_equity": 100223.48,
+  "account_equity": 95442.63,
   "available_cash": 417.75,
   "positions": {
     "1": {
@@ -25,11 +25,11 @@
       "buy_date": "2026-11-03",
       "mandatory_exit_date": "2026-11-10",
       "cost_basis": 19989.09,
-      "current_price": 60.55,
-      "market_value": 20042.05,
-      "unrealized_pnl": 52.96,
-      "unrealized_pnl_pct": 0.26,
-      "days_held": 0
+      "current_price": 57.51,
+      "market_value": 19035.81,
+      "unrealized_pnl": -953.28,
+      "unrealized_pnl_pct": -4.77,
+      "days_held": 1
     },
     "2": {
       "slot": 2,
@@ -40,11 +40,11 @@
       "buy_date": "2026-11-03",
       "mandatory_exit_date": "2026-11-10",
       "cost_basis": 19718.84,
-      "current_price": 680.16,
-      "market_value": 19724.64,
-      "unrealized_pnl": 5.8,
-      "unrealized_pnl_pct": 0.03,
-      "days_held": 0
+      "current_price": 616.03,
+      "market_value": 17864.87,
+      "unrealized_pnl": -1853.97,
+      "unrealized_pnl_pct": -9.4,
+      "days_held": 1
     },
     "3": {
       "slot": 3,
@@ -55,11 +55,11 @@
       "buy_date": "2026-11-03",
       "mandatory_exit_date": "2026-11-10",
       "cost_basis": 19984.64,
-      "current_price": 96.15,
-      "market_value": 19999.2,
-      "unrealized_pnl": 14.56,
-      "unrealized_pnl_pct": 0.07,
-      "days_held": 0
+      "current_price": 101.55,
+      "market_value": 21122.4,
+      "unrealized_pnl": 1137.76,
+      "unrealized_pnl_pct": 5.69,
+      "days_held": 1
     },
     "4": {
       "slot": 4,
@@ -70,11 +70,11 @@
       "buy_date": "2026-11-03",
       "mandatory_exit_date": "2026-11-10",
       "cost_basis": 19953.16,
-      "current_price": 171.97,
-      "market_value": 19948.52,
-      "unrealized_pnl": -4.64,
-      "unrealized_pnl_pct": -0.02,
-      "days_held": 0
+      "current_price": 157.82,
+      "market_value": 18307.12,
+      "unrealized_pnl": -1646.04,
+      "unrealized_pnl_pct": -8.25,
+      "days_held": 1
     },
     "5": {
       "slot": 5,
@@ -85,25 +85,40 @@
       "buy_date": "2026-11-03",
       "mandatory_exit_date": "2026-11-10",
       "cost_basis": 19936.52,
-      "current_price": 233.62,
-      "market_value": 20091.32,
-      "unrealized_pnl": 154.8,
-      "unrealized_pnl_pct": 0.78,
-      "days_held": 0
+      "current_price": 217.38,
+      "market_value": 18694.68,
+      "unrealized_pnl": -1241.84,
+      "unrealized_pnl_pct": -6.23,
+      "days_held": 1
     }
   },
-  "pending_sells": [],
-  "pending_buys": [],
+  "pending_sells": [
+    {
+      "slot": 3,
+      "ticker": "RDDT",
+      "reason": "Target Hit (+3%)",
+      "pnl": 5.69
+    }
+  ],
+  "pending_buys": [
+    {
+      "ticker": "FIS",
+      "name": "Fidelity National Information Services",
+      "shares": 14,
+      "price": 29.72,
+      "return_3d_pct": -22.91
+    }
+  ],
   "top_candidates": [
     {
-      "ticker": "ILMN",
-      "name": "Illumina, Inc.",
+      "ticker": "FIS",
+      "name": "Fidelity National Information Services",
       "indices": [
         "SP500"
       ],
-      "current_price": 238.08,
-      "price_3d_ago": 290.06,
-      "return_3d_pct": -17.92
+      "current_price": 29.72,
+      "price_3d_ago": 38.55,
+      "return_3d_pct": -22.91
     },
     {
       "ticker": "DDOG",
@@ -112,51 +127,29 @@
         "SP500",
         "NASDAQ100"
       ],
-      "current_price": 220.18,
-      "price_3d_ago": 265.84,
-      "return_3d_pct": -17.18
+      "current_price": 189.38,
+      "price_3d_ago": 235.27,
+      "return_3d_pct": -19.51
     },
     {
-      "ticker": "SNDK",
-      "name": "Sandisk",
-      "indices": [
-        "SP500",
-        "NASDAQ100"
-      ],
-      "current_price": 1126.4,
-      "price_3d_ago": 1330.05,
-      "return_3d_pct": -15.31
-    },
-    {
-      "ticker": "SHOP",
-      "name": "Shopify",
-      "indices": [
-        "NASDAQ100"
-      ],
-      "current_price": 142.66,
-      "price_3d_ago": 166.89,
-      "return_3d_pct": -14.52
-    },
-    {
-      "ticker": "AMD",
-      "name": "Advanced Micro Devices",
-      "indices": [
-        "SP500",
-        "NASDAQ100"
-      ],
-      "current_price": 484.47,
-      "price_3d_ago": 566.42,
-      "return_3d_pct": -14.47
-    },
-    {
-      "ticker": "P",
-      "name": "Everpure",
+      "ticker": "TRMB",
+      "name": "Trimble Inc.",
       "indices": [
         "SP500"
       ],
-      "current_price": 117.66,
-      "price_3d_ago": 137.2,
-      "return_3d_pct": -14.24
+      "current_price": 53.99,
+      "price_3d_ago": 64.94,
+      "return_3d_pct": -16.87
+    },
+    {
+      "ticker": "APA",
+      "name": "APA Corporation",
+      "indices": [
+        "SP500"
+      ],
+      "current_price": 44.05,
+      "price_3d_ago": 52.82,
+      "return_3d_pct": -16.6
     },
     {
       "ticker": "CIEN",
@@ -164,19 +157,40 @@
       "indices": [
         "SP500"
       ],
-      "current_price": 299.99,
-      "price_3d_ago": 349.45,
-      "return_3d_pct": -14.15
+      "current_price": 270.64,
+      "price_3d_ago": 320.72,
+      "return_3d_pct": -15.61
     },
     {
-      "ticker": "DELL",
-      "name": "Dell Technologies",
+      "ticker": "DVN",
+      "name": "Devon Energy",
       "indices": [
         "SP500"
       ],
-      "current_price": 408.43,
-      "price_3d_ago": 475.51,
-      "return_3d_pct": -14.11
+      "current_price": 44.19,
+      "price_3d_ago": 52.15,
+      "return_3d_pct": -15.26
+    },
+    {
+      "ticker": "TPL",
+      "name": "Texas Pacific Land Corporation",
+      "indices": [
+        "SP500"
+      ],
+      "current_price": 282.78,
+      "price_3d_ago": 331.68,
+      "return_3d_pct": -14.74
+    },
+    {
+      "ticker": "FANG",
+      "name": "Diamondback Energy",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ],
+      "current_price": 181.96,
+      "price_3d_ago": 212.08,
+      "return_3d_pct": -14.2
     }
   ],
   "recent_history": []
