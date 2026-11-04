@@ -51,10 +51,10 @@ class StockTraderDaemon:
         self.cached_candidates: list = []
 
     def get_cst_now(self) -> datetime.datetime:
-        """Returns current time in US Central Time (CST/CDT)."""
-        # UTC to CST is UTC-6 (or UTC-5 during Daylight Saving)
-        # Using local time on user's machine since user's timezone is CST (UTC-6)
-        return datetime.datetime.now()
+        """Returns current time in US Central Time (America/Chicago)."""
+        import pytz
+        cst_tz = pytz.timezone("America/Chicago")
+        return datetime.datetime.now(cst_tz).replace(tzinfo=None)
 
     def calculate_next_run(self) -> Dict[str, Any]:
         """Calculates exact time until the next 2:55 PM CST window."""
@@ -94,7 +94,16 @@ class StockTraderDaemon:
         now = self.get_cst_now()
         today = now.date()
 
-        # Update screener cache every 3 minutes during market hours, or if forced
+        # 1. Update holdings valuations first (fast: < 0.5s)
+        held = self.ledger.get_active_tickers()
+        if held:
+            try:
+                prices = self.screener.get_current_prices(held)
+                self.ledger.update_portfolio_valuation(prices, today)
+            except Exception as e:
+                log(f"Warning: valuation update failed: {e}")
+
+        # 2. Update screener cache every 3 minutes during market hours, or if forced
         if forced or (time.time() - self.last_screen_time > 180):
             try:
                 self.cached_candidates = self.screener.scan_3day_drops(
@@ -104,15 +113,6 @@ class StockTraderDaemon:
                 self.last_screen_time = time.time()
             except Exception as e:
                 log(f"Warning: screener telemetry update failed: {e}")
-
-        # Update holdings valuations
-        held = self.ledger.get_active_tickers()
-        if held:
-            try:
-                prices = self.screener.get_current_prices(held)
-                self.ledger.update_portfolio_valuation(prices, today)
-            except Exception:
-                pass
 
         # Prepare audit / signals preview
         pending_sells = []

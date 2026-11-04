@@ -1,18 +1,18 @@
 {
   "daemon_running": true,
-  "pid": 91222,
-  "updated_at": "2026-11-03T18:58:37.187599",
-  "current_time_cst": "06:58:37 PM CST",
+  "pid": 14563,
+  "updated_at": "2026-11-03T19:45:38.672282",
+  "current_time_cst": "07:45:38 PM CST",
   "today_date": "2026-11-03",
   "is_trading_day": true,
   "next_run": {
     "target_datetime": "2026-11-04T14:55:00",
-    "countdown_seconds": 71782,
-    "countdown_str": "19h 56m 22s",
+    "countdown_seconds": 68960,
+    "countdown_str": "19h 9m 20s",
     "note": "Wednesday, Nov 04 at 2:55 PM CST",
     "is_trading_day": true
   },
-  "last_execution_date": "2026-11-03",
+  "last_execution_date": null,
   "account_equity": 100223.48,
   "available_cash": 417.75,
   "positions": {
@@ -101,9 +101,9 @@
       "indices": [
         "SP500"
       ],
-      "current_price": 238.21,
+      "current_price": 238.08,
       "price_3d_ago": 290.06,
-      "return_3d_pct": -17.88
+      "return_3d_pct": -17.92
     },
     {
       "ticker": "DDOG",
@@ -112,9 +112,9 @@
         "SP500",
         "NASDAQ100"
       ],
-      "current_price": 220.52,
+      "current_price": 220.18,
       "price_3d_ago": 265.84,
-      "return_3d_pct": -17.05
+      "return_3d_pct": -17.18
     },
     {
       "ticker": "SNDK",
@@ -123,9 +123,19 @@
         "SP500",
         "NASDAQ100"
       ],
-      "current_price": 1126.52,
+      "current_price": 1126.4,
       "price_3d_ago": 1330.05,
-      "return_3d_pct": -15.3
+      "return_3d_pct": -15.31
+    },
+    {
+      "ticker": "SHOP",
+      "name": "Shopify",
+      "indices": [
+        "NASDAQ100"
+      ],
+      "current_price": 142.66,
+      "price_3d_ago": 166.89,
+      "return_3d_pct": -14.52
     },
     {
       "ticker": "AMD",
@@ -134,19 +144,9 @@
         "SP500",
         "NASDAQ100"
       ],
-      "current_price": 483.9,
+      "current_price": 484.47,
       "price_3d_ago": 566.42,
-      "return_3d_pct": -14.57
-    },
-    {
-      "ticker": "SHOP",
-      "name": "Shopify",
-      "indices": [
-        "NASDAQ100"
-      ],
-      "current_price": 142.57,
-      "price_3d_ago": 166.89,
-      "return_3d_pct": -14.57
+      "return_3d_pct": -14.47
     },
     {
       "ticker": "P",
@@ -154,9 +154,9 @@
       "indices": [
         "SP500"
       ],
-      "current_price": 117.65,
+      "current_price": 117.66,
       "price_3d_ago": 137.2,
-      "return_3d_pct": -14.25
+      "return_3d_pct": -14.24
     },
     {
       "ticker": "CIEN",
@@ -164,9 +164,9 @@
       "indices": [
         "SP500"
       ],
-      "current_price": 300.08,
+      "current_price": 299.99,
       "price_3d_ago": 349.45,
-      "return_3d_pct": -14.13
+      "return_3d_pct": -14.15
     },
     {
       "ticker": "DELL",
@@ -174,7 +174,7 @@
       "indices": [
         "SP500"
       ],
-      "current_price": 408.4,
+      "current_price": 408.43,
       "price_3d_ago": 475.51,
       "return_3d_pct": -14.11
     }

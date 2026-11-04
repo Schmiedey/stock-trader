@@ -14,6 +14,14 @@ from src.screener import DropBounceScreener
 from src.calendar_util import count_trading_days_held, is_trading_day
 
 
+def get_cst_today() -> datetime.date:
+    try:
+        import pytz
+        return datetime.datetime.now(pytz.timezone("America/Chicago")).date()
+    except Exception:
+        return datetime.date.today()
+
+
 class PureCloneEngine:
     def __init__(self, ledger: Optional[Ledger] = None, screener: Optional[DropBounceScreener] = None):
         self.ledger = ledger or Ledger()
@@ -27,7 +35,7 @@ class PureCloneEngine:
         - Computes open slots and scans for replacements.
         - Computes 20% equity position sizing.
         """
-        as_of_date = as_of_date or datetime.date.today()
+        as_of_date = as_of_date or get_cst_today()
         self.ledger.clean_expired_cooldowns(as_of_date)
 
         # 1. Fetch current prices for active holdings
@@ -205,7 +213,7 @@ class PureCloneEngine:
         2. Logs new buy fills into their assigned slots.
         3. Persists changes to disk.
         """
-        execution_date = execution_date or datetime.date.today()
+        execution_date = execution_date or get_cst_today()
         actual_sell_fills = actual_sell_fills or {}
         actual_buy_fills = actual_buy_fills or {}
 
