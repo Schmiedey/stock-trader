@@ -1,19 +1,20 @@
 {
   "daemon_running": true,
-  "pid": 70389,
-  "updated_at": "2026-11-04T14:45:07.222563",
+  "pid": 75584,
+  "updated_at": "2026-11-04T15:06:51.534440",
   "session": {
-    "current_time_str": "15:45",
-    "is_market_open": true,
-    "session_phase": "MANDATORY_FLAT_PREP",
+    "current_time_str": "16:06",
+    "is_market_open": false,
+    "session_phase": "AFTER_HOURS",
     "trading_allowed": false,
-    "reason": "Pre-exit window. Prepare to close all active open positions."
+    "reason": "Market is closed."
   },
   "active_positions_count": 0,
   "active_positions": [],
   "today_stats": {
     "today_date": "2026-11-04",
-    "trades_count": 5,
+    "trades_count": 3,
+    "execution_events_count": 5,
     "realized_pnl_usd": 120.0,
     "wins": 3,
     "losses": 2
@@ -31,8 +32,6 @@
     "max_loss_usd": 140.0
   },
   "recent_logs": [
-    "[2026-11-04 13:36:32] Error scanning QQQ: 'stop_price'",
-    "[2026-11-04 13:36:48] \ud83d\udd0d [SIGNAL DETECTED] QQQ PUT (MEDIUM) | Setup: Below VWAP (694.05) & EMA9 (693.72)",
     "[2026-11-04 13:36:49] Error scanning QQQ: 'stop_price'",
     "[2026-11-04 13:36:53] \u26a1 0DTE Autonomous Scalper Daemon started. PID=70389",
     "[2026-11-04 13:36:53] Monitoring underlyings: SPY, QQQ | Hard Stop: -15% | Take-Profit: +20% / +40%",
@@ -60,6 +59,8 @@
     "[2026-11-04 13:46:40] \ud83d\uded1 [STOP LOSS HIT] SPY261104C00768000: Quote $0.59 <= Stop $0.62 (-19.2% | $-140.00)",
     "[2026-11-04 13:46:40] [\u2713] Position SPY261104C00768000 closed on stop loss.",
     "[2026-11-04 13:46:48] \ud83c\udfaf [TARGET 2 HIT] QQQ261104P00693000: Quote $0.86 >= TP2 $0.85 (+41.0% | +$125.00)",
-    "[2026-11-04 13:46:48] [\u2713] Position QQQ261104P00693000 closed at Target 2."
+    "[2026-11-04 13:46:48] [\u2713] Position QQQ261104P00693000 closed at Target 2.",
+    "[2026-11-04 15:05:23] \u26a1 0DTE Autonomous Scalper Daemon started. PID=75584",
+    "[2026-11-04 15:05:23] Monitoring underlyings: SPY, QQQ | Hard Stop: -15% | Take-Profit: +20% / +40%"
   ]
 }

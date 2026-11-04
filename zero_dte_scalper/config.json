@@ -16,6 +16,8 @@
   "take_profit_1_pct": 0.20,
   "take_profit_2_pct": 0.40,
   "tp1_scale_out_pct": 0.50,
+  "reentry_cooldown_seconds": 90,
+  "breakeven_cushion_usd": 0.02,
   "trading_hours": {
     "timezone": "America/New_York",
     "market_open": "09:30",

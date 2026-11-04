@@ -204,15 +204,19 @@ def update_active_positions_quotes() -> list[dict]:
 
 
 def get_today_stats() -> dict:
-    """Return realized P&L and total trades executed today."""
+    """Return realized P&L, unique position count, and win/loss breakdown for today."""
     today = get_today_ny_date()
     history = load_trade_history()
     today_trades = [t for t in history if t.get("entry_date") == today]
 
     realized_pnl = sum(t.get("realized_pnl_usd", 0.0) for t in today_trades)
+    unique_positions = {t["id"] for t in today_trades if "id" in t}
+    pos_count = len(unique_positions) if unique_positions else len(today_trades)
+
     return {
         "today_date": today,
-        "trades_count": len(today_trades),
+        "trades_count": pos_count,
+        "execution_events_count": len(today_trades),
         "realized_pnl_usd": round(realized_pnl, 2),
         "wins": len([t for t in today_trades if t.get("realized_pnl_usd", 0) > 0]),
         "losses": len([t for t in today_trades if t.get("realized_pnl_usd", 0) < 0])

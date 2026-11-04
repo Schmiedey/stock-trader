@@ -1,0 +1,17 @@
+[
+  {
+    "slot": 3,
+    "ticker": "RDDT",
+    "shares": 208,
+    "buy_date": "2026-11-03",
+    "entry_price": 96.08,
+    "exit_date": "2026-11-04",
+    "exit_price": 101.67,
+    "target_price": 98.96,
+    "proceeds": 21147.36,
+    "pnl": 1162.72,
+    "pnl_pct": 5.82,
+    "days_held": 1,
+    "exit_reason": "PROFIT_TARGET_HIT (+3% Rule)"
+  }
+]

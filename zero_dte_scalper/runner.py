@@ -57,6 +57,8 @@ class ZeroDteScalperDaemon:
         self.underlyings = self.config.get("underlyings", ["SPY", "QQQ"])
         self.max_concurrent_positions = 2
         self.last_screen_time = 0.0
+        self.last_exit_times = {}  # {symbol: (exit_timestamp, reason_str)}
+        self.reentry_cooldown_seconds = self.config.get("reentry_cooldown_seconds", 90)
 
     def update_telemetry(self):
         """Write live daemon status and telemetry."""
@@ -115,6 +117,7 @@ class ZeroDteScalperDaemon:
                 log(f"🛑 [STOP LOSS HIT] {contract_sym}: Quote ${curr_px:.2f} <= Stop ${stop_px:.2f} ({pnl_pct:.1f}% | ${pnl_usd:,.2f})")
                 try:
                     close_position(position_id=pos_id, exit_price=curr_px, reason="STOP_LOSS_HIT (-15%)")
+                    self.last_exit_times[pos["symbol"]] = (time.time(), "STOP_LOSS")
                     log(f"[✓] Position {contract_sym} closed on stop loss.")
                 except Exception as e:
                     log(f"Error closing stop-loss: {e}")
@@ -125,6 +128,7 @@ class ZeroDteScalperDaemon:
                 log(f"🎯 [TARGET 2 HIT] {contract_sym}: Quote ${curr_px:.2f} >= TP2 ${tp2_px:.2f} (+{pnl_pct:.1f}% | +${pnl_usd:,.2f})")
                 try:
                     close_position(position_id=pos_id, exit_price=curr_px, reason="TARGET_2_HIT (+40%)")
+                    self.last_exit_times[pos["symbol"]] = (time.time(), "TARGET_2")
                     log(f"[✓] Position {contract_sym} closed at Target 2.")
                 except Exception as e:
                     log(f"Error closing target 2: {e}")
@@ -137,14 +141,16 @@ class ZeroDteScalperDaemon:
                     log(f"💰 [TARGET 1 HIT] {contract_sym}: Quote ${curr_px:.2f} >= TP1 ${tp1_px:.2f}. Scaling out {half_qty} contracts.")
                     try:
                         close_position(position_id=pos_id, exit_price=curr_px, reason="TARGET_1_SCALE_OUT (+20%)", partial_qty=half_qty)
-                        # Move stop to breakeven
+                        # Move stop to breakeven with a 2-cent spread cushion
+                        cushion = self.config.get("breakeven_cushion_usd", 0.02)
+                        protected_stop = max(0.01, round(pos["entry_price"] - cushion, 2))
                         active_now = load_active_positions()
                         for p in active_now:
                             if p["id"] == pos_id:
                                 p["tp1_hit"] = True
-                                p["stop_loss_price"] = p["entry_price"]
+                                p["stop_loss_price"] = protected_stop
                         save_active_positions(active_now)
-                        log(f"[✓] Stop moved to breakeven for remaining {contract_sym} contracts.")
+                        log(f"[✓] Stop moved to breakeven buffer (${protected_stop:.2f}) for remaining {contract_sym} contracts.")
                     except Exception as e:
                         log(f"Error scaling out at target 1: {e}")
                 else:
@@ -152,6 +158,7 @@ class ZeroDteScalperDaemon:
                         log(f"💰 [TARGET 1 SECURED] {contract_sym}: Quote ${curr_px:.2f} (+{pnl_pct:.1f}%). Closing 1-contract position.")
                         try:
                             close_position(position_id=pos_id, exit_price=curr_px, reason="TARGET_1_FULL (+20%)")
+                            self.last_exit_times[pos["symbol"]] = (time.time(), "TARGET_1")
                         except Exception as e:
                             log(f"Error closing target 1: {e}")
 
@@ -185,10 +192,19 @@ class ZeroDteScalperDaemon:
             return
 
         active_symbols = {p["symbol"] for p in active}
+        active_directions = {p.get("action", "").upper() for p in active if p.get("action")}
 
         for symbol in self.underlyings:
             if symbol in active_symbols:
                 continue
+
+            # 1. Micro Candle Reset Cooldown check (prevent immediate same-tick re-entry after exit)
+            if symbol in self.last_exit_times:
+                last_exit_t, last_reason = self.last_exit_times[symbol]
+                elapsed = time.time() - last_exit_t
+                cooldown_dur = 120 if last_reason == "STOP_LOSS" else self.reentry_cooldown_seconds
+                if elapsed < cooldown_dur:
+                    continue
 
             try:
                 sig = evaluate_scalp_signals(symbol=symbol, interval="5m")
@@ -197,6 +213,12 @@ class ZeroDteScalperDaemon:
 
                 # Require high or medium conviction directional trigger
                 if action in ["CALL", "PUT"] and conviction in ["HIGH", "MEDIUM"]:
+                    # 2. Inter-market Directional Alignment Guard
+                    # Prevent conflicting trades (e.g. SPY CALL while holding QQQ PUT)
+                    if active_directions and action.upper() not in active_directions:
+                        log(f"⚠️ [DIRECTION CONFLICT] Blocking {symbol} {action} entry: opposing active position ({', '.join(active_directions)}) is open.")
+                        continue
+
                     log(f"🔍 [SIGNAL DETECTED] {symbol} {action} ({conviction}) | Setup: {sig.get('primary_setup')}")
 
                     rec = select_best_contract(symbol=symbol, action=action, config=self.config)

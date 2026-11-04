@@ -1,6 +1,6 @@
 {
-  "account_equity": 95442.63,
-  "available_cash": 417.75,
+  "account_equity": 96682.79,
+  "available_cash": 2369.31,
   "cooldowns": {},
   "positions": {
     "1": {
@@ -12,10 +12,10 @@
       "buy_date": "2026-11-03",
       "mandatory_exit_date": "2026-11-10",
       "cost_basis": 19989.09,
-      "current_price": 57.51,
-      "market_value": 19035.81,
-      "unrealized_pnl": -953.28,
-      "unrealized_pnl_pct": -4.77,
+      "current_price": 58.27,
+      "market_value": 19287.37,
+      "unrealized_pnl": -701.72,
+      "unrealized_pnl_pct": -3.51,
       "days_held": 1
     },
     "2": {
@@ -27,25 +27,10 @@
       "buy_date": "2026-11-03",
       "mandatory_exit_date": "2026-11-10",
       "cost_basis": 19718.84,
-      "current_price": 616.03,
-      "market_value": 17864.87,
-      "unrealized_pnl": -1853.97,
-      "unrealized_pnl_pct": -9.4,
-      "days_held": 1
-    },
-    "3": {
-      "slot": 3,
-      "ticker": "RDDT",
-      "shares": 208,
-      "entry_price": 96.08,
-      "target_price": 98.96,
-      "buy_date": "2026-11-03",
-      "mandatory_exit_date": "2026-11-10",
-      "cost_basis": 19984.64,
-      "current_price": 101.55,
-      "market_value": 21122.4,
-      "unrealized_pnl": 1137.76,
-      "unrealized_pnl_pct": 5.69,
+      "current_price": 626.75,
+      "market_value": 18175.75,
+      "unrealized_pnl": -1543.09,
+      "unrealized_pnl_pct": -7.83,
       "days_held": 1
     },
     "4": {
@@ -57,10 +42,10 @@
       "buy_date": "2026-11-03",
       "mandatory_exit_date": "2026-11-10",
       "cost_basis": 19953.16,
-      "current_price": 157.82,
-      "market_value": 18307.12,
-      "unrealized_pnl": -1646.04,
-      "unrealized_pnl_pct": -8.25,
+      "current_price": 159.8,
+      "market_value": 18536.8,
+      "unrealized_pnl": -1416.36,
+      "unrealized_pnl_pct": -7.1,
       "days_held": 1
     },
     "5": {
@@ -72,12 +57,27 @@
       "buy_date": "2026-11-03",
       "mandatory_exit_date": "2026-11-10",
       "cost_basis": 19936.52,
-      "current_price": 217.38,
-      "market_value": 18694.68,
-      "unrealized_pnl": -1241.84,
-      "unrealized_pnl_pct": -6.23,
+      "current_price": 223.27,
+      "market_value": 19201.22,
+      "unrealized_pnl": -735.3,
+      "unrealized_pnl_pct": -3.69,
       "days_held": 1
+    },
+    "3": {
+      "slot": 3,
+      "ticker": "FIS",
+      "shares": 642,
+      "entry_price": 29.9,
+      "target_price": 30.8,
+      "buy_date": "2026-11-04",
+      "mandatory_exit_date": "2026-11-11",
+      "cost_basis": 19195.8,
+      "current_price": 29.77,
+      "market_value": 19112.34,
+      "unrealized_pnl": -83.46,
+      "unrealized_pnl_pct": -0.43,
+      "days_held": 0
     }
   },
-  "updated_at": "2026-11-04T14:44:56.620869"
+  "updated_at": "2026-11-04T15:06:26.535531"
 }
