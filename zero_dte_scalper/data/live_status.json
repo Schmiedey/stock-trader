@@ -1,0 +1,37 @@
+{
+  "daemon_running": true,
+  "pid": 2839,
+  "updated_at": "2026-11-03T18:58:42.868521",
+  "session": {
+    "current_time_str": "19:58",
+    "is_market_open": false,
+    "session_phase": "AFTER_HOURS",
+    "trading_allowed": false,
+    "reason": "Market is closed."
+  },
+  "active_positions_count": 0,
+  "active_positions": [],
+  "today_stats": {
+    "today_date": "2026-11-03",
+    "trades_count": 0,
+    "realized_pnl_usd": 0,
+    "wins": 0,
+    "losses": 0
+  },
+  "metrics": {
+    "total_trades": 0,
+    "win_rate_pct": 0.0,
+    "total_realized_pnl_usd": 0.0,
+    "profit_factor": 0.0,
+    "wins": 0,
+    "losses": 0,
+    "avg_win_usd": 0.0,
+    "avg_loss_usd": 0.0,
+    "max_win_usd": 0.0,
+    "max_loss_usd": 0.0
+  },
+  "recent_logs": [
+    "[2026-11-03 15:14:22] \u26a1 0DTE Autonomous Scalper Daemon started. PID=2839",
+    "[2026-11-03 15:14:22] Monitoring underlyings: SPY, QQQ | Hard Stop: -15% | Take-Profit: +20% / +40%"
+  ]
+}

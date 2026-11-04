@@ -1,0 +1,3718 @@
+{
+  "timestamp": 1793731401.6427908,
+  "total_count": 518,
+  "constituents": [
+    {
+      "symbol": "A",
+      "name": "Agilent Technologies",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "name": "Apple Inc.",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "ABBV",
+      "name": "AbbVie",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ABNB",
+      "name": "Airbnb",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "ABT",
+      "name": "Abbott Laboratories",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ACGL",
+      "name": "Arch Capital Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ACN",
+      "name": "Accenture",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ADBE",
+      "name": "Adobe Inc.",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "ADI",
+      "name": "Analog Devices",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "ADM",
+      "name": "Archer Daniels Midland",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ADP",
+      "name": "Automatic Data Processing",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "ADSK",
+      "name": "Autodesk",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "AEE",
+      "name": "Ameren",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AEP",
+      "name": "American Electric Power",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "AES",
+      "name": "AES Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AFL",
+      "name": "Aflac",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AIG",
+      "name": "American International Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AIZ",
+      "name": "Assurant",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AJG",
+      "name": "Arthur J. Gallagher & Co.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AKAM",
+      "name": "Akamai Technologies",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ALAB",
+      "name": "Astera Labs",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "ALB",
+      "name": "Albemarle Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ALGN",
+      "name": "Align Technology",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ALL",
+      "name": "Allstate",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ALLE",
+      "name": "Allegion",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ALNY",
+      "name": "Alnylam Pharmaceuticals",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "AMAT",
+      "name": "Applied Materials",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "AMCR",
+      "name": "Amcor",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AMD",
+      "name": "Advanced Micro Devices",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "AME",
+      "name": "Ametek",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AMGN",
+      "name": "Amgen",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "AMP",
+      "name": "Ameriprise Financial",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AMT",
+      "name": "American Tower",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "name": "Amazon",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "ANET",
+      "name": "Arista Networks",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AON",
+      "name": "Aon plc",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AOS",
+      "name": "A. O. Smith",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "APA",
+      "name": "APA Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "APD",
+      "name": "Air Products",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "APH",
+      "name": "Amphenol",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "APO",
+      "name": "Apollo Global Management",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "APP",
+      "name": "AppLovin",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "APTV",
+      "name": "Aptiv",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ARE",
+      "name": "Alexandria Real Estate Equities",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ARES",
+      "name": "Ares Management",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ARM",
+      "name": "Arm Holdings",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "ASML",
+      "name": "ASML Holding",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "ATO",
+      "name": "Atmos Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AVGO",
+      "name": "Broadcom",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "AVY",
+      "name": "Avery Dennison",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AWK",
+      "name": "American Water Works",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AXON",
+      "name": "Axon Enterprise",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "AXP",
+      "name": "American Express",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "AZO",
+      "name": "AutoZone",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BA",
+      "name": "Boeing",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BAC",
+      "name": "Bank of America",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BALL",
+      "name": "Ball Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BAX",
+      "name": "Baxter International",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BBY",
+      "name": "Best Buy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BDX",
+      "name": "Becton Dickinson",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BE",
+      "name": "Bloom Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BEN",
+      "name": "Franklin Resources",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BF-B",
+      "name": "Brown\u2013Forman",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BG",
+      "name": "Bunge Global",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BIIB",
+      "name": "Biogen",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BKNG",
+      "name": "Booking Holdings",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "BKR",
+      "name": "Baker Hughes",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "BLK",
+      "name": "BlackRock",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BMY",
+      "name": "Bristol Myers Squibb",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BNY",
+      "name": "BNY Mellon",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BR",
+      "name": "Broadridge Financial Solutions",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BRK-B",
+      "name": "Berkshire Hathaway",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BRO",
+      "name": "Brown & Brown",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BSX",
+      "name": "Boston Scientific",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BX",
+      "name": "Blackstone Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "BXP",
+      "name": "BXP, Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "C",
+      "name": "Citigroup",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CAH",
+      "name": "Cardinal Health",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CARR",
+      "name": "Carrier Global",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CASY",
+      "name": "Casey's",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CAT",
+      "name": "Caterpillar Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CB",
+      "name": "Chubb Limited",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CBOE",
+      "name": "Cboe Global Markets",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CBRE",
+      "name": "CBRE Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CCEP",
+      "name": "Coca-Cola Europacific Partners",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "CCI",
+      "name": "Crown Castle",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CCL",
+      "name": "Carnival Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CDNS",
+      "name": "Cadence Design Systems",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "CDW",
+      "name": "CDW Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CEG",
+      "name": "Constellation Energy",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "CF",
+      "name": "CF Industries",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CFG",
+      "name": "Citizens Financial Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CHD",
+      "name": "Church & Dwight",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CHRW",
+      "name": "C.H. Robinson",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CHTR",
+      "name": "Charter Communications",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CI",
+      "name": "Cigna",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CIEN",
+      "name": "Ciena",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CINF",
+      "name": "Cincinnati Financial",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CL",
+      "name": "Colgate-Palmolive",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CLX",
+      "name": "Clorox",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CMCSA",
+      "name": "Comcast",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "CME",
+      "name": "CME Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CMG",
+      "name": "Chipotle Mexican Grill",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CMI",
+      "name": "Cummins",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CMS",
+      "name": "CMS Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CNC",
+      "name": "Centene Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CNP",
+      "name": "CenterPoint Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "COF",
+      "name": "Capital One",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "COHR",
+      "name": "Coherent Corp.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "COIN",
+      "name": "Coinbase",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "COO",
+      "name": "Cooper Companies (The)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "COP",
+      "name": "ConocoPhillips",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "COR",
+      "name": "Cencora",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "COST",
+      "name": "Costco",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "CPAY",
+      "name": "Corpay",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CPRT",
+      "name": "Copart",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "CPT",
+      "name": "Camden Property Trust",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CRH",
+      "name": "CRH plc",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CRL",
+      "name": "Charles River Laboratories",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CRM",
+      "name": "Salesforce",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CRWD",
+      "name": "CrowdStrike",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "CRWV",
+      "name": "CoreWeave",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "CSCO",
+      "name": "Cisco",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "CSGP",
+      "name": "CoStar Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CSX",
+      "name": "CSX Corporation",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "CTAS",
+      "name": "Cintas",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "CTSH",
+      "name": "Cognizant",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CVNA",
+      "name": "Carvana",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CVS",
+      "name": "CVS Health",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "CVX",
+      "name": "Chevron Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "D",
+      "name": "Dominion Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DAL",
+      "name": "Delta Air Lines",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DASH",
+      "name": "DoorDash",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "DD",
+      "name": "DuPont",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DDOG",
+      "name": "Datadog",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "DE",
+      "name": "Deere & Company",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DECK",
+      "name": "Deckers Brands",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DELL",
+      "name": "Dell Technologies",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DG",
+      "name": "Dollar General",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DGX",
+      "name": "Quest Diagnostics",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DHI",
+      "name": "D. R. Horton",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DHR",
+      "name": "Danaher Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DIS",
+      "name": "Walt Disney Company (The)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DLR",
+      "name": "Digital Realty",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DLTR",
+      "name": "Dollar Tree",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DOC",
+      "name": "Healthpeak Properties",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DOV",
+      "name": "Dover Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DOW",
+      "name": "Dow Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DPZ",
+      "name": "Domino's",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DRI",
+      "name": "Darden Restaurants",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DTE",
+      "name": "DTE Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DUK",
+      "name": "Duke Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DVA",
+      "name": "DaVita",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DVN",
+      "name": "Devon Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "DXCM",
+      "name": "Dexcom",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "EBAY",
+      "name": "eBay Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ECHO",
+      "name": "EchoStar",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ECL",
+      "name": "Ecolab",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ED",
+      "name": "Consolidated Edison",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EFX",
+      "name": "Equifax",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EG",
+      "name": "Everest Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EIX",
+      "name": "Edison International",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EL",
+      "name": "Est\u00e9e Lauder Companies (The)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ELV",
+      "name": "Elevance Health",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EME",
+      "name": "Emcor",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EMR",
+      "name": "Emerson Electric",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EOG",
+      "name": "EOG Resources",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EQIX",
+      "name": "Equinix",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EQT",
+      "name": "EQT Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ERIE",
+      "name": "Erie Indemnity",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ES",
+      "name": "Eversource Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ESS",
+      "name": "Essex Property Trust",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ETN",
+      "name": "Eaton Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ETR",
+      "name": "Entergy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EVRG",
+      "name": "Evergy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EW",
+      "name": "Edwards Lifesciences",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EXC",
+      "name": "Exelon",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "EXE",
+      "name": "Expand Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EXPD",
+      "name": "Expeditors International",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EXPE",
+      "name": "Expedia Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "EXR",
+      "name": "Extra Space Storage",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "F",
+      "name": "Ford Motor Company",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FANG",
+      "name": "Diamondback Energy",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "FAST",
+      "name": "Fastenal",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "FCX",
+      "name": "Freeport-McMoRan",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FDS",
+      "name": "FactSet",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FDX",
+      "name": "FedEx",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FDXF",
+      "name": "FedEx Freight",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FE",
+      "name": "FirstEnergy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FER",
+      "name": "Ferrovial",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "FERG",
+      "name": "Ferguson Enterprises",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FFIV",
+      "name": "F5, Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FICO",
+      "name": "Fair Isaac",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FIS",
+      "name": "Fidelity National Information Services",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FISV",
+      "name": "Fiserv",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FITB",
+      "name": "Fifth Third Bancorp",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FIX",
+      "name": "Comfort Systems USA",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FLEX",
+      "name": "Flex Ltd.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FOX",
+      "name": "Fox Corporation (Class B)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FOXA",
+      "name": "Fox Corporation (Class A)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FRT",
+      "name": "Federal Realty Investment Trust",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FSLR",
+      "name": "First Solar",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "FTNT",
+      "name": "Fortinet",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "FTV",
+      "name": "Fortive",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GD",
+      "name": "General Dynamics",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GDDY",
+      "name": "GoDaddy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GE",
+      "name": "GE Aerospace",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GEHC",
+      "name": "GE HealthCare",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "GEN",
+      "name": "Gen Digital",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GEV",
+      "name": "GE Vernova",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GILD",
+      "name": "Gilead Sciences",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "GIS",
+      "name": "General Mills",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GL",
+      "name": "Globe Life",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GLW",
+      "name": "Corning Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GM",
+      "name": "General Motors",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GNRC",
+      "name": "Generac",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GOOG",
+      "name": "Alphabet Inc. (Class C)",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "name": "Alphabet Inc. (Class A)",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "GPC",
+      "name": "Genuine Parts Company",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GPN",
+      "name": "Global Payments",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GRMN",
+      "name": "Garmin",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GS",
+      "name": "Goldman Sachs",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "GWW",
+      "name": "W. W. Grainger",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HAL",
+      "name": "Halliburton",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HAS",
+      "name": "Hasbro",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HBAN",
+      "name": "Huntington Bancshares",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HCA",
+      "name": "HCA Healthcare",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HD",
+      "name": "Home Depot (The)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HIG",
+      "name": "Hartford (The)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HII",
+      "name": "Huntington Ingalls Industries",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HLT",
+      "name": "Hilton Worldwide",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HON",
+      "name": "Honeywell Technologies",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "HONA",
+      "name": "Honeywell Aerospace",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "HOOD",
+      "name": "Robinhood Markets",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HPE",
+      "name": "Hewlett Packard Enterprise",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HPQ",
+      "name": "HP Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HRL",
+      "name": "Hormel Foods",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HSIC",
+      "name": "Henry Schein",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HST",
+      "name": "Host Hotels & Resorts",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HSY",
+      "name": "Hershey Company (The)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HUBB",
+      "name": "Hubbell Incorporated",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HUM",
+      "name": "Humana",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "HWM",
+      "name": "Howmet Aerospace",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "IBKR",
+      "name": "Interactive Brokers",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "IBM",
+      "name": "IBM",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ICE",
+      "name": "Intercontinental Exchange",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "IDXX",
+      "name": "Idexx Laboratories",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "IEX",
+      "name": "IDEX Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "IFF",
+      "name": "International Flavors & Fragrances",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ILMN",
+      "name": "Illumina, Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "INCY",
+      "name": "Incyte",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "INTC",
+      "name": "Intel",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "INTU",
+      "name": "Intuit",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "INVH",
+      "name": "Invitation Homes",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "IP",
+      "name": "International Paper",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "IQV",
+      "name": "IQVIA",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "IR",
+      "name": "Ingersoll Rand",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "IRM",
+      "name": "Iron Mountain",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ISRG",
+      "name": "Intuitive Surgical",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "IT",
+      "name": "Gartner",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ITW",
+      "name": "Illinois Tool Works",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "IVZ",
+      "name": "Invesco",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "J",
+      "name": "Jacobs Solutions",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "JBHT",
+      "name": "J.B. Hunt",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "JBL",
+      "name": "Jabil",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "JCI",
+      "name": "Johnson Controls",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "JKHY",
+      "name": "Jack Henry & Associates",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "JNJ",
+      "name": "Johnson & Johnson",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "JPM",
+      "name": "JPMorgan Chase",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "KDP",
+      "name": "Keurig Dr Pepper",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "KEY",
+      "name": "KeyCorp",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "KEYS",
+      "name": "Keysight Technologies",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "KHC",
+      "name": "Kraft Heinz",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "KIM",
+      "name": "Kimco Realty",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "KKR",
+      "name": "KKR & Co.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "KLAC",
+      "name": "KLA Corporation",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "KMB",
+      "name": "Kimberly-Clark",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "KMI",
+      "name": "Kinder Morgan",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "KO",
+      "name": "Coca-Cola Company (The)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "KR",
+      "name": "Kroger",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "KVUE",
+      "name": "Kenvue",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "L",
+      "name": "Loews Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LDOS",
+      "name": "Leidos",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LEN",
+      "name": "Lennar",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LH",
+      "name": "Labcorp",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LHX",
+      "name": "L3Harris",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LII",
+      "name": "Lennox International",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LIN",
+      "name": "Linde plc",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "LITE",
+      "name": "Lumentum",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "LLY",
+      "name": "Lilly (Eli)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LMT",
+      "name": "Lockheed Martin",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LNT",
+      "name": "Alliant Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LOW",
+      "name": "Lowe's",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LRCX",
+      "name": "Lam Research",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "LULU",
+      "name": "Lululemon Athletica",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LUV",
+      "name": "Southwest Airlines",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LVS",
+      "name": "Las Vegas Sands",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LYB",
+      "name": "LyondellBasell",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "LYV",
+      "name": "Live Nation Entertainment",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MA",
+      "name": "Mastercard",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MAA",
+      "name": "Mid-America Apartment Communities",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MAR",
+      "name": "Marriott International",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "MAS",
+      "name": "Masco",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MCD",
+      "name": "McDonald's",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MCHP",
+      "name": "Microchip Technology",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "MCK",
+      "name": "McKesson",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MCO",
+      "name": "Moody's Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MDLZ",
+      "name": "Mondelez International",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "MDT",
+      "name": "Medtronic",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MELI",
+      "name": "Mercado Libre",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "MET",
+      "name": "MetLife",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "META",
+      "name": "Meta Platforms",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "MGM",
+      "name": "MGM Resorts",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MKC",
+      "name": "McCormick & Company",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MLM",
+      "name": "Martin Marietta Materials",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MMM",
+      "name": "3M",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MNST",
+      "name": "Monster Beverage",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "MO",
+      "name": "Altria",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MOS",
+      "name": "Mosaic Company (The)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MPC",
+      "name": "Marathon Petroleum",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MPWR",
+      "name": "Monolithic Power Systems",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "MRK",
+      "name": "Merck & Co.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MRNA",
+      "name": "Moderna",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "MRSH",
+      "name": "Marsh McLennan",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MRVL",
+      "name": "Marvell Technology",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "MS",
+      "name": "Morgan Stanley",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MSCI",
+      "name": "MSCI",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "name": "Microsoft",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "MSI",
+      "name": "Motorola Solutions",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MSTR",
+      "name": "MicroStrategy",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "MTB",
+      "name": "M&T Bank",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MTD",
+      "name": "Mettler Toledo",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "MU",
+      "name": "Micron Technology",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "NBIS",
+      "name": "Nebius Group",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "NCLH",
+      "name": "Norwegian Cruise Line Holdings",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NDAQ",
+      "name": "Nasdaq, Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NDSN",
+      "name": "Nordson Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NEE",
+      "name": "NextEra Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NEM",
+      "name": "Newmont",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NFLX",
+      "name": "Netflix",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "NI",
+      "name": "NiSource",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NKE",
+      "name": "Nike, Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NOC",
+      "name": "Northrop Grumman",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NOW",
+      "name": "ServiceNow",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NRG",
+      "name": "NRG Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NSC",
+      "name": "Norfolk Southern",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NTAP",
+      "name": "NetApp",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NTRS",
+      "name": "Northern Trust",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NUE",
+      "name": "Nucor",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "name": "Nvidia",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "NVR",
+      "name": "NVR, Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NWS",
+      "name": "News Corp (Class B)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NWSA",
+      "name": "News Corp (Class A)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "NXPI",
+      "name": "NXP Semiconductors",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "O",
+      "name": "Realty Income",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ODFL",
+      "name": "Old Dominion",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "OKE",
+      "name": "Oneok",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "OMC",
+      "name": "Omnicom Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ON",
+      "name": "ON Semiconductor",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ORCL",
+      "name": "Oracle Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ORLY",
+      "name": "O'Reilly Automotive",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "OTIS",
+      "name": "Otis Worldwide",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "OXY",
+      "name": "Occidental Petroleum",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "P",
+      "name": "Everpure",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PANW",
+      "name": "Palo Alto Networks",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "PAYX",
+      "name": "Paychex",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "PCAR",
+      "name": "Paccar",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "PCG",
+      "name": "PG&E Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PDD",
+      "name": "PDD Holdings",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "PEG",
+      "name": "Public Service Enterprise Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PEP",
+      "name": "PepsiCo",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "PFE",
+      "name": "Pfizer",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PFG",
+      "name": "Principal Financial Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PG",
+      "name": "Procter & Gamble",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PGR",
+      "name": "Progressive Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PH",
+      "name": "Parker Hannifin",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PHM",
+      "name": "PulteGroup",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PKG",
+      "name": "Packaging Corporation of America",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PLD",
+      "name": "Prologis",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PLTR",
+      "name": "Palantir Technologies",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "PM",
+      "name": "Philip Morris International",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PNC",
+      "name": "PNC Financial Services",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PNR",
+      "name": "Pentair",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PNW",
+      "name": "Pinnacle West Capital",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PODD",
+      "name": "Insulet Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PPG",
+      "name": "PPG Industries",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PPL",
+      "name": "PPL Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PRU",
+      "name": "Prudential Financial",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PSA",
+      "name": "Public Storage",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PSX",
+      "name": "Phillips 66",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PTC",
+      "name": "PTC Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PWR",
+      "name": "Quanta Services",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "PYPL",
+      "name": "PayPal",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "Q",
+      "name": "Qnity Electronics",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "QCOM",
+      "name": "Qualcomm",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "RCL",
+      "name": "Royal Caribbean Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "RDDT",
+      "name": "Reddit",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "REG",
+      "name": "Regency Centers",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "REGN",
+      "name": "Regeneron Pharmaceuticals",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "RF",
+      "name": "Regions Financial Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "RJF",
+      "name": "Raymond James Financial",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "RKLB",
+      "name": "Rocket Lab",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "RL",
+      "name": "Ralph Lauren Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "RMD",
+      "name": "ResMed",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ROK",
+      "name": "Rockwell Automation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ROL",
+      "name": "Rollins, Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ROP",
+      "name": "Roper Technologies",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "ROST",
+      "name": "Ross Stores",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "RSG",
+      "name": "Republic Services",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "RTX",
+      "name": "RTX Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "RVTY",
+      "name": "Revvity",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SBAC",
+      "name": "SBA Communications",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SBUX",
+      "name": "Starbucks",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "SCHW",
+      "name": "Charles Schwab Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SHOP",
+      "name": "Shopify",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "SHW",
+      "name": "Sherwin-Williams",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SJM",
+      "name": "J.M. Smucker Company (The)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SKYD",
+      "name": "Skydance",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SLB",
+      "name": "Schlumberger",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SMCI",
+      "name": "Supermicro",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SNA",
+      "name": "Snap-on",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SNDK",
+      "name": "Sandisk",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "SNPS",
+      "name": "Synopsys",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "SO",
+      "name": "Southern Company",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SOLV",
+      "name": "Solventum",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SPCX",
+      "name": "SpaceX",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "SPG",
+      "name": "Simon Property Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SPGI",
+      "name": "S&P Global",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SRE",
+      "name": "Sempra",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "STE",
+      "name": "Steris",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "STLD",
+      "name": "Steel Dynamics",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "STT",
+      "name": "State Street Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "STX",
+      "name": "Seagate Technology",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "STZ",
+      "name": "Constellation Brands",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SW",
+      "name": "Smurfit Westrock",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SWK",
+      "name": "Stanley Black & Decker",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SWKS",
+      "name": "Skyworks Solutions",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SYF",
+      "name": "Synchrony Financial",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SYK",
+      "name": "Stryker Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "SYY",
+      "name": "Sysco",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "T",
+      "name": "AT&T",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TDG",
+      "name": "TransDigm Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TDY",
+      "name": "Teledyne Technologies",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TECH",
+      "name": "Bio-Techne",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TEL",
+      "name": "TE Connectivity",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TER",
+      "name": "Teradyne",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "TFC",
+      "name": "Truist Financial",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TGT",
+      "name": "Target Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TJX",
+      "name": "TJX Companies",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TKO",
+      "name": "TKO Group Holdings",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TMO",
+      "name": "Thermo Fisher Scientific",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TMUS",
+      "name": "T-Mobile US",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "TPL",
+      "name": "Texas Pacific Land Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TPR",
+      "name": "Tapestry, Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TRGP",
+      "name": "Targa Resources",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TRI",
+      "name": "Thomson Reuters",
+      "indices": [
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "TRMB",
+      "name": "Trimble Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TROW",
+      "name": "T. Rowe Price",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TRV",
+      "name": "Travelers Companies (The)",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TSCO",
+      "name": "Tractor Supply",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "name": "Tesla, Inc.",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "TSN",
+      "name": "Tyson Foods",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TT",
+      "name": "Trane Technologies",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TTWO",
+      "name": "Take-Two Interactive",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "TWLO",
+      "name": "Twilio",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TXN",
+      "name": "Texas Instruments",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "TXT",
+      "name": "Textron",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "TYL",
+      "name": "Tyler Technologies",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "UAL",
+      "name": "United Airlines Holdings",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "UBER",
+      "name": "Uber",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "UDR",
+      "name": "UDR, Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "UHS",
+      "name": "Universal Health Services",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ULTA",
+      "name": "Ulta Beauty",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "UNH",
+      "name": "UnitedHealth Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "UNP",
+      "name": "Union Pacific Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "UPS",
+      "name": "United Parcel Service",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "URI",
+      "name": "United Rentals",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "USB",
+      "name": "U.S. Bancorp",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "V",
+      "name": "Visa Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VEEV",
+      "name": "Veeva Systems",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VICI",
+      "name": "Vici Properties",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VLO",
+      "name": "Valero Energy",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VLTO",
+      "name": "Veralto",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VMC",
+      "name": "Vulcan Materials Company",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VMRK",
+      "name": "Vivmark Residential",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VRSK",
+      "name": "Verisk Analytics",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VRSN",
+      "name": "Verisign",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VRT",
+      "name": "Vertiv",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VRTX",
+      "name": "Vertex Pharmaceuticals",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "VST",
+      "name": "Vistra Corp.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VTR",
+      "name": "Ventas",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VTRS",
+      "name": "Viatris",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VYLR",
+      "name": "Vylor",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "VZ",
+      "name": "Verizon",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WAB",
+      "name": "Wabtec",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WAT",
+      "name": "Waters Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WDAY",
+      "name": "Workday, Inc.",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "WDC",
+      "name": "Western Digital",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "WEC",
+      "name": "WEC Energy Group",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WELL",
+      "name": "Welltower",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WFC",
+      "name": "Wells Fargo",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WM",
+      "name": "Waste Management",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WMB",
+      "name": "Williams Companies",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WMT",
+      "name": "Walmart",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "WRB",
+      "name": "W. R. Berkley Corporation",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WSM",
+      "name": "Williams-Sonoma, Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WST",
+      "name": "West Pharmaceutical Services",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WTW",
+      "name": "Willis Towers Watson",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WY",
+      "name": "Weyerhaeuser",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "WYNN",
+      "name": "Wynn Resorts",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "XEL",
+      "name": "Xcel Energy",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ]
+    },
+    {
+      "symbol": "XOM",
+      "name": "ExxonMobil",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "XYL",
+      "name": "Xylem Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "XYZ",
+      "name": "Block, Inc.",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "YUM",
+      "name": "Yum! Brands",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ZBH",
+      "name": "Zimmer Biomet",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ZBRA",
+      "name": "Zebra Technologies",
+      "indices": [
+        "SP500"
+      ]
+    },
+    {
+      "symbol": "ZTS",
+      "name": "Zoetis",
+      "indices": [
+        "SP500"
+      ]
+    }
+  ]
+}

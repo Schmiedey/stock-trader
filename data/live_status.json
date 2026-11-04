@@ -1,0 +1,183 @@
+{
+  "daemon_running": true,
+  "pid": 91222,
+  "updated_at": "2026-11-03T18:58:37.187599",
+  "current_time_cst": "06:58:37 PM CST",
+  "today_date": "2026-11-03",
+  "is_trading_day": true,
+  "next_run": {
+    "target_datetime": "2026-11-04T14:55:00",
+    "countdown_seconds": 71782,
+    "countdown_str": "19h 56m 22s",
+    "note": "Wednesday, Nov 04 at 2:55 PM CST",
+    "is_trading_day": true
+  },
+  "last_execution_date": "2026-11-03",
+  "account_equity": 100223.48,
+  "available_cash": 417.75,
+  "positions": {
+    "1": {
+      "slot": 1,
+      "ticker": "INTC",
+      "shares": 331,
+      "entry_price": 60.39,
+      "target_price": 62.2,
+      "buy_date": "2026-11-03",
+      "mandatory_exit_date": "2026-11-10",
+      "cost_basis": 19989.09,
+      "current_price": 60.55,
+      "market_value": 20042.05,
+      "unrealized_pnl": 52.96,
+      "unrealized_pnl_pct": 0.26,
+      "days_held": 0
+    },
+    "2": {
+      "slot": 2,
+      "ticker": "LITE",
+      "shares": 29,
+      "entry_price": 679.96,
+      "target_price": 700.36,
+      "buy_date": "2026-11-03",
+      "mandatory_exit_date": "2026-11-10",
+      "cost_basis": 19718.84,
+      "current_price": 680.16,
+      "market_value": 19724.64,
+      "unrealized_pnl": 5.8,
+      "unrealized_pnl_pct": 0.03,
+      "days_held": 0
+    },
+    "3": {
+      "slot": 3,
+      "ticker": "RDDT",
+      "shares": 208,
+      "entry_price": 96.08,
+      "target_price": 98.96,
+      "buy_date": "2026-11-03",
+      "mandatory_exit_date": "2026-11-10",
+      "cost_basis": 19984.64,
+      "current_price": 96.15,
+      "market_value": 19999.2,
+      "unrealized_pnl": 14.56,
+      "unrealized_pnl_pct": 0.07,
+      "days_held": 0
+    },
+    "4": {
+      "slot": 4,
+      "ticker": "MRVL",
+      "shares": 116,
+      "entry_price": 172.01,
+      "target_price": 177.17,
+      "buy_date": "2026-11-03",
+      "mandatory_exit_date": "2026-11-10",
+      "cost_basis": 19953.16,
+      "current_price": 171.97,
+      "market_value": 19948.52,
+      "unrealized_pnl": -4.64,
+      "unrealized_pnl_pct": -0.02,
+      "days_held": 0
+    },
+    "5": {
+      "slot": 5,
+      "ticker": "ALAB",
+      "shares": 86,
+      "entry_price": 231.82,
+      "target_price": 238.77,
+      "buy_date": "2026-11-03",
+      "mandatory_exit_date": "2026-11-10",
+      "cost_basis": 19936.52,
+      "current_price": 233.62,
+      "market_value": 20091.32,
+      "unrealized_pnl": 154.8,
+      "unrealized_pnl_pct": 0.78,
+      "days_held": 0
+    }
+  },
+  "pending_sells": [],
+  "pending_buys": [],
+  "top_candidates": [
+    {
+      "ticker": "ILMN",
+      "name": "Illumina, Inc.",
+      "indices": [
+        "SP500"
+      ],
+      "current_price": 238.21,
+      "price_3d_ago": 290.06,
+      "return_3d_pct": -17.88
+    },
+    {
+      "ticker": "DDOG",
+      "name": "Datadog",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ],
+      "current_price": 220.52,
+      "price_3d_ago": 265.84,
+      "return_3d_pct": -17.05
+    },
+    {
+      "ticker": "SNDK",
+      "name": "Sandisk",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ],
+      "current_price": 1126.52,
+      "price_3d_ago": 1330.05,
+      "return_3d_pct": -15.3
+    },
+    {
+      "ticker": "AMD",
+      "name": "Advanced Micro Devices",
+      "indices": [
+        "SP500",
+        "NASDAQ100"
+      ],
+      "current_price": 483.9,
+      "price_3d_ago": 566.42,
+      "return_3d_pct": -14.57
+    },
+    {
+      "ticker": "SHOP",
+      "name": "Shopify",
+      "indices": [
+        "NASDAQ100"
+      ],
+      "current_price": 142.57,
+      "price_3d_ago": 166.89,
+      "return_3d_pct": -14.57
+    },
+    {
+      "ticker": "P",
+      "name": "Everpure",
+      "indices": [
+        "SP500"
+      ],
+      "current_price": 117.65,
+      "price_3d_ago": 137.2,
+      "return_3d_pct": -14.25
+    },
+    {
+      "ticker": "CIEN",
+      "name": "Ciena",
+      "indices": [
+        "SP500"
+      ],
+      "current_price": 300.08,
+      "price_3d_ago": 349.45,
+      "return_3d_pct": -14.13
+    },
+    {
+      "ticker": "DELL",
+      "name": "Dell Technologies",
+      "indices": [
+        "SP500"
+      ],
+      "current_price": 408.4,
+      "price_3d_ago": 475.51,
+      "return_3d_pct": -14.11
+    }
+  ],
+  "recent_history": []
+}

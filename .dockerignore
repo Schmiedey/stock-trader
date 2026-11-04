@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.git
+.gitignore
+*.pid
+data/*.pid
+data/*.log
+zero_dte_scalper/data/*.pid
+zero_dte_scalper/data/*.log
+.DS_Store
+.venv/
+venv/
