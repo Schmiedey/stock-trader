@@ -74,18 +74,20 @@ def select_best_contract(
     stop_loss_pct = config.get("stop_loss_pct", 0.15)
     tp1_pct = config.get("take_profit_1_pct", 0.20)
     tp2_pct = config.get("take_profit_2_pct", 0.40)
-    risk_budget = config.get("max_risk_per_trade_usd", 300.0)
+    risk_budget = config.get("max_risk_per_trade_usd", 200.0)
+    max_outlay = config.get("max_position_outlay_usd", 450.0)
+    max_contracts_cap = config.get("max_contracts", 4)
 
     contract_unit_cost = entry_price * 100.0
     dollar_risk_per_contract = contract_unit_cost * stop_loss_pct
 
-    if dollar_risk_per_contract > 0:
-        suggested_qty = int(risk_budget / dollar_risk_per_contract)
-    else:
-        suggested_qty = 1
+    by_risk_qty = int(risk_budget / dollar_risk_per_contract) if dollar_risk_per_contract > 0 else 1
+    by_outlay_qty = int(max_outlay / contract_unit_cost) if contract_unit_cost > 0 else 1
 
-    # Clamp quantity: 1 to 10 contracts
-    suggested_qty = max(1, min(10, suggested_qty))
+    # Clamp quantity strictly to preserve capital
+    suggested_qty = min(by_risk_qty, by_outlay_qty, max_contracts_cap)
+    suggested_qty = max(1, suggested_qty)
+
     total_outlay = round(contract_unit_cost * suggested_qty, 2)
     total_dollar_risk = round(dollar_risk_per_contract * suggested_qty, 2)
 

@@ -1,7 +1,8 @@
 """
-Autonomous 0DTE Options Scalper Daemon.
-Continuously scans intraday 5m technicals for SPY and QQQ, enters high-conviction
-scalp setups on paper, and manages exits via hard -15% stop-loss and +20%/+40% profit targets.
+Autonomous 0DTE Options Scalper Daemon v2.0.
+Continuously scans intraday technicals for SPY and QQQ, enters high-conviction
+scalp setups on paper, and manages exits via hard -15% stop-loss, +20%/+40% profit targets,
+underlying technical invalidation, and theta stagnation exits.
 """
 
 import os
@@ -55,10 +56,13 @@ class ZeroDteScalperDaemon:
     def __init__(self):
         self.config = load_config()
         self.underlyings = self.config.get("underlyings", ["SPY", "QQQ"])
-        self.max_concurrent_positions = 2
+        # Strict single position limit: never hold correlated SPY & QQQ simultaneously
+        self.max_concurrent_positions = self.config.get("max_concurrent_positions", 1)
         self.last_screen_time = 0.0
         self.last_exit_times = {}  # {symbol: (exit_timestamp, reason_str)}
-        self.reentry_cooldown_seconds = self.config.get("reentry_cooldown_seconds", 90)
+        self.reentry_cooldown_seconds = self.config.get("reentry_cooldown_seconds", 300)
+        self.max_hold_time_minutes = self.config.get("max_hold_time_minutes", 25)
+        self.circuit_breaker_logged = False
 
     def update_telemetry(self):
         """Write live daemon status and telemetry."""
@@ -89,7 +93,7 @@ class ZeroDteScalperDaemon:
             log(f"Failed to write telemetry: {e}")
 
     def manage_active_positions(self):
-        """Check stop-loss (-15%), profit targets (+20%/+40%), and time exits."""
+        """Check stop-loss (-15%), profit targets (+20%/+40%), stagnation, and invalidation."""
         try:
             positions = update_active_positions_quotes()
         except Exception as e:
@@ -111,6 +115,9 @@ class ZeroDteScalperDaemon:
             stop_px = pos.get("stop_loss_price", pos["entry_price"] * 0.85)
             tp1_px = pos.get("tp1_price", pos["entry_price"] * 1.20)
             tp2_px = pos.get("tp2_price", pos["entry_price"] * 1.40)
+            elapsed_mins = pos.get("elapsed_minutes", 0.0)
+            spot_px = pos.get("current_spot_price", 0.0)
+            underlying_stop = pos.get("underlying_stop", 0.0)
 
             # Trigger 1: Hard Stop-Loss (-15% on premium)
             if curr_px <= stop_px or pnl_pct <= -15.0:
@@ -141,7 +148,7 @@ class ZeroDteScalperDaemon:
                     log(f"💰 [TARGET 1 HIT] {contract_sym}: Quote ${curr_px:.2f} >= TP1 ${tp1_px:.2f}. Scaling out {half_qty} contracts.")
                     try:
                         close_position(position_id=pos_id, exit_price=curr_px, reason="TARGET_1_SCALE_OUT (+20%)", partial_qty=half_qty)
-                        # Move stop to breakeven with a 2-cent spread cushion
+                        # Move stop to breakeven with cushion
                         cushion = self.config.get("breakeven_cushion_usd", 0.02)
                         protected_stop = max(0.01, round(pos["entry_price"] - cushion, 2))
                         active_now = load_active_positions()
@@ -162,8 +169,36 @@ class ZeroDteScalperDaemon:
                         except Exception as e:
                             log(f"Error closing target 1: {e}")
 
-            # Trigger 4: Mandatory End-Of-Day Expiration Exit (15:50 EST)
-            if session_phase == "MANDATORY_EXIT" or session_phase == "CLOSED":
+            # Trigger 4: Stagnation / Theta Defense Exit (Held >= 25m without reaching +10%)
+            if elapsed_mins >= self.max_hold_time_minutes and pnl_pct < 10.0:
+                log(f"⏳ [STAGNATION EXIT] {contract_sym}: Open for {elapsed_mins:.1f}m without momentum (+{pnl_pct:.1f}%). Exiting to eliminate theta decay.")
+                try:
+                    close_position(position_id=pos_id, exit_price=curr_px, reason="STAGNATION_TIME_EXIT")
+                    self.last_exit_times[pos["symbol"]] = (time.time(), "STAGNATION")
+                except Exception as e:
+                    log(f"Error closing stagnation exit: {e}")
+                continue
+
+            # Trigger 5: Underlying Invalidation Exit (Underlying broken beyond key technical stop)
+            if underlying_stop > 0 and spot_px > 0:
+                is_invalid = False
+                if pos["action"] == "CALL" and spot_px < underlying_stop:
+                    is_invalid = True
+                    log(f"⚠️ [UNDERLYING INVALIDATION] {contract_sym}: Spot ${spot_px:.2f} broke below technical support ${underlying_stop:.2f}.")
+                elif pos["action"] == "PUT" and spot_px > underlying_stop:
+                    is_invalid = True
+                    log(f"⚠️ [UNDERLYING INVALIDATION] {contract_sym}: Spot ${spot_px:.2f} broke above technical resistance ${underlying_stop:.2f}.")
+
+                if is_invalid:
+                    try:
+                        close_position(position_id=pos_id, exit_price=curr_px, reason="UNDERLYING_INVALIDATION_EXIT")
+                        self.last_exit_times[pos["symbol"]] = (time.time(), "INVALIDATION")
+                    except Exception as e:
+                        log(f"Error closing underlying invalidation: {e}")
+                    continue
+
+            # Trigger 6: Mandatory End-Of-Day Expiration Exit (15:50 EST)
+            if session_phase in ["MANDATORY_FLAT", "MANDATORY_EXIT", "CLOSED"]:
                 log(f"⏰ [MANDATORY EOD EXIT] {contract_sym}: Closing before 4:00 PM EST bell @ ${curr_px:.2f}")
                 try:
                     close_position(position_id=pos_id, exit_price=curr_px, reason="MANDATORY_EOD_EXPIRATION_EXIT")
@@ -176,7 +211,7 @@ class ZeroDteScalperDaemon:
         if not session.get("trading_allowed", False):
             return
 
-        # Check active positions count
+        # Check active positions count (Strict max 1 position rule)
         active = load_active_positions()
         if len(active) >= self.max_concurrent_positions:
             return
@@ -189,20 +224,24 @@ class ZeroDteScalperDaemon:
             config=self.config
         )
         if not allowed:
+            if not self.circuit_breaker_logged:
+                log(f"🛡️ [RISK LOCK]: {reason}")
+                self.circuit_breaker_logged = True
             return
+        else:
+            self.circuit_breaker_logged = False
 
         active_symbols = {p["symbol"] for p in active}
-        active_directions = {p.get("action", "").upper() for p in active if p.get("action")}
 
         for symbol in self.underlyings:
             if symbol in active_symbols:
                 continue
 
-            # 1. Micro Candle Reset Cooldown check (prevent immediate same-tick re-entry after exit)
+            # Re-entry Cooldown check (5 min after stop loss, 3 min after TP)
             if symbol in self.last_exit_times:
                 last_exit_t, last_reason = self.last_exit_times[symbol]
                 elapsed = time.time() - last_exit_t
-                cooldown_dur = 120 if last_reason == "STOP_LOSS" else self.reentry_cooldown_seconds
+                cooldown_dur = self.reentry_cooldown_seconds if last_reason in ["STOP_LOSS", "INVALIDATION"] else 180
                 if elapsed < cooldown_dur:
                     continue
 
@@ -211,14 +250,8 @@ class ZeroDteScalperDaemon:
                 action = sig.get("signal")
                 conviction = sig.get("conviction")
 
-                # Require high or medium conviction directional trigger
+                # Require high or medium conviction directional trigger with zero vetoes
                 if action in ["CALL", "PUT"] and conviction in ["HIGH", "MEDIUM"]:
-                    # 2. Inter-market Directional Alignment Guard
-                    # Prevent conflicting trades (e.g. SPY CALL while holding QQQ PUT)
-                    if active_directions and action.upper() not in active_directions:
-                        log(f"⚠️ [DIRECTION CONFLICT] Blocking {symbol} {action} entry: opposing active position ({', '.join(active_directions)}) is open.")
-                        continue
-
                     log(f"🔍 [SIGNAL DETECTED] {symbol} {action} ({conviction}) | Setup: {sig.get('primary_setup')}")
 
                     rec = select_best_contract(symbol=symbol, action=action, config=self.config)
@@ -251,31 +284,39 @@ class ZeroDteScalperDaemon:
                         stop_loss_price=stop_px,
                         tp1_price=tp1_px,
                         tp2_price=tp2_px,
-                        setup_name=sig.get("primary_setup", "Autonomous Scalp")
+                        setup_name=sig.get("primary_setup", "Autonomous Scalp"),
+                        entry_spot_price=sig.get("current_price", 0.0),
+                        iv=c.get("iv", 0.16)
                     )
+
+                    # Attach underlying stop for invalidation monitoring
+                    active_now = load_active_positions()
+                    for p in active_now:
+                        if p["id"] == pos["id"]:
+                            p["underlying_stop"] = sig.get("underlying_stop", 0.0)
+                    save_active_positions(active_now)
 
                     log("=" * 70)
                     log(f"⚡ [AUTONOMOUS 0DTE ENTRY] {qty}x {c['contract_symbol']} ({action})")
-                    log(f"   Entry: ${entry_px:.2f} | Stop: ${stop_px:.2f} (-15%) | TP1: ${tp1_px:.2f} (+20%) | TP2: ${tp2_px:.2f} (+40%)")
+                    log(f"   Spot: ${sig.get('current_price', 0.0):.2f} | Entry: ${entry_px:.2f} | Stop: ${stop_px:.2f} (-15%) | TP1: ${tp1_px:.2f} (+20%) | TP2: ${tp2_px:.2f} (+40%)")
+                    log(f"   Max Risk: ${rec.get('sizing', {}).get('projected_max_loss', 0.0):.2f} | Outlay: ${rec.get('sizing', {}).get('total_outlay', 0.0):.2f}")
                     log("=" * 70)
 
-                    # Update active positions list
-                    active_symbols.add(symbol)
-                    if len(active_symbols) >= self.max_concurrent_positions:
-                        break
+                    # Single position rule: exit loop immediately
+                    break
 
             except Exception as e:
                 log(f"Error scanning {symbol}: {e}")
 
     def run_loop(self):
         """Main autonomous scalper loop."""
-        log(f"⚡ 0DTE Autonomous Scalper Daemon started. PID={os.getpid()}")
-        log(f"Monitoring underlyings: {', '.join(self.underlyings)} | Hard Stop: -15% | Take-Profit: +20% / +40%")
+        log(f"⚡ 0DTE Autonomous Scalper Daemon v2.0 started. PID={os.getpid()}")
+        log(f"Monitoring underlyings: {', '.join(self.underlyings)} | Hard Stop: -15% | Take-Profit: +20% / +40% | Stagnation: 25m")
 
         loop_count = 0
         while True:
             try:
-                # 1. Manage current positions (check stop-loss & take-profits)
+                # 1. Manage current positions (check stop-loss, take-profits, invalidation)
                 self.manage_active_positions()
 
                 # 2. Scan for new entries every 15s during market hours
@@ -283,7 +324,7 @@ class ZeroDteScalperDaemon:
                     self.scan_and_enter_setups()
                     self.last_screen_time = time.time()
 
-                # 3. Update status telemetry every ~10s
+                # 3. Update status telemetry every ~8s
                 if loop_count % 1 == 0:
                     self.update_telemetry()
 
@@ -346,7 +387,7 @@ def status_daemon():
             with open(STATUS_FILE) as f:
                 data = json.load(f)
             print("\n" + "=" * 70)
-            print("  0DTE AUTONOMOUS SCALPER TELEMETRY")
+            print("  0DTE AUTONOMOUS SCALPER TELEMETRY v2.0")
             print("=" * 70)
             print(f" Status: {'RUNNING' if data.get('daemon_running') else 'STOPPED'} (PID {data.get('pid')})")
             print(f" Session: {data.get('session', {}).get('session_phase')}")

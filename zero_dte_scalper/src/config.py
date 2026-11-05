@@ -61,12 +61,12 @@ def get_market_session_state(config: dict | None = None) -> dict:
 
     m_open = hours.get("market_open", "09:30")
     m_close = hours.get("market_close", "16:00")
-    prime_start = hours.get("prime_morning_start", "09:35")
+    prime_start = hours.get("prime_morning_start", "09:45")
     prime_end = hours.get("prime_morning_end", "11:30")
     chop_start = hours.get("midday_chop_start", "11:30")
     chop_end = hours.get("midday_chop_end", "13:30")
     pm_start = hours.get("afternoon_window_start", "13:30")
-    pm_end = hours.get("afternoon_window_end", "15:45")
+    pm_end = hours.get("afternoon_window_end", "15:30")
     mand_exit = hours.get("mandatory_exit_time", "15:50")
 
     if current_time_str < m_open:
@@ -83,7 +83,7 @@ def get_market_session_state(config: dict | None = None) -> dict:
             "is_market_open": True,
             "session_phase": "OPENING_VOLATILITY",
             "trading_allowed": False,
-            "reason": "Opening 5-minute volatility. Wait for initial range to form."
+            "reason": "Opening 15-minute price discovery (09:30 - 09:45 EST). Wait for 15m range to establish."
         }
     elif prime_start <= current_time_str < prime_end:
         return {

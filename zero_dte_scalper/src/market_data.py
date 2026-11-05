@@ -38,7 +38,7 @@ def get_intraday_data(symbol: str = "SPY", interval: str = "5m", period: str = "
 
 def calculate_indicators(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Compute VWAP, EMA 9, EMA 21, RSI 14, and ATR on intraday dataframe.
+    Compute VWAP, EMA 9, EMA 21, EMA 50, RSI 14, ATR, Relative Volume, and MACD.
     """
     df = df.copy()
 
@@ -54,9 +54,10 @@ def calculate_indicators(df: pd.DataFrame) -> pd.DataFrame:
     df["VWAP"] = df["Cum_VP"] / df["Cum_Vol"].replace(0, np.nan)
     df["VWAP"] = df["VWAP"].ffill()
 
-    # 2. Exponential Moving Averages
+    # 2. Exponential Moving Averages (Short, Medium, Macro Trend)
     df["EMA9"] = df["Close"].ewm(span=9, adjust=False).mean()
     df["EMA21"] = df["Close"].ewm(span=21, adjust=False).mean()
+    df["EMA50"] = df["Close"].ewm(span=50, adjust=False).mean()
 
     # 3. Relative Strength Index (RSI - 14)
     delta = df["Close"].diff()
@@ -74,6 +75,17 @@ def calculate_indicators(df: pd.DataFrame) -> pd.DataFrame:
     low_close = (df["Low"] - df["Close"].shift()).abs()
     tr = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1)
     df["ATR"] = tr.rolling(window=14).mean().ffill()
+
+    # 5. Volume Analysis (SMA20 & Relative Volume)
+    df["Vol_SMA20"] = df["Volume"].rolling(window=20).mean()
+    df["Rel_Volume"] = (df["Volume"] / df["Vol_SMA20"].replace(0, np.nan)).fillna(1.0)
+
+    # 6. MACD (12, 26, 9)
+    ema12 = df["Close"].ewm(span=12, adjust=False).mean()
+    ema26 = df["Close"].ewm(span=26, adjust=False).mean()
+    df["MACD"] = ema12 - ema26
+    df["MACD_Signal"] = df["MACD"].ewm(span=9, adjust=False).mean()
+    df["MACD_Hist"] = df["MACD"] - df["MACD_Signal"]
 
     return df
 
@@ -114,8 +126,11 @@ def get_key_levels(symbol: str = "SPY", intraday_df: pd.DataFrame | None = None)
     current_price = float(today_bars["Close"].iloc[-1])
 
     # Opening Range (First 15 minutes: 09:30 to 09:45)
-    orb_bars = today_bars.between_time("09:30", "09:45")
-    if not orb_bars.empty:
+    orb_bars = today_bars.between_time("09:30", "09:44")
+    time_ny_str = ny_now.strftime("%H:%M")
+    orb_established = (time_ny_str >= "09:45") and (not orb_bars.empty)
+
+    if orb_established:
         orb_high = float(orb_bars["High"].max())
         orb_low = float(orb_bars["Low"].min())
     else:
@@ -133,7 +148,8 @@ def get_key_levels(symbol: str = "SPY", intraday_df: pd.DataFrame | None = None)
         "pdc": pdc if pdc else current_price,
         "orb_15m_high": orb_high,
         "orb_15m_low": orb_low,
-        "orb_mid": (orb_high + orb_low) / 2.0
+        "orb_mid": (orb_high + orb_low) / 2.0,
+        "orb_established": orb_established
     }
 
 
