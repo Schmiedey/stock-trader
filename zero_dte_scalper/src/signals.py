@@ -54,10 +54,13 @@ def evaluate_scalp_signals(symbol: str = "SPY", interval: str = "5m") -> dict:
     # =========================================================================
     # 1. EXHAUSTION & OVEREXTENSION VETOES (Capital Preservation First)
     # =========================================================================
-    if rsi >= 72.0:
-        veto_reasons.append(f"RSI Overbought ({rsi:.1f} >= 72). High reversal risk on CALLs.")
-    if rsi <= 28.0:
-        veto_reasons.append(f"RSI Oversold ({rsi:.1f} <= 28). Extreme exhaustion risk on PUTs; bounce probable.")
+    if rsi >= 70.0:
+        veto_reasons.append(f"RSI Overbought ({rsi:.1f} >= 70). High reversal risk on CALLs.")
+    if rsi <= 30.0:
+        veto_reasons.append(f"RSI Oversold ({rsi:.1f} <= 30). Extreme exhaustion risk on PUTs; bounce probable.")
+
+    if rel_vol < 0.75:
+        veto_reasons.append(f"Low relative volume ({rel_vol:.2f}x < 0.75x). Market in low-liquidity drift.")
 
     vwap_dist = price - vwap
     if vwap_dist > 2.0 * atr:
@@ -69,11 +72,11 @@ def evaluate_scalp_signals(symbol: str = "SPY", interval: str = "5m") -> dict:
     # 2. SETUP A: TRUE 15-MINUTE ORB BREAKOUT / BREAKDOWN (09:45 - 11:30 EST)
     # =========================================================================
     if orb_established:
-        if price > orb_high and is_green_candle and price > vwap and ema9 > ema21:
-            if 50.0 <= rsi <= 70.0 and rel_vol >= 0.85:
+        if price > orb_high and is_green_candle and price > vwap and ema9 > ema21 and price > ema50:
+            if 50.0 <= rsi <= 68.0 and rel_vol >= 1.05:
                 bull_triggers.append(f"Confirmed ORB Bullish Breakout above {orb_high:.2f} (RelVol: {rel_vol:.1f}x)")
-        elif price < orb_low and is_red_candle and price < vwap and ema9 < ema21:
-            if 30.0 <= rsi <= 50.0 and rel_vol >= 0.85:
+        elif price < orb_low and is_red_candle and price < vwap and ema9 < ema21 and price < ema50:
+            if 32.0 <= rsi <= 50.0 and rel_vol >= 1.05:
                 bear_triggers.append(f"Confirmed ORB Bearish Breakdown below {orb_low:.2f} (RelVol: {rel_vol:.1f}x)")
 
     # =========================================================================

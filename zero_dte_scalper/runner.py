@@ -61,7 +61,7 @@ class ZeroDteScalperDaemon:
         self.last_screen_time = 0.0
         self.last_exit_times = {}  # {symbol: (exit_timestamp, reason_str)}
         self.reentry_cooldown_seconds = self.config.get("reentry_cooldown_seconds", 300)
-        self.max_hold_time_minutes = self.config.get("max_hold_time_minutes", 25)
+        self.max_hold_time_minutes = self.config.get("max_hold_time_minutes", 20)
         self.circuit_breaker_logged = False
 
     def update_telemetry(self):
@@ -259,9 +259,10 @@ class ZeroDteScalperDaemon:
                         continue
 
                     c = rec["contract"]
-                    # Ensure bid/ask spread is tight (<= $0.05)
-                    if c.get("spread", 0.05) > self.config.get("max_bid_ask_spread_usd", 0.05):
-                        log(f"Spread too wide on {c['contract_symbol']}: ${c.get('spread')}")
+                    # Ensure bid/ask spread is tight (<= $0.04)
+                    max_spr = self.config.get("max_bid_ask_spread_usd", 0.04)
+                    if c.get("spread", 0.04) > max_spr:
+                        log(f"Spread too wide on {c['contract_symbol']}: ${c.get('spread')} > ${max_spr}")
                         continue
 
                     entry_px = rec.get("entry_price", c.get("ask", 0.50))

@@ -74,9 +74,9 @@ def select_best_contract(
     stop_loss_pct = config.get("stop_loss_pct", 0.15)
     tp1_pct = config.get("take_profit_1_pct", 0.20)
     tp2_pct = config.get("take_profit_2_pct", 0.40)
-    risk_budget = config.get("max_risk_per_trade_usd", 200.0)
-    max_outlay = config.get("max_position_outlay_usd", 450.0)
-    max_contracts_cap = config.get("max_contracts", 4)
+    risk_budget = config.get("max_risk_per_trade_usd", 150.0)
+    max_outlay = config.get("max_position_outlay_usd", 400.0)
+    max_contracts_cap = config.get("max_contracts", 3)
 
     contract_unit_cost = entry_price * 100.0
     dollar_risk_per_contract = contract_unit_cost * stop_loss_pct

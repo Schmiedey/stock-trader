@@ -240,16 +240,38 @@ def update_active_positions_quotes() -> list[dict]:
         fair_bid = max(0.01, round(bs_price - 0.02, 2))
         fair_bid = max(fair_bid, round(intrinsic, 2))
 
-        # 3. Check live options quote if available, applying strict sanity bounds
-        final_price = fair_bid
+        # 3. Check live options quote first (with Anti-Spike Sanity Gate)
+        live_val = None
         try:
             c_ticker = yf.Ticker(contract_sym)
-            live_val = float(c_ticker.fast_info.last_price or 0.0)
-            # Live quote is only accepted if it satisfies intrinsic value and is within 40% of BS fair value
-            if live_val >= intrinsic and (0.35 * fair_bid <= live_val <= 2.2 * fair_bid):
-                final_price = round(live_val, 2)
+            px = float(c_ticker.fast_info.last_price or 0.0)
+            if px <= 0:
+                h = c_ticker.history(period="1d", interval="1m")
+                if not h.empty:
+                    px = float(h["Close"].iloc[-1])
+            if px > 0 and px >= intrinsic:
+                live_val = px
         except Exception:
             pass
+
+        # Anti-Spike Sanity Gate: Reject phantom drops (>25%) if underlying hasn't moved
+        prev_quote = pos.get("current_price", pos["entry_price"])
+        entry_spot = pos.get("entry_spot_price", spot_px)
+        underlying_move_pct = abs(spot_px - entry_spot) / entry_spot if entry_spot > 0 else 0.0
+
+        if live_val is not None:
+            pct_drop = (prev_quote - live_val) / prev_quote if prev_quote > 0 else 0.0
+            # If quote drops >25% in a single tick but underlying spot moved <0.20%, reject tick as anomalous print
+            if pct_drop > 0.25 and underlying_move_pct < 0.0020:
+                final_price = fair_bid
+            else:
+                final_price = round(live_val, 2)
+        else:
+            final_price = fair_bid
+
+        # Never permit quotes below intrinsic value
+        final_price = max(final_price, round(intrinsic, 2))
+        final_price = max(0.01, final_price)
 
         pos["current_price"] = final_price
         pos["unrealized_pnl_usd"] = round((final_price - pos["entry_price"]) * 100.0 * pos["current_quantity"], 2)

@@ -181,7 +181,7 @@ def get_0dte_expiration(symbol: str = "SPY") -> str:
 def generate_synthetic_0dte_chain(symbol: str, spot_price: float, exp_date_str: str) -> dict:
     """Generate synthetic 0DTE options chain when Yahoo Finance blocks or rate-limits cloud IPs."""
     tte_years = calculate_time_to_expiration_years(exp_date_str)
-    tte_hours = tte_years * 365.25 * 24.0
+    tte_hours = tte_years * 252.0 * 6.5
 
     center_strike = round(spot_price)
     strikes = [center_strike + i for i in range(-5, 6)]
@@ -272,8 +272,9 @@ def calculate_time_to_expiration_years(expiration_date_str: str) -> float:
         # Minimum clamp: 1 minute remaining
         diff_seconds = 60.0
 
-    # Annual fraction based on calendar seconds
-    tte_years = diff_seconds / (365.25 * 86400.0)
+    # For 0DTE intraday options, use annual trading hours: 252 trading days * 6.5 hours = 1,638 hours
+    diff_hours = diff_seconds / 3600.0
+    tte_years = diff_hours / (252.0 * 6.5)
     return max(1e-5, tte_years)
 
 
@@ -312,7 +313,7 @@ def fetch_0dte_chain(symbol: str = "SPY") -> dict:
     is_true_0dte = (exp_date_str == ny_now.strftime("%Y-%m-%d"))
 
     tte_years = calculate_time_to_expiration_years(exp_date_str)
-    tte_hours = tte_years * 365.25 * 24.0
+    tte_hours = tte_years * 252.0 * 6.5
 
     def parse_contracts(df: pd.DataFrame, opt_type: str) -> list[dict]:
         results = []

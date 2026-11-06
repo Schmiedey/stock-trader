@@ -19,8 +19,8 @@ def check_trading_permissions(
     if config is None:
         config = load_config()
 
-    max_daily_loss = config.get("max_daily_loss_usd", 600.0)
-    max_trades = config.get("max_trades_per_day", 4)
+    max_daily_loss = config.get("max_daily_loss_usd", 400.0)
+    max_trades = config.get("max_trades_per_day", 3)
 
     # 1. Circuit Breaker Check
     if daily_realized_pnl <= -abs(max_daily_loss):
