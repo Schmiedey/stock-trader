@@ -236,10 +236,6 @@ def update_active_positions_quotes() -> list[dict]:
         else:
             intrinsic = max(0.0, strike - spot_px)
 
-        # Fair market bid with standard 2-cent spread haircut
-        fair_bid = max(0.01, round(bs_price - 0.02, 2))
-        fair_bid = max(fair_bid, round(intrinsic, 2))
-
         # 3. Check live options quote first (with Anti-Spike Sanity Gate)
         live_val = None
         try:
@@ -254,20 +250,35 @@ def update_active_positions_quotes() -> list[dict]:
         except Exception:
             pass
 
-        # Anti-Spike Sanity Gate: Reject phantom drops (>25%) if underlying hasn't moved
-        prev_quote = pos.get("current_price", pos["entry_price"])
-        entry_spot = pos.get("entry_spot_price", spot_px)
-        underlying_move_pct = abs(spot_px - entry_spot) / entry_spot if entry_spot > 0 else 0.0
+        # Model-anchored sanity gate: the option should move roughly as Black-Scholes
+        # predicts from the underlying's move since entry. yfinance option prints are
+        # often stale or phantom (e.g. -74% in the same second as entry while spot is
+        # flat), which triggered fake stops and fake targets. Reject prints that
+        # disagree with the model by more than 25% (and more than $0.05).
+        if not pos.get("entry_spot_price"):
+            pos["entry_spot_price"] = round(spot_px, 2)
+        entry_spot = pos["entry_spot_price"]
+        model_px = pos["entry_price"]
+        try:
+            bs_entry = black_scholes_price(spot=entry_spot, strike=strike, tte_years=tte_years,
+                                           volatility=iv, option_type=opt_type)
+            if bs_entry > 0.01:
+                model_px = pos["entry_price"] * (bs_price / bs_entry)
+        except Exception:
+            pass
+        pos["model_price"] = round(model_px, 2)
 
         if live_val is not None:
-            pct_drop = (prev_quote - live_val) / prev_quote if prev_quote > 0 else 0.0
-            # If quote drops >25% in a single tick but underlying spot moved <0.20%, reject tick as anomalous print
-            if pct_drop > 0.25 and underlying_move_pct < 0.0020:
-                final_price = fair_bid
+            gap = abs(live_val - model_px)
+            if model_px > 0 and gap / model_px > 0.25 and gap > 0.05:
+                final_price = round(model_px, 2)
+                pos["quote_source"] = "MODEL (rejected print %.2f)" % live_val
             else:
                 final_price = round(live_val, 2)
+                pos["quote_source"] = "LIVE"
         else:
-            final_price = fair_bid
+            final_price = round(model_px, 2)
+            pos["quote_source"] = "MODEL"
 
         # Never permit quotes below intrinsic value
         final_price = max(final_price, round(intrinsic, 2))

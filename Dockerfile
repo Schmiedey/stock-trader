@@ -24,7 +24,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Ensure data directories exist
-RUN mkdir -p data zero_dte_scalper/data
+RUN mkdir -p zero_dte_scalper/data
 
 EXPOSE 8791
 

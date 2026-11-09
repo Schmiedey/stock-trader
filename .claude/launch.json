@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "scalper-dashboard",
+      "runtimeExecutable": "venv/bin/python",
+      "runtimeArgs": ["dashboard/server.py", "8791", "127.0.0.1"],
+      "port": 8791
+    }
+  ]
+}

@@ -71,9 +71,9 @@ def select_best_contract(
 
     # Sizing & Risk calculations
     entry_price = best_contract["ask"] if best_contract["ask"] > 0 else best_contract["last_price"]
-    stop_loss_pct = config.get("stop_loss_pct", 0.15)
-    tp1_pct = config.get("take_profit_1_pct", 0.20)
-    tp2_pct = config.get("take_profit_2_pct", 0.40)
+    stop_loss_pct = config.get("stop_loss_pct", 0.20)
+    tp1_pct = config.get("take_profit_1_pct", 0.30)
+    tp2_pct = config.get("take_profit_2_pct", 0.80)
     risk_budget = config.get("max_risk_per_trade_usd", 150.0)
     max_outlay = config.get("max_position_outlay_usd", 400.0)
     max_contracts_cap = config.get("max_contracts", 3)

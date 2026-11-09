@@ -1,9 +1,8 @@
 """
 Cloud Container Entrypoint Supervisor.
-Runs the complete Stock Trader Quant Desk 24/7 on any cloud platform:
-1. Spinach 3D Drop Automation Daemon (runner.py)
-2. 0DTE Options Scalper Automation Daemon (zero_dte_scalper/runner.py)
-3. Quant Terminal Dashboard Server (dashboard/server.py)
+Runs the 0DTE Scalper Desk 24/7 on any cloud platform:
+1. 0DTE Options Scalper Automation Daemon (zero_dte_scalper/runner.py)
+2. Scalper Dashboard Server (dashboard/server.py)
 """
 
 import os
@@ -14,12 +13,9 @@ import subprocess
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR / "data"
 SCALPER_DATA_DIR = BASE_DIR / "zero_dte_scalper/data"
 
-DATA_DIR.mkdir(parents=True, exist_ok=True)
-SCALPER_DATA_DIR.mkdir(parents=True, exist_ok=True)
-
+SCALPER_
 processes = {}
 
 
@@ -58,29 +54,23 @@ def main():
     host = os.environ.get("HOST", "0.0.0.0")
 
     log("=" * 70)
-    log("  STOCK TRADER 24/7 CLOUD QUANT TERMINAL INITIALIZING")
+    log("  0DTE SCALPER 24/7 CLOUD DESK INITIALIZING")
     log(f"  Public Binding: http://{host}:{port}")
     log("=" * 70)
 
-    # 1. Start Spinach Equities Daemon
-    start_process(
-        "Spinach_Equities_Daemon",
-        [sys.executable, str(BASE_DIR / "runner.py"), "_daemon"]
-    )
-
-    # 2. Start 0DTE Scalper Daemon
+    # 1. Start 0DTE Scalper Daemon
     start_process(
         "0DTE_Scalper_Daemon",
         [sys.executable, str(BASE_DIR / "zero_dte_scalper/runner.py"), "_daemon"]
     )
 
-    # 3. Start Dashboard Server
+    # 2. Start Dashboard Server
     start_process(
         "Dashboard_Server",
         [sys.executable, str(BASE_DIR / "dashboard/server.py"), port, host]
     )
 
-    # 4. Optional Cloud Keepalive Thread (prevents cloud container idle spin-down)
+    # 3. Optional Cloud Keepalive Thread (prevents cloud container idle spin-down)
     def keepalive_worker():
         external_url = os.environ.get("RENDER_EXTERNAL_URL") or os.environ.get("PUBLIC_APP_URL")
         if not external_url:

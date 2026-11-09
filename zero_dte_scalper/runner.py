@@ -93,7 +93,7 @@ class ZeroDteScalperDaemon:
             log(f"Failed to write telemetry: {e}")
 
     def manage_active_positions(self):
-        """Check stop-loss (-15%), profit targets (+20%/+40%), stagnation, and invalidation."""
+        """Check stop-loss, profit targets, stagnation, and invalidation (levels from config)."""
         try:
             positions = update_active_positions_quotes()
         except Exception as e:
@@ -112,62 +112,81 @@ class ZeroDteScalperDaemon:
             curr_px = pos.get("current_price", pos["entry_price"])
             pnl_pct = pos.get("unrealized_pnl_pct", 0.0)
             pnl_usd = pos.get("unrealized_pnl_usd", 0.0)
-            stop_px = pos.get("stop_loss_price", pos["entry_price"] * 0.85)
-            tp1_px = pos.get("tp1_price", pos["entry_price"] * 1.20)
-            tp2_px = pos.get("tp2_price", pos["entry_price"] * 1.40)
+            stop_pct = self.config.get("stop_loss_pct", 0.20)
+            tp1_pct = self.config.get("take_profit_1_pct", 0.30)
+            tp2_pct = self.config.get("take_profit_2_pct", 0.80)
+            stop_px = pos.get("stop_loss_price", pos["entry_price"] * (1 - stop_pct))
+            tp1_px = pos.get("tp1_price", pos["entry_price"] * (1 + tp1_pct))
+            tp2_px = pos.get("tp2_price", pos["entry_price"] * (1 + tp2_pct))
             elapsed_mins = pos.get("elapsed_minutes", 0.0)
             spot_px = pos.get("current_spot_price", 0.0)
             underlying_stop = pos.get("underlying_stop", 0.0)
 
-            # Trigger 1: Hard Stop-Loss (-15% on premium)
-            if curr_px <= stop_px or pnl_pct <= -15.0:
-                log(f"🛑 [STOP LOSS HIT] {contract_sym}: Quote ${curr_px:.2f} <= Stop ${stop_px:.2f} ({pnl_pct:.1f}% | ${pnl_usd:,.2f})")
+            # Trigger 1: Stop-Loss on premium. Requires two consecutive checks below the
+            # stop so a single bad print can't stop us out (it did, repeatedly).
+            breach_count = pos.get("stop_breach_count", 0)
+            if curr_px <= stop_px:
+                breach_count += 1
+            else:
+                breach_count = 0
+            if breach_count != pos.get("stop_breach_count", 0):
+                active_now = load_active_positions()
+                for p in active_now:
+                    if p["id"] == pos_id:
+                        p["stop_breach_count"] = breach_count
+                save_active_positions(active_now)
+            if breach_count == 1:
+                log(f"⚠️ [STOP WATCH] {contract_sym}: ${curr_px:.2f} <= stop ${stop_px:.2f}. Confirming on next check.")
+            if breach_count >= 2:
+                label = "BREAKEVEN_STOP" if pos.get("tp1_hit") else f"STOP_LOSS_HIT (-{stop_pct*100:.0f}%)"
+                log(f"🛑 [{label}] {contract_sym}: Quote ${curr_px:.2f} <= Stop ${stop_px:.2f} ({pnl_pct:.1f}% | ${pnl_usd:,.2f})")
                 try:
-                    close_position(position_id=pos_id, exit_price=curr_px, reason="STOP_LOSS_HIT (-15%)")
+                    close_position(position_id=pos_id, exit_price=curr_px, reason=label)
                     self.last_exit_times[pos["symbol"]] = (time.time(), "STOP_LOSS")
                     log(f"[✓] Position {contract_sym} closed on stop loss.")
                 except Exception as e:
                     log(f"Error closing stop-loss: {e}")
                 continue
 
-            # Trigger 2: Target 2 (+40% on premium)
-            if curr_px >= tp2_px or pnl_pct >= 40.0:
+            # Trigger 2: Target 2 on premium
+            if curr_px >= tp2_px:
                 log(f"🎯 [TARGET 2 HIT] {contract_sym}: Quote ${curr_px:.2f} >= TP2 ${tp2_px:.2f} (+{pnl_pct:.1f}% | +${pnl_usd:,.2f})")
                 try:
-                    close_position(position_id=pos_id, exit_price=curr_px, reason="TARGET_2_HIT (+40%)")
+                    close_position(position_id=pos_id, exit_price=curr_px, reason=f"TARGET_2_HIT (+{tp2_pct*100:.0f}%)")
                     self.last_exit_times[pos["symbol"]] = (time.time(), "TARGET_2")
                     log(f"[✓] Position {contract_sym} closed at Target 2.")
                 except Exception as e:
                     log(f"Error closing target 2: {e}")
                 continue
 
-            # Trigger 3: Target 1 (+20% on premium) scale out / trailing
+            # Trigger 3: Target 1 on premium: scale out half, move stop to locked profit
             if curr_px >= tp1_px and not pos.get("tp1_hit"):
                 if pos.get("current_quantity", 1) > 1:
                     half_qty = pos["current_quantity"] // 2
                     log(f"💰 [TARGET 1 HIT] {contract_sym}: Quote ${curr_px:.2f} >= TP1 ${tp1_px:.2f}. Scaling out {half_qty} contracts.")
                     try:
-                        close_position(position_id=pos_id, exit_price=curr_px, reason="TARGET_1_SCALE_OUT (+20%)", partial_qty=half_qty)
-                        # Move stop to breakeven with cushion
+                        close_position(position_id=pos_id, exit_price=curr_px, reason=f"TARGET_1_SCALE_OUT (+{tp1_pct*100:.0f}%)", partial_qty=half_qty)
+                        # Move stop to entry plus cushion so the runner can't turn into a loss
                         cushion = self.config.get("breakeven_cushion_usd", 0.02)
-                        protected_stop = max(0.01, round(pos["entry_price"] - cushion, 2))
+                        protected_stop = round(pos["entry_price"] + cushion, 2)
                         active_now = load_active_positions()
                         for p in active_now:
                             if p["id"] == pos_id:
                                 p["tp1_hit"] = True
                                 p["stop_loss_price"] = protected_stop
+                                p["stop_breach_count"] = 0
                         save_active_positions(active_now)
                         log(f"[✓] Stop moved to breakeven buffer (${protected_stop:.2f}) for remaining {contract_sym} contracts.")
                     except Exception as e:
                         log(f"Error scaling out at target 1: {e}")
                 else:
-                    if pnl_pct >= 25.0:
-                        log(f"💰 [TARGET 1 SECURED] {contract_sym}: Quote ${curr_px:.2f} (+{pnl_pct:.1f}%). Closing 1-contract position.")
-                        try:
-                            close_position(position_id=pos_id, exit_price=curr_px, reason="TARGET_1_FULL (+20%)")
-                            self.last_exit_times[pos["symbol"]] = (time.time(), "TARGET_1")
-                        except Exception as e:
-                            log(f"Error closing target 1: {e}")
+                    log(f"💰 [TARGET 1 SECURED] {contract_sym}: Quote ${curr_px:.2f} (+{pnl_pct:.1f}%). Closing 1-contract position.")
+                    try:
+                        close_position(position_id=pos_id, exit_price=curr_px, reason=f"TARGET_1_FULL (+{tp1_pct*100:.0f}%)")
+                        self.last_exit_times[pos["symbol"]] = (time.time(), "TARGET_1")
+                    except Exception as e:
+                        log(f"Error closing target 1: {e}")
+                continue  # position changed this tick; re-evaluate next loop
 
             # Trigger 4: Stagnation / Theta Defense Exit (Held >= 25m without reaching +10%)
             if elapsed_mins >= self.max_hold_time_minutes and pnl_pct < 10.0:
@@ -269,9 +288,9 @@ class ZeroDteScalperDaemon:
                     qty = max(1, rec.get("sizing", {}).get("suggested_contracts", rec.get("sizing", {}).get("contracts", 1)))
 
                     t = rec.get("targets", {})
-                    stop_px = t.get("stop_loss_price") or t.get("stop_price") or round(entry_px * 0.85, 2)
-                    tp1_px = t.get("tp1_price") or t.get("target_1") or round(entry_px * 1.20, 2)
-                    tp2_px = t.get("tp2_price") or t.get("target_2") or round(entry_px * 1.40, 2)
+                    stop_px = t.get("stop_loss_price") or t.get("stop_price") or round(entry_px * 0.80, 2)
+                    tp1_px = t.get("tp1_price") or t.get("target_1") or round(entry_px * 1.30, 2)
+                    tp2_px = t.get("tp2_price") or t.get("target_2") or round(entry_px * 1.80, 2)
 
                     # Open position on paper
                     pos = open_position(
@@ -299,7 +318,7 @@ class ZeroDteScalperDaemon:
 
                     log("=" * 70)
                     log(f"⚡ [AUTONOMOUS 0DTE ENTRY] {qty}x {c['contract_symbol']} ({action})")
-                    log(f"   Spot: ${sig.get('current_price', 0.0):.2f} | Entry: ${entry_px:.2f} | Stop: ${stop_px:.2f} (-15%) | TP1: ${tp1_px:.2f} (+20%) | TP2: ${tp2_px:.2f} (+40%)")
+                    log(f"   Spot: ${sig.get('current_price', 0.0):.2f} | Entry: ${entry_px:.2f} | Stop: ${stop_px:.2f} | TP1: ${tp1_px:.2f} | TP2: ${tp2_px:.2f}")
                     log(f"   Max Risk: ${rec.get('sizing', {}).get('projected_max_loss', 0.0):.2f} | Outlay: ${rec.get('sizing', {}).get('total_outlay', 0.0):.2f}")
                     log("=" * 70)
 
