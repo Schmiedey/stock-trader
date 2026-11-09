@@ -9,3 +9,11 @@ services:
     envVars:
       - key: PORT
         value: 8791
+      # Paper ledgers persist to the paper-ledger branch (free-tier disk is wiped on deploy).
+      # Set the value in the Render dashboard: fine-grained PAT, Contents read/write on this repo.
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: GITHUB_REPO
+        value: Schmiedey/stock-trader
+      - key: LEDGER_BRANCH
+        value: paper-ledger

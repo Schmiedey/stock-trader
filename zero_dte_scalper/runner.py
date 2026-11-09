@@ -217,10 +217,16 @@ class ZeroDteScalperDaemon:
                 sig = evaluate_scalp_signals(symbol=symbol, interval="5m")
                 action = sig.get("signal")
                 conviction = sig.get("conviction")
-                journal({"symbol": symbol, "signal": action, "conviction": conviction,
-                         "setup": sig.get("primary_setup"), "price": sig.get("current_price"),
-                         "rsi": sig.get("rsi"), "rel_vol": sig.get("rel_vol"),
-                         "vetoes": sig.get("veto_reasons", []), "reason": sig.get("reason", "")[:200]})
+                # journal only when the decision changes (keeps the file small for ledger sync)
+                jkey = (action, sig.get("primary_setup"), tuple(sig.get("veto_reasons", [])[:1]), sig.get("timestamp") if action in ("CALL", "PUT") else None)
+                if not hasattr(self, "last_journal"):
+                    self.last_journal = {}
+                if self.last_journal.get(symbol) != jkey:
+                    self.last_journal[symbol] = jkey
+                    journal({"symbol": symbol, "signal": action, "conviction": conviction,
+                             "setup": sig.get("primary_setup"), "price": sig.get("current_price"),
+                             "rsi": sig.get("rsi"), "rel_vol": sig.get("rel_vol"),
+                             "vetoes": sig.get("veto_reasons", []), "reason": sig.get("reason", "")[:200]})
 
                 # One entry per signal bar: don't re-enter the same completed-bar signal after an exit
                 bar_key = (symbol, sig.get("timestamp"))

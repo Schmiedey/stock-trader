@@ -12,6 +12,8 @@ import signal
 import subprocess
 from pathlib import Path
 
+import ledger_sync
+
 BASE_DIR = Path(__file__).resolve().parent
 SCALPER_DATA_DIR = BASE_DIR / "zero_dte_scalper/data"
 
@@ -42,6 +44,10 @@ def shutdown_handler(signum, frame):
                 proc.wait(timeout=5)
             except subprocess.TimeoutExpired:
                 proc.kill()
+    try:
+        ledger_sync.sync(log=log, message="paper ledger sync (shutdown)")
+    except Exception as e:
+        log(f"[LEDGER] final sync failed: {e}")
     log("All cloud trading services stopped cleanly.")
     sys.exit(0)
 
@@ -57,6 +63,21 @@ def main():
     log("  0DTE SCALPER 24/7 CLOUD DESK INITIALIZING")
     log(f"  Public Binding: http://{host}:{port}")
     log("=" * 70)
+
+    # 0. Restore paper ledgers from GitHub before anything reads them
+    try:
+        ledger_sync.restore(log=log)
+    except Exception as e:
+        log(f"[LEDGER] restore failed (starting with repo copies): {e}")
+
+    def ledger_worker():
+        interval = int(os.environ.get("LEDGER_SYNC_SECONDS", "300"))
+        while True:
+            time.sleep(interval)
+            try:
+                ledger_sync.sync(log=log)
+            except Exception as e:
+                log(f"[LEDGER] sync failed: {e}")
 
     # 1. Start 0DTE Scalper Daemon
     start_process(
@@ -90,6 +111,8 @@ def main():
     import threading
     t = threading.Thread(target=keepalive_worker, daemon=True)
     t.start()
+    if ledger_sync.enabled():
+        threading.Thread(target=ledger_worker, daemon=True).start()
 
     # Supervisor loop
     while True:
