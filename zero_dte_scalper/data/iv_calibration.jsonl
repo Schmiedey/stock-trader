@@ -1,0 +1,2 @@
+{"ts": "2026-11-09T12:29:54", "symbol": "SPY", "source": "cboe_delayed", "quote_time": "2026-11-09T13:14:12", "spot": 752.66, "strike": 753.0, "straddle_mid": 1.8, "model_at_index": 2.17, "ratio": 0.829, "index_iv": 0.202}
+{"ts": "2026-11-09T12:29:56", "symbol": "QQQ", "source": "cboe_delayed", "quote_time": "2026-11-09T13:14:17", "spot": 677.03, "strike": 677.0, "straddle_mid": 2.295, "model_at_index": 2.791, "ratio": 0.822, "index_iv": 0.2911}

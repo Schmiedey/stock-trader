@@ -1,0 +1,41 @@
+[
+  {
+    "id": "aa7cf3c6",
+    "symbol": "SPY",
+    "entry_date": "2026-11-09",
+    "entry_time": "2026-11-09 13:30:04",
+    "entry_spot": 752.66,
+    "center": 753.0,
+    "width": 3,
+    "units": 2,
+    "legs": [
+      {
+        "kind": "call",
+        "strike": 753.0,
+        "side": "short"
+      },
+      {
+        "kind": "put",
+        "strike": 753.0,
+        "side": "short"
+      },
+      {
+        "kind": "call",
+        "strike": 756.0,
+        "side": "long"
+      },
+      {
+        "kind": "put",
+        "strike": 750.0,
+        "side": "long"
+      }
+    ],
+    "credit": 1.42,
+    "max_loss_usd": 316.0,
+    "max_profit_usd": 284.0,
+    "unrealized_pnl_usd": -6.0,
+    "mark_cost": 1.45,
+    "spot": 752.75,
+    "opened_epoch": 1794249005.2456229
+  }
+]
