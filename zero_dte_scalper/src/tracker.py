@@ -165,7 +165,10 @@ def close_position(
         "realized_pnl_pct": realized_pnl_pct,
         "exit_reason": reason,
         "setup": pos.get("setup", "Scalp"),
-        "is_partial": (remaining_qty > 0)
+        "is_partial": (remaining_qty > 0),
+        # underlying prices, so charts can draw the trade on the SPY/QQQ candles
+        "entry_spot_price": pos.get("entry_spot_price", 0.0),
+        "exit_spot_price": pos.get("current_spot_price", 0.0),
     }
 
     history.append(trade_record)

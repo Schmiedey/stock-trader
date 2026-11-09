@@ -15,6 +15,56 @@ from urllib.parse import urlparse, parse_qs
 BASE_DIR = Path(__file__).resolve().parent.parent
 ZERO_DTE_DIR = BASE_DIR / "zero_dte_scalper"
 HTML_PATH = Path(__file__).resolve().parent / "index.html"
+CHART_PATH = Path(__file__).resolve().parent / "chart.html"
+_series_cache: dict = {}
+
+
+def _cached(key, ttl, fn):
+    hit = _series_cache.get(key)
+    if hit and time.time() - hit[0] < ttl:
+        return hit[1]
+    val = fn()
+    _series_cache[key] = (time.time(), val)
+    return val
+
+
+def get_candles(symbol: str, interval: str) -> dict:
+    """OHLCV + VWAP/EMA for the chart. 1m: today, 5m/15m: last 5 sessions."""
+    import yfinance as yf
+    from zero_dte_scalper.src.market_data import calculate_indicators
+    symbol = symbol.upper() if symbol.upper() in ("SPY", "QQQ") else "SPY"
+    interval = interval if interval in ("1m", "5m", "15m") else "5m"
+    period = {"1m": "1d", "5m": "5d", "15m": "5d"}[interval]
+
+    def load():
+        df = yf.Ticker(symbol).history(period=period, interval=interval, prepost=False)
+        if df.empty:
+            return {"symbol": symbol, "interval": interval, "bars": []}
+        df.index = df.index.tz_convert("America/New_York")
+        df = calculate_indicators(df)
+        bars = [{"ts": int(ix.timestamp()), "o": round(float(r.Open), 2), "h": round(float(r.High), 2),
+                 "l": round(float(r.Low), 2), "c": round(float(r.Close), 2), "v": int(r.Volume),
+                 "vwap": round(float(r.VWAP), 2), "ema9": round(float(r.EMA9), 2), "ema21": round(float(r.EMA21), 2)}
+                for ix, r in df.iterrows()]
+        return {"symbol": symbol, "interval": interval, "bars": bars}
+    return _cached(("c", symbol, interval), 20 if interval == "1m" else 45, load)
+
+
+def get_quotes() -> list:
+    import yfinance as yf
+
+    def load():
+        out = []
+        for sym, name in (("SPY", "SPDR S&P 500"), ("QQQ", "Invesco QQQ"), ("^VIX", "CBOE Volatility"), ("^VXN", "Nasdaq-100 Vol")):
+            try:
+                fi = yf.Ticker(sym).fast_info
+                last, prev = float(fi.last_price), float(fi.previous_close)
+                out.append({"symbol": sym.replace("^", ""), "name": name, "last": round(last, 2),
+                            "chg": round(last - prev, 2), "chg_pct": round((last / prev - 1) * 100, 2)})
+            except Exception:
+                pass
+        return out
+    return _cached(("q",), 15, load)
 POLL_SECONDS = 10.0
 
 sys.path.insert(0, str(BASE_DIR))
@@ -278,9 +328,20 @@ class Handler(BaseHTTPRequestHandler):
             sys.path.insert(0, str(BASE_DIR))
             import ledger_sync
             return self._json(ledger_sync.snapshot())
+        if path == "/api/candles":
+            q = {k: v[0] for k, v in parse_qs(urlparse(self.path).query).items()}
+            try:
+                return self._json(get_candles(q.get("symbol", "SPY"), q.get("interval", "5m")))
+            except Exception as e:
+                return self._json({"bars": [], "error": str(e)})
+        if path == "/api/quotes":
+            return self._json(get_quotes())
         if path.startswith("/api/"):
             return self._json({"ok": False, "error": "use POST for actions"}, 405)
-        body = HTML_PATH.read_bytes() if HTML_PATH.exists() else b"<h1>Dashboard HTML not found.</h1>"
+        page = HTML_PATH if path.startswith("/analytics") else CHART_PATH
+        if not page.exists():
+            page = HTML_PATH
+        body = page.read_bytes() if page.exists() else b"<h1>Dashboard HTML not found.</h1>"
         self._send(body, "text/html; charset=utf-8")
 
     def log_message(self, *args):
