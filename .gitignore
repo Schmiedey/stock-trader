@@ -8,3 +8,6 @@ zero_dte_scalper/data/*.log
 .DS_Store
 .venv/
 venv/
+
+# research caches (derived; bar caches are committed so history grows)
+zero_dte_scalper/data/cache/sig_*.pkl

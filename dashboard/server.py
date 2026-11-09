@@ -132,7 +132,7 @@ def _risk_config(config: dict) -> dict:
         "paper_mode", "account_equity", "max_concurrent_positions", "max_risk_per_trade_usd",
         "max_position_outlay_usd", "max_daily_loss_usd", "max_trades_per_day", "max_contracts",
         "stop_loss_pct", "take_profit_1_pct", "take_profit_2_pct", "max_hold_time_minutes",
-        "optimal_target_delta", "version",
+        "optimal_target_delta", "version", "strategy", "stop_mode", "hard_stop_pct", "research_note",
     ]
     return {k: config.get(k) for k in keys}
 
@@ -177,6 +177,8 @@ def full_state() -> dict:
         from zero_dte_scalper.src.config import load_config, get_market_session_state
 
         config = load_config()
+        from zero_dte_scalper.src.premium_seller import load_positions as prem_pos, load_history as prem_hist
+        state["premium"] = {"config": config.get("premium_seller", {}), "positions": prem_pos(), "history": prem_hist()}
         state.update({
             "session": get_market_session_state(config),
             "config": _risk_config(config),

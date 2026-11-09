@@ -1,0 +1,20 @@
+58 days | trades=135 win_rate=23.0 pnl=-2690.0 expectancy=-19.93 profit_factor=0.51 avg_win=90.48 avg_loss=-52.84 max_dd=-2766.0 sharpe_per_trade=-0.264 avg_hold_min=7.1
+-- by_symbol_side
+   QQQ CALL                     n= 24 pnl=    -636 pf=0.45 wr=12.5
+   QQQ PUT                      n= 37 pnl=    -964 pf=0.44 wr=21.6
+   SPY CALL                     n= 39 pnl=    -386 pf=0.72 wr=33.3
+   SPY PUT                      n= 35 pnl=    -704 pf=0.44 wr=20.0
+-- by_exit
+   BREAKEVEN_STOP               n= 15 pnl=     571 pf=inf wr=100.0
+   STAGNATION_TIME_EXIT         n= 11 pnl=     217 pf=5.52 wr=63.6
+   STOP_LOSS_HIT                n= 83 pnl=   -5126 pf=0.0 wr=0.0
+   TARGET_2_HIT                 n=  9 pnl=    1969 pf=inf wr=100.0
+   UNDERLYING_INVALIDATION_EXIT n= 17 pnl=    -321 pf=0.0 wr=0.0
+-- by_hour
+   09h                          n= 27 pnl=    -761 pf=0.44 wr=18.5
+   10h                          n= 45 pnl=    -683 pf=0.68 wr=28.9
+   11h                          n= 14 pnl=     161 pf=1.45 wr=57.1
+   13h                          n= 18 pnl=    -505 pf=0.25 wr=11.1
+   14h                          n= 18 pnl=    -666 pf=0.07 wr=11.1
+   15h                          n= 13 pnl=    -236 pf=0.05 wr=7.7
+saved /Users/wesleyschmiedeskamp/Documents/stock trader/zero_dte_scalper/research/results/live_config.json

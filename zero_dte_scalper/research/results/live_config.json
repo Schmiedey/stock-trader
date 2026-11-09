@@ -1,0 +1,4054 @@
+{
+ "config": {
+  "stop_loss_pct": 0.2,
+  "take_profit_1_pct": 0.3,
+  "take_profit_2_pct": 0.8,
+  "max_hold_time_minutes": 20,
+  "optimal_target_delta": 0.48,
+  "tp1_scale_out": null,
+  "underlying_invalidation_exit": null,
+  "trading_hours": {
+   "timezone": "America/New_York",
+   "market_open": "09:30",
+   "prime_morning_start": "09:45",
+   "prime_morning_end": "11:30",
+   "midday_chop_start": "11:30",
+   "midday_chop_end": "13:30",
+   "afternoon_window_start": "13:30",
+   "afternoon_window_end": "15:30",
+   "mandatory_exit_time": "15:50",
+   "market_close": "16:00"
+  }
+ },
+ "signal_params": {},
+ "filters": {},
+ "symbols": [
+  "SPY",
+  "QQQ"
+ ],
+ "days": 58,
+ "trades": [
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (768.44) / EMA9 (768.31)",
+   "entry_time": "2026-08-18 13:45:00-04:00",
+   "exit_time": "2026-08-18 14:07:00-04:00",
+   "date": "2026-08-18",
+   "hour": 13,
+   "weekday": 1,
+   "entry_price": 0.72,
+   "qty": 3,
+   "strike": 768.0,
+   "pnl": 18.0,
+   "pnl_pct_of_risk": 0.417,
+   "exit_reason": "STAGNATION_TIME_EXIT",
+   "hold_min": 22.0,
+   "iv": 0.151899995803833,
+   "fills": [
+    {
+     "t": "2026-08-18 14:07:00-04:00",
+     "qty": 3,
+     "px": 0.78,
+     "reason": "STAGNATION_TIME_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Confirmed ORB Bearish Breakdown below 718.79 (RelVol: 1.6x)",
+   "entry_time": "2026-08-18 14:25:00-04:00",
+   "exit_time": "2026-08-18 14:37:00-04:00",
+   "date": "2026-08-18",
+   "hour": 14,
+   "weekday": 1,
+   "entry_price": 0.88,
+   "qty": 3,
+   "strike": 718.0,
+   "pnl": -57.0,
+   "pnl_pct_of_risk": -1.08,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 12.0,
+   "iv": 0.21510000228881837,
+   "fills": [
+    {
+     "t": "2026-08-18 14:37:00-04:00",
+     "qty": 3,
+     "px": 0.69,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Confirmed ORB Bearish Breakdown below 767.91 (RelVol: 1.1x)",
+   "entry_time": "2026-08-18 14:55:00-04:00",
+   "exit_time": "2026-08-18 15:07:00-04:00",
+   "date": "2026-08-18",
+   "hour": 14,
+   "weekday": 1,
+   "entry_price": 0.64,
+   "qty": 3,
+   "strike": 768.0,
+   "pnl": -42.0,
+   "pnl_pct_of_risk": -1.094,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 12.0,
+   "iv": 0.151899995803833,
+   "fills": [
+    {
+     "t": "2026-08-18 15:07:00-04:00",
+     "qty": 3,
+     "px": 0.5,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (769.83) / EMA9 (768.92)",
+   "entry_time": "2026-08-19 09:55:00-04:00",
+   "exit_time": "2026-08-19 09:57:00-04:00",
+   "date": "2026-08-19",
+   "hour": 9,
+   "weekday": 2,
+   "entry_price": 1.16,
+   "qty": 3,
+   "strike": 770.0,
+   "pnl": -54.0,
+   "pnl_pct_of_risk": -0.776,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 2.0,
+   "iv": 0.1584000015258789,
+   "fills": [
+    {
+     "t": "2026-08-19 09:57:00-04:00",
+     "qty": 3,
+     "px": 0.98,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (717.51) / EMA9 (716.28)",
+   "entry_time": "2026-08-19 10:05:00-04:00",
+   "exit_time": "2026-08-19 10:07:00-04:00",
+   "date": "2026-08-19",
+   "hour": 10,
+   "weekday": 2,
+   "entry_price": 1.28,
+   "qty": 3,
+   "strike": 714.0,
+   "pnl": -81.0,
+   "pnl_pct_of_risk": -1.055,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.22559999465942382,
+   "fills": [
+    {
+     "t": "2026-08-19 10:07:00-04:00",
+     "qty": 3,
+     "px": 1.01,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (769.76) / EMA9 (769.33)",
+   "entry_time": "2026-08-19 10:20:00-04:00",
+   "exit_time": "2026-08-19 10:27:00-04:00",
+   "date": "2026-08-19",
+   "hour": 10,
+   "weekday": 2,
+   "entry_price": 1.16,
+   "qty": 3,
+   "strike": 770.0,
+   "pnl": -72.0,
+   "pnl_pct_of_risk": -1.034,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.1584000015258789,
+   "fills": [
+    {
+     "t": "2026-08-19 10:27:00-04:00",
+     "qty": 3,
+     "px": 0.92,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (765.16) / EMA9 (764.09)",
+   "entry_time": "2026-08-21 09:45:00-04:00",
+   "exit_time": "2026-08-21 09:47:00-04:00",
+   "date": "2026-08-21",
+   "hour": 9,
+   "weekday": 4,
+   "entry_price": 1.43,
+   "qty": 2,
+   "strike": 765.0,
+   "pnl": -60.0,
+   "pnl_pct_of_risk": -1.049,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.16010000228881835,
+   "fills": [
+    {
+     "t": "2026-08-21 09:47:00-04:00",
+     "qty": 2,
+     "px": 1.13,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (765.06) / EMA9 (764.61)",
+   "entry_time": "2026-08-21 10:10:00-04:00",
+   "exit_time": "2026-08-21 10:12:00-04:00",
+   "date": "2026-08-21",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.43,
+   "qty": 2,
+   "strike": 765.0,
+   "pnl": -60.0,
+   "pnl_pct_of_risk": -1.049,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.16010000228881835,
+   "fills": [
+    {
+     "t": "2026-08-21 10:12:00-04:00",
+     "qty": 2,
+     "px": 1.13,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (712.06) / EMA9 (710.75)",
+   "entry_time": "2026-08-21 10:20:00-04:00",
+   "exit_time": "2026-08-21 10:22:00-04:00",
+   "date": "2026-08-21",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.48,
+   "qty": 2,
+   "strike": 709.0,
+   "pnl": -62.0,
+   "pnl_pct_of_risk": -1.047,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.23260000228881836,
+   "fills": [
+    {
+     "t": "2026-08-21 10:22:00-04:00",
+     "qty": 2,
+     "px": 1.17,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (763.65) / EMA9 (764.02)",
+   "entry_time": "2026-08-24 13:30:00-04:00",
+   "exit_time": "2026-08-24 13:50:00-04:00",
+   "date": "2026-08-24",
+   "hour": 13,
+   "weekday": 0,
+   "entry_price": 0.61,
+   "qty": 3,
+   "strike": 763.0,
+   "pnl": -6.0,
+   "pnl_pct_of_risk": -0.164,
+   "exit_reason": "STAGNATION_TIME_EXIT",
+   "hold_min": 20.0,
+   "iv": 0.15130000114440917,
+   "fills": [
+    {
+     "t": "2026-08-24 13:50:00-04:00",
+     "qty": 3,
+     "px": 0.59,
+     "reason": "STAGNATION_TIME_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (706.65) / EMA9 (707.95)",
+   "entry_time": "2026-08-24 15:10:00-04:00",
+   "exit_time": "2026-08-24 15:11:00-04:00",
+   "date": "2026-08-24",
+   "hour": 15,
+   "weekday": 0,
+   "entry_price": 0.43,
+   "qty": 3,
+   "strike": 707.0,
+   "pnl": -12.0,
+   "pnl_pct_of_risk": -0.465,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.21979999542236328,
+   "fills": [
+    {
+     "t": "2026-08-24 15:11:00-04:00",
+     "qty": 3,
+     "px": 0.39,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (765.45) / EMA9 (764.76)",
+   "entry_time": "2026-08-25 10:50:00-04:00",
+   "exit_time": "2026-08-25 10:52:00-04:00",
+   "date": "2026-08-25",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.08,
+   "qty": 3,
+   "strike": 764.0,
+   "pnl": -69.0,
+   "pnl_pct_of_risk": -1.065,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.15850000381469725,
+   "fills": [
+    {
+     "t": "2026-08-25 10:52:00-04:00",
+     "qty": 3,
+     "px": 0.85,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (710.98) / EMA9 (709.63)",
+   "entry_time": "2026-08-25 11:05:00-04:00",
+   "exit_time": "2026-08-25 11:07:00-04:00",
+   "date": "2026-08-25",
+   "hour": 11,
+   "weekday": 1,
+   "entry_price": 1.55,
+   "qty": 2,
+   "strike": 709.0,
+   "pnl": -64.0,
+   "pnl_pct_of_risk": -1.032,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.22690000534057617,
+   "fills": [
+    {
+     "t": "2026-08-25 11:07:00-04:00",
+     "qty": 2,
+     "px": 1.23,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Confirmed ORB Bearish Breakdown below 765.87 (RelVol: 1.8x)",
+   "entry_time": "2026-08-25 13:30:00-04:00",
+   "exit_time": "2026-08-25 13:47:00-04:00",
+   "date": "2026-08-25",
+   "hour": 13,
+   "weekday": 1,
+   "entry_price": 0.93,
+   "qty": 3,
+   "strike": 765.0,
+   "pnl": -60.0,
+   "pnl_pct_of_risk": -1.075,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 17.0,
+   "iv": 0.15850000381469725,
+   "fills": [
+    {
+     "t": "2026-08-25 13:47:00-04:00",
+     "qty": 3,
+     "px": 0.73,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (765.54) / EMA9 (765.71)",
+   "entry_time": "2026-08-26 09:45:00-04:00",
+   "exit_time": "2026-08-26 09:52:00-04:00",
+   "date": "2026-08-26",
+   "hour": 9,
+   "weekday": 2,
+   "entry_price": 1.46,
+   "qty": 2,
+   "strike": 766.0,
+   "pnl": -60.0,
+   "pnl_pct_of_risk": -1.027,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.15449999809265136,
+   "fills": [
+    {
+     "t": "2026-08-26 09:52:00-04:00",
+     "qty": 2,
+     "px": 1.16,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (710.26) / EMA9 (710.65)",
+   "entry_time": "2026-08-26 09:55:00-04:00",
+   "exit_time": "2026-08-26 10:07:00-04:00",
+   "date": "2026-08-26",
+   "hour": 9,
+   "weekday": 2,
+   "entry_price": 1.49,
+   "qty": 2,
+   "strike": 712.0,
+   "pnl": -62.0,
+   "pnl_pct_of_risk": -1.04,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 12.0,
+   "iv": 0.21790000915527344,
+   "fills": [
+    {
+     "t": "2026-08-26 10:07:00-04:00",
+     "qty": 2,
+     "px": 1.18,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (710.49) / EMA9 (710.37)",
+   "entry_time": "2026-08-26 10:25:00-04:00",
+   "exit_time": "2026-08-26 10:32:00-04:00",
+   "date": "2026-08-26",
+   "hour": 10,
+   "weekday": 2,
+   "entry_price": 1.54,
+   "qty": 2,
+   "strike": 709.0,
+   "pnl": 46.0,
+   "pnl_pct_of_risk": 0.747,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 7.0,
+   "iv": 0.21790000915527344,
+   "fills": [
+    {
+     "t": "2026-08-26 10:28:00-04:00",
+     "qty": 1,
+     "px": 1.99,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-08-26 10:32:00-04:00",
+     "qty": 1,
+     "px": 1.55,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (768.22) / EMA9 (767.91)",
+   "entry_time": "2026-08-27 09:55:00-04:00",
+   "exit_time": "2026-08-27 09:57:00-04:00",
+   "date": "2026-08-27",
+   "hour": 9,
+   "weekday": 3,
+   "entry_price": 1.36,
+   "qty": 2,
+   "strike": 769.0,
+   "pnl": -56.0,
+   "pnl_pct_of_risk": -1.029,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.15210000038146973,
+   "fills": [
+    {
+     "t": "2026-08-27 09:57:00-04:00",
+     "qty": 2,
+     "px": 1.08,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (768.36) / EMA9 (768.48)",
+   "entry_time": "2026-08-27 10:20:00-04:00",
+   "exit_time": "2026-08-27 10:40:00-04:00",
+   "date": "2026-08-27",
+   "hour": 10,
+   "weekday": 3,
+   "entry_price": 1.31,
+   "qty": 3,
+   "strike": 769.0,
+   "pnl": 40.0,
+   "pnl_pct_of_risk": 0.509,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 20.0,
+   "iv": 0.15210000038146973,
+   "fills": [
+    {
+     "t": "2026-08-27 10:38:00-04:00",
+     "qty": 1,
+     "px": 1.69,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-08-27 10:40:00-04:00",
+     "qty": 2,
+     "px": 1.32,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (768.57) / EMA9 (769.38)",
+   "entry_time": "2026-08-27 10:50:00-04:00",
+   "exit_time": "2026-08-27 10:57:00-04:00",
+   "date": "2026-08-27",
+   "hour": 10,
+   "weekday": 3,
+   "entry_price": 1.3,
+   "qty": 3,
+   "strike": 770.0,
+   "pnl": -81.0,
+   "pnl_pct_of_risk": -1.038,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.15210000038146973,
+   "fills": [
+    {
+     "t": "2026-08-27 10:57:00-04:00",
+     "qty": 3,
+     "px": 1.03,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (719.54) / EMA9 (720.11)",
+   "entry_time": "2026-08-28 09:45:00-04:00",
+   "exit_time": "2026-08-28 09:47:00-04:00",
+   "date": "2026-08-28",
+   "hour": 9,
+   "weekday": 4,
+   "entry_price": 1.22,
+   "qty": 3,
+   "strike": 722.0,
+   "pnl": -75.0,
+   "pnl_pct_of_risk": -1.025,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.20239999771118164,
+   "fills": [
+    {
+     "t": "2026-08-28 09:47:00-04:00",
+     "qty": 3,
+     "px": 0.97,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Confirmed ORB Bearish Breakdown below 718.18 (RelVol: 1.3x)",
+   "entry_time": "2026-08-28 10:15:00-04:00",
+   "exit_time": "2026-08-28 10:17:00-04:00",
+   "date": "2026-08-28",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.25,
+   "qty": 3,
+   "strike": 717.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.04,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.20239999771118164,
+   "fills": [
+    {
+     "t": "2026-08-28 10:17:00-04:00",
+     "qty": 3,
+     "px": 0.99,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (771.59) / EMA9 (771.51)",
+   "entry_time": "2026-08-28 10:35:00-04:00",
+   "exit_time": "2026-08-28 10:48:00-04:00",
+   "date": "2026-08-28",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.22,
+   "qty": 3,
+   "strike": 772.0,
+   "pnl": 230.0,
+   "pnl_pct_of_risk": 3.142,
+   "exit_reason": "TARGET_2_HIT (+80%)",
+   "hold_min": 13.0,
+   "iv": 0.14510000228881836,
+   "fills": [
+    {
+     "t": "2026-08-28 10:43:00-04:00",
+     "qty": 1,
+     "px": 1.58,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-08-28 10:48:00-04:00",
+     "qty": 2,
+     "px": 2.19,
+     "reason": "TARGET_2_HIT (+80%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (715.31) / EMA9 (715.27)",
+   "entry_time": "2026-08-31 10:05:00-04:00",
+   "exit_time": "2026-08-31 10:07:00-04:00",
+   "date": "2026-08-31",
+   "hour": 10,
+   "weekday": 0,
+   "entry_price": 1.34,
+   "qty": 3,
+   "strike": 714.0,
+   "pnl": -84.0,
+   "pnl_pct_of_risk": -1.045,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.19920000076293945,
+   "fills": [
+    {
+     "t": "2026-08-31 10:07:00-04:00",
+     "qty": 3,
+     "px": 1.06,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (715.02) / EMA9 (714.49)",
+   "entry_time": "2026-08-31 10:25:00-04:00",
+   "exit_time": "2026-08-31 10:32:00-04:00",
+   "date": "2026-08-31",
+   "hour": 10,
+   "weekday": 0,
+   "entry_price": 1.25,
+   "qty": 3,
+   "strike": 713.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.04,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.19920000076293945,
+   "fills": [
+    {
+     "t": "2026-08-31 10:32:00-04:00",
+     "qty": 3,
+     "px": 0.99,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Confirmed ORB Bearish Breakdown below 765.75 (RelVol: 1.3x)",
+   "entry_time": "2026-08-31 13:35:00-04:00",
+   "exit_time": "2026-08-31 13:37:00-04:00",
+   "date": "2026-08-31",
+   "hour": 13,
+   "weekday": 0,
+   "entry_price": 0.61,
+   "qty": 3,
+   "strike": 765.0,
+   "pnl": -39.0,
+   "pnl_pct_of_risk": -1.066,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.1443000030517578,
+   "fills": [
+    {
+     "t": "2026-08-31 13:37:00-04:00",
+     "qty": 3,
+     "px": 0.48,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (708.56) / EMA9 (708.17)",
+   "entry_time": "2026-09-01 13:50:00-04:00",
+   "exit_time": "2026-09-01 13:52:00-04:00",
+   "date": "2026-09-01",
+   "hour": 13,
+   "weekday": 1,
+   "entry_price": 0.64,
+   "qty": 3,
+   "strike": 707.0,
+   "pnl": -42.0,
+   "pnl_pct_of_risk": -1.094,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.20180000305175783,
+   "fills": [
+    {
+     "t": "2026-09-01 13:52:00-04:00",
+     "qty": 3,
+     "px": 0.5,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (762.29) / EMA9 (761.88)",
+   "entry_time": "2026-09-02 09:45:00-04:00",
+   "exit_time": "2026-09-02 09:47:00-04:00",
+   "date": "2026-09-02",
+   "hour": 9,
+   "weekday": 2,
+   "entry_price": 1.27,
+   "qty": 3,
+   "strike": 763.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.024,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.1634000015258789,
+   "fills": [
+    {
+     "t": "2026-09-02 09:47:00-04:00",
+     "qty": 3,
+     "px": 1.01,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (706.55) / EMA9 (706.84)",
+   "entry_time": "2026-09-02 09:50:00-04:00",
+   "exit_time": "2026-09-02 09:52:00-04:00",
+   "date": "2026-09-02",
+   "hour": 9,
+   "weekday": 2,
+   "entry_price": 1.26,
+   "qty": 3,
+   "strike": 705.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.032,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.21959999084472656,
+   "fills": [
+    {
+     "t": "2026-09-02 09:52:00-04:00",
+     "qty": 3,
+     "px": 1.0,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (762.34) / EMA9 (762.23)",
+   "entry_time": "2026-09-02 10:00:00-04:00",
+   "exit_time": "2026-09-02 10:18:00-04:00",
+   "date": "2026-09-02",
+   "hour": 10,
+   "weekday": 2,
+   "entry_price": 1.38,
+   "qty": 2,
+   "strike": 763.0,
+   "pnl": 149.0,
+   "pnl_pct_of_risk": 2.699,
+   "exit_reason": "TARGET_2_HIT (+80%)",
+   "hold_min": 18.0,
+   "iv": 0.1634000015258789,
+   "fills": [
+    {
+     "t": "2026-09-02 10:08:00-04:00",
+     "qty": 1,
+     "px": 1.78,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-02 10:18:00-04:00",
+     "qty": 1,
+     "px": 2.47,
+     "reason": "TARGET_2_HIT (+80%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Confirmed ORB Bullish Breakout above 713.49 (RelVol: 1.1x)",
+   "entry_time": "2026-09-03 11:00:00-04:00",
+   "exit_time": "2026-09-03 11:08:00-04:00",
+   "date": "2026-09-03",
+   "hour": 11,
+   "weekday": 3,
+   "entry_price": 1.26,
+   "qty": 3,
+   "strike": 714.0,
+   "pnl": 237.0,
+   "pnl_pct_of_risk": 3.135,
+   "exit_reason": "TARGET_2_HIT (+80%)",
+   "hold_min": 8.0,
+   "iv": 0.21069999694824218,
+   "fills": [
+    {
+     "t": "2026-09-03 11:03:00-04:00",
+     "qty": 1,
+     "px": 1.63,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-03 11:08:00-04:00",
+     "qty": 2,
+     "px": 2.26,
+     "reason": "TARGET_2_HIT (+80%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (718.25) / EMA9 (717.68)",
+   "entry_time": "2026-09-04 14:55:00-04:00",
+   "exit_time": "2026-09-04 14:56:00-04:00",
+   "date": "2026-09-04",
+   "hour": 14,
+   "weekday": 4,
+   "entry_price": 0.66,
+   "qty": 3,
+   "strike": 718.0,
+   "pnl": -12.0,
+   "pnl_pct_of_risk": -0.303,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.2015999984741211,
+   "fills": [
+    {
+     "t": "2026-09-04 14:56:00-04:00",
+     "qty": 3,
+     "px": 0.62,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (718.23) / EMA9 (717.72)",
+   "entry_time": "2026-09-04 15:25:00-04:00",
+   "exit_time": "2026-09-04 15:26:00-04:00",
+   "date": "2026-09-04",
+   "hour": 15,
+   "weekday": 4,
+   "entry_price": 0.43,
+   "qty": 3,
+   "strike": 718.0,
+   "pnl": -6.0,
+   "pnl_pct_of_risk": -0.233,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.2015999984741211,
+   "fills": [
+    {
+     "t": "2026-09-04 15:26:00-04:00",
+     "qty": 3,
+     "px": 0.41,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (718.67) / EMA9 (717.80)",
+   "entry_time": "2026-09-08 10:05:00-04:00",
+   "exit_time": "2026-09-08 10:17:00-04:00",
+   "date": "2026-09-08",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.49,
+   "qty": 2,
+   "strike": 717.0,
+   "pnl": 45.0,
+   "pnl_pct_of_risk": 0.755,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 12.0,
+   "iv": 0.20040000915527345,
+   "fills": [
+    {
+     "t": "2026-09-08 10:13:00-04:00",
+     "qty": 1,
+     "px": 1.93,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-08 10:17:00-04:00",
+     "qty": 1,
+     "px": 1.5,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (718.27) / EMA9 (717.92)",
+   "entry_time": "2026-09-08 10:55:00-04:00",
+   "exit_time": "2026-09-08 11:28:00-04:00",
+   "date": "2026-09-08",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.24,
+   "qty": 3,
+   "strike": 719.0,
+   "pnl": 232.0,
+   "pnl_pct_of_risk": 3.118,
+   "exit_reason": "TARGET_2_HIT (+80%)",
+   "hold_min": 33.0,
+   "iv": 0.20040000915527345,
+   "fills": [
+    {
+     "t": "2026-09-08 11:13:00-04:00",
+     "qty": 1,
+     "px": 1.6,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-08 11:28:00-04:00",
+     "qty": 2,
+     "px": 2.22,
+     "reason": "TARGET_2_HIT (+80%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (719.69) / EMA9 (720.26)",
+   "entry_time": "2026-09-08 13:35:00-04:00",
+   "exit_time": "2026-09-08 13:42:00-04:00",
+   "date": "2026-09-08",
+   "hour": 13,
+   "weekday": 1,
+   "entry_price": 0.79,
+   "qty": 3,
+   "strike": 721.0,
+   "pnl": -51.0,
+   "pnl_pct_of_risk": -1.076,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.20040000915527345,
+   "fills": [
+    {
+     "t": "2026-09-08 13:42:00-04:00",
+     "qty": 3,
+     "px": 0.62,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (716.73) / EMA9 (717.77)",
+   "entry_time": "2026-09-09 09:45:00-04:00",
+   "exit_time": "2026-09-09 09:47:00-04:00",
+   "date": "2026-09-09",
+   "hour": 9,
+   "weekday": 2,
+   "entry_price": 1.24,
+   "qty": 3,
+   "strike": 716.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.048,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.21709999084472656,
+   "fills": [
+    {
+     "t": "2026-09-09 09:47:00-04:00",
+     "qty": 3,
+     "px": 0.98,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (717.48) / EMA9 (717.95)",
+   "entry_time": "2026-09-09 10:25:00-04:00",
+   "exit_time": "2026-09-09 10:27:00-04:00",
+   "date": "2026-09-09",
+   "hour": 10,
+   "weekday": 2,
+   "entry_price": 1.34,
+   "qty": 3,
+   "strike": 716.0,
+   "pnl": -84.0,
+   "pnl_pct_of_risk": -1.045,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.21709999084472656,
+   "fills": [
+    {
+     "t": "2026-09-09 10:27:00-04:00",
+     "qty": 3,
+     "px": 1.06,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (717.92) / EMA9 (717.53)",
+   "entry_time": "2026-09-09 11:10:00-04:00",
+   "exit_time": "2026-09-09 11:17:00-04:00",
+   "date": "2026-09-09",
+   "hour": 11,
+   "weekday": 2,
+   "entry_price": 1.47,
+   "qty": 2,
+   "strike": 716.0,
+   "pnl": 44.0,
+   "pnl_pct_of_risk": 0.748,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 7.0,
+   "iv": 0.21709999084472656,
+   "fills": [
+    {
+     "t": "2026-09-09 11:13:00-04:00",
+     "qty": 1,
+     "px": 1.9,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-09 11:17:00-04:00",
+     "qty": 1,
+     "px": 1.48,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (758.46) / EMA9 (758.61)",
+   "entry_time": "2026-09-10 13:40:00-04:00",
+   "exit_time": "2026-09-10 13:42:00-04:00",
+   "date": "2026-09-10",
+   "hour": 13,
+   "weekday": 3,
+   "entry_price": 0.79,
+   "qty": 3,
+   "strike": 758.0,
+   "pnl": -51.0,
+   "pnl_pct_of_risk": -1.076,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.16459999084472657,
+   "fills": [
+    {
+     "t": "2026-09-10 13:42:00-04:00",
+     "qty": 3,
+     "px": 0.62,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (758.46) / EMA9 (758.52)",
+   "entry_time": "2026-09-10 13:50:00-04:00",
+   "exit_time": "2026-09-10 13:52:00-04:00",
+   "date": "2026-09-10",
+   "hour": 13,
+   "weekday": 3,
+   "entry_price": 0.68,
+   "qty": 3,
+   "strike": 758.0,
+   "pnl": -45.0,
+   "pnl_pct_of_risk": -1.103,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.16459999084472657,
+   "fills": [
+    {
+     "t": "2026-09-10 13:52:00-04:00",
+     "qty": 3,
+     "px": 0.53,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (758.46) / EMA9 (758.45)",
+   "entry_time": "2026-09-10 14:00:00-04:00",
+   "exit_time": "2026-09-10 14:02:00-04:00",
+   "date": "2026-09-10",
+   "hour": 14,
+   "weekday": 3,
+   "entry_price": 0.64,
+   "qty": 3,
+   "strike": 758.0,
+   "pnl": -42.0,
+   "pnl_pct_of_risk": -1.094,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.16459999084472657,
+   "fills": [
+    {
+     "t": "2026-09-10 14:02:00-04:00",
+     "qty": 3,
+     "px": 0.5,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (765.23) / EMA9 (765.13)",
+   "entry_time": "2026-09-11 15:10:00-04:00",
+   "exit_time": "2026-09-11 15:15:00-04:00",
+   "date": "2026-09-11",
+   "hour": 15,
+   "weekday": 4,
+   "entry_price": 0.68,
+   "qty": 3,
+   "strike": 765.0,
+   "pnl": -45.0,
+   "pnl_pct_of_risk": -1.103,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 5.0,
+   "iv": 0.1784000015258789,
+   "fills": [
+    {
+     "t": "2026-09-11 15:15:00-04:00",
+     "qty": 3,
+     "px": 0.53,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (715.22) / EMA9 (715.92)",
+   "entry_time": "2026-09-11 15:15:00-04:00",
+   "exit_time": "2026-09-11 15:16:00-04:00",
+   "date": "2026-09-11",
+   "hour": 15,
+   "weekday": 4,
+   "entry_price": 0.86,
+   "qty": 3,
+   "strike": 716.0,
+   "pnl": -24.0,
+   "pnl_pct_of_risk": -0.465,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.23329999923706055,
+   "fills": [
+    {
+     "t": "2026-09-11 15:16:00-04:00",
+     "qty": 3,
+     "px": 0.78,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (760.90) / EMA9 (762.22)",
+   "entry_time": "2026-09-14 15:05:00-04:00",
+   "exit_time": "2026-09-14 15:06:00-04:00",
+   "date": "2026-09-14",
+   "hour": 15,
+   "weekday": 0,
+   "entry_price": 0.55,
+   "qty": 3,
+   "strike": 762.0,
+   "pnl": -15.0,
+   "pnl_pct_of_risk": -0.455,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.1584000015258789,
+   "fills": [
+    {
+     "t": "2026-09-14 15:06:00-04:00",
+     "qty": 3,
+     "px": 0.5,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (708.28) / EMA9 (711.86)",
+   "entry_time": "2026-09-14 15:10:00-04:00",
+   "exit_time": "2026-09-14 15:11:00-04:00",
+   "date": "2026-09-14",
+   "hour": 15,
+   "weekday": 0,
+   "entry_price": 0.46,
+   "qty": 3,
+   "strike": 711.0,
+   "pnl": -15.0,
+   "pnl_pct_of_risk": -0.543,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.2102000045776367,
+   "fills": [
+    {
+     "t": "2026-09-14 15:11:00-04:00",
+     "qty": 3,
+     "px": 0.41,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (760.92) / EMA9 (762.07)",
+   "entry_time": "2026-09-14 15:20:00-04:00",
+   "exit_time": "2026-09-14 15:21:00-04:00",
+   "date": "2026-09-14",
+   "hour": 15,
+   "weekday": 0,
+   "entry_price": 0.51,
+   "qty": 3,
+   "strike": 762.0,
+   "pnl": -12.0,
+   "pnl_pct_of_risk": -0.392,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.1584000015258789,
+   "fills": [
+    {
+     "t": "2026-09-14 15:21:00-04:00",
+     "qty": 3,
+     "px": 0.47,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (757.63) / EMA9 (757.23)",
+   "entry_time": "2026-09-15 15:25:00-04:00",
+   "exit_time": "2026-09-15 15:42:00-04:00",
+   "date": "2026-09-15",
+   "hour": 15,
+   "weekday": 1,
+   "entry_price": 0.39,
+   "qty": 3,
+   "strike": 757.0,
+   "pnl": 13.0,
+   "pnl_pct_of_risk": 0.556,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 17.0,
+   "iv": 0.17100000381469727,
+   "fills": [
+    {
+     "t": "2026-09-15 15:38:00-04:00",
+     "qty": 1,
+     "px": 0.5,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-15 15:42:00-04:00",
+     "qty": 2,
+     "px": 0.4,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (759.44) / EMA9 (759.60)",
+   "entry_time": "2026-09-16 11:00:00-04:00",
+   "exit_time": "2026-09-16 11:20:00-04:00",
+   "date": "2026-09-16",
+   "hour": 11,
+   "weekday": 2,
+   "entry_price": 1.39,
+   "qty": 2,
+   "strike": 760.0,
+   "pnl": 24.0,
+   "pnl_pct_of_risk": 0.432,
+   "exit_reason": "STAGNATION_TIME_EXIT",
+   "hold_min": 20.0,
+   "iv": 0.17200000762939452,
+   "fills": [
+    {
+     "t": "2026-09-16 11:20:00-04:00",
+     "qty": 2,
+     "px": 1.51,
+     "reason": "STAGNATION_TIME_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (759.89) / EMA9 (759.68)",
+   "entry_time": "2026-09-16 13:45:00-04:00",
+   "exit_time": "2026-09-16 13:47:00-04:00",
+   "date": "2026-09-16",
+   "hour": 13,
+   "weekday": 2,
+   "entry_price": 0.69,
+   "qty": 3,
+   "strike": 759.0,
+   "pnl": -45.0,
+   "pnl_pct_of_risk": -1.087,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.17200000762939452,
+   "fills": [
+    {
+     "t": "2026-09-16 13:47:00-04:00",
+     "qty": 3,
+     "px": 0.54,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Confirmed ORB Bullish Breakout above 759.70 (RelVol: 6.4x)",
+   "entry_time": "2026-09-16 14:05:00-04:00",
+   "exit_time": "2026-09-16 14:12:00-04:00",
+   "date": "2026-09-16",
+   "hour": 14,
+   "weekday": 2,
+   "entry_price": 0.91,
+   "qty": 3,
+   "strike": 760.0,
+   "pnl": 28.0,
+   "pnl_pct_of_risk": 0.513,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 7.0,
+   "iv": 0.17200000762939452,
+   "fills": [
+    {
+     "t": "2026-09-16 14:08:00-04:00",
+     "qty": 1,
+     "px": 1.17,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-16 14:12:00-04:00",
+     "qty": 2,
+     "px": 0.92,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Confirmed ORB Bullish Breakout above 716.37 (RelVol: 1.8x)",
+   "entry_time": "2026-09-17 14:15:00-04:00",
+   "exit_time": "2026-09-17 14:27:00-04:00",
+   "date": "2026-09-17",
+   "hour": 14,
+   "weekday": 3,
+   "entry_price": 0.66,
+   "qty": 3,
+   "strike": 717.0,
+   "pnl": -42.0,
+   "pnl_pct_of_risk": -1.061,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 12.0,
+   "iv": 0.22440000534057616,
+   "fills": [
+    {
+     "t": "2026-09-17 14:27:00-04:00",
+     "qty": 3,
+     "px": 0.52,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (717.30) / EMA9 (716.84)",
+   "entry_time": "2026-09-18 10:45:00-04:00",
+   "exit_time": "2026-09-18 10:47:00-04:00",
+   "date": "2026-09-18",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.24,
+   "qty": 3,
+   "strike": 716.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.048,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.19959999084472657,
+   "fills": [
+    {
+     "t": "2026-09-18 10:47:00-04:00",
+     "qty": 3,
+     "px": 0.98,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (717.30) / EMA9 (717.07)",
+   "entry_time": "2026-09-18 11:15:00-04:00",
+   "exit_time": "2026-09-18 11:27:00-04:00",
+   "date": "2026-09-18",
+   "hour": 11,
+   "weekday": 4,
+   "entry_price": 1.48,
+   "qty": 2,
+   "strike": 717.0,
+   "pnl": -62.0,
+   "pnl_pct_of_risk": -1.047,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 12.0,
+   "iv": 0.19959999084472657,
+   "fills": [
+    {
+     "t": "2026-09-18 11:27:00-04:00",
+     "qty": 2,
+     "px": 1.17,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (717.05) / EMA9 (717.03)",
+   "entry_time": "2026-09-18 13:40:00-04:00",
+   "exit_time": "2026-09-18 14:00:00-04:00",
+   "date": "2026-09-18",
+   "hour": 13,
+   "weekday": 4,
+   "entry_price": 0.69,
+   "qty": 3,
+   "strike": 718.0,
+   "pnl": -9.0,
+   "pnl_pct_of_risk": -0.217,
+   "exit_reason": "STAGNATION_TIME_EXIT",
+   "hold_min": 20.0,
+   "iv": 0.19959999084472657,
+   "fills": [
+    {
+     "t": "2026-09-18 14:00:00-04:00",
+     "qty": 3,
+     "px": 0.66,
+     "reason": "STAGNATION_TIME_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (774.14) / EMA9 (773.70)",
+   "entry_time": "2026-09-22 10:45:00-04:00",
+   "exit_time": "2026-09-22 10:47:00-04:00",
+   "date": "2026-09-22",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.01,
+   "qty": 3,
+   "strike": 773.0,
+   "pnl": -63.0,
+   "pnl_pct_of_risk": -1.04,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.14869999885559082,
+   "fills": [
+    {
+     "t": "2026-09-22 10:47:00-04:00",
+     "qty": 3,
+     "px": 0.8,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Confirmed ORB Bearish Breakdown below 773.89 (RelVol: 4.6x)",
+   "entry_time": "2026-09-22 11:10:00-04:00",
+   "exit_time": "2026-09-22 11:17:00-04:00",
+   "date": "2026-09-22",
+   "hour": 11,
+   "weekday": 1,
+   "entry_price": 0.92,
+   "qty": 3,
+   "strike": 773.0,
+   "pnl": -57.0,
+   "pnl_pct_of_risk": -1.033,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.14869999885559082,
+   "fills": [
+    {
+     "t": "2026-09-22 11:17:00-04:00",
+     "qty": 3,
+     "px": 0.73,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (773.68) / EMA9 (773.34)",
+   "entry_time": "2026-09-22 13:30:00-04:00",
+   "exit_time": "2026-09-22 13:32:00-04:00",
+   "date": "2026-09-22",
+   "hour": 13,
+   "weekday": 1,
+   "entry_price": 0.61,
+   "qty": 3,
+   "strike": 774.0,
+   "pnl": -39.0,
+   "pnl_pct_of_risk": -1.066,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.14869999885559082,
+   "fills": [
+    {
+     "t": "2026-09-22 13:32:00-04:00",
+     "qty": 3,
+     "px": 0.48,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (745.49) / EMA9 (746.17)",
+   "entry_time": "2026-09-23 09:45:00-04:00",
+   "exit_time": "2026-09-23 10:03:00-04:00",
+   "date": "2026-09-23",
+   "hour": 9,
+   "weekday": 2,
+   "entry_price": 1.27,
+   "qty": 3,
+   "strike": 744.0,
+   "pnl": 239.0,
+   "pnl_pct_of_risk": 3.136,
+   "exit_reason": "TARGET_2_HIT (+80%)",
+   "hold_min": 18.0,
+   "iv": 0.20180000305175783,
+   "fills": [
+    {
+     "t": "2026-09-23 09:48:00-04:00",
+     "qty": 1,
+     "px": 1.64,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-23 10:03:00-04:00",
+     "qty": 2,
+     "px": 2.28,
+     "reason": "TARGET_2_HIT (+80%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (741.11) / EMA9 (740.28)",
+   "entry_time": "2026-09-23 14:00:00-04:00",
+   "exit_time": "2026-09-23 14:02:00-04:00",
+   "date": "2026-09-23",
+   "hour": 14,
+   "weekday": 2,
+   "entry_price": 1.08,
+   "qty": 3,
+   "strike": 741.0,
+   "pnl": -69.0,
+   "pnl_pct_of_risk": -1.065,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.20180000305175783,
+   "fills": [
+    {
+     "t": "2026-09-23 14:02:00-04:00",
+     "qty": 3,
+     "px": 0.85,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (741.08) / EMA9 (740.54)",
+   "entry_time": "2026-09-23 14:20:00-04:00",
+   "exit_time": "2026-09-23 14:22:00-04:00",
+   "date": "2026-09-23",
+   "hour": 14,
+   "weekday": 2,
+   "entry_price": 0.89,
+   "qty": 3,
+   "strike": 741.0,
+   "pnl": -57.0,
+   "pnl_pct_of_risk": -1.067,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.20180000305175783,
+   "fills": [
+    {
+     "t": "2026-09-23 14:22:00-04:00",
+     "qty": 3,
+     "px": 0.7,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (735.91) / EMA9 (738.36)",
+   "entry_time": "2026-09-24 09:50:00-04:00",
+   "exit_time": "2026-09-24 09:51:00-04:00",
+   "date": "2026-09-24",
+   "hour": 9,
+   "weekday": 3,
+   "entry_price": 1.33,
+   "qty": 3,
+   "strike": 736.0,
+   "pnl": -24.0,
+   "pnl_pct_of_risk": -0.301,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.20760000228881836,
+   "fills": [
+    {
+     "t": "2026-09-24 09:51:00-04:00",
+     "qty": 3,
+     "px": 1.25,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (765.12) / EMA9 (765.54)",
+   "entry_time": "2026-09-24 10:55:00-04:00",
+   "exit_time": "2026-09-24 11:22:00-04:00",
+   "date": "2026-09-24",
+   "hour": 10,
+   "weekday": 3,
+   "entry_price": 1.19,
+   "qty": 3,
+   "strike": 765.0,
+   "pnl": 49.0,
+   "pnl_pct_of_risk": 0.686,
+   "exit_reason": "STAGNATION_TIME_EXIT",
+   "hold_min": 27.0,
+   "iv": 0.1518000030517578,
+   "fills": [
+    {
+     "t": "2026-09-24 11:08:00-04:00",
+     "qty": 1,
+     "px": 1.54,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-24 11:22:00-04:00",
+     "qty": 2,
+     "px": 1.26,
+     "reason": "STAGNATION_TIME_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (765.79) / EMA9 (767.02)",
+   "entry_time": "2026-09-24 13:50:00-04:00",
+   "exit_time": "2026-09-24 13:52:00-04:00",
+   "date": "2026-09-24",
+   "hour": 13,
+   "weekday": 3,
+   "entry_price": 0.6,
+   "qty": 3,
+   "strike": 767.0,
+   "pnl": -39.0,
+   "pnl_pct_of_risk": -1.083,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.1518000030517578,
+   "fills": [
+    {
+     "t": "2026-09-24 13:52:00-04:00",
+     "qty": 3,
+     "px": 0.47,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (769.18) / EMA9 (768.74)",
+   "entry_time": "2026-09-25 09:50:00-04:00",
+   "exit_time": "2026-09-25 09:57:00-04:00",
+   "date": "2026-09-25",
+   "hour": 9,
+   "weekday": 4,
+   "entry_price": 1.08,
+   "qty": 3,
+   "strike": 770.0,
+   "pnl": 33.0,
+   "pnl_pct_of_risk": 0.509,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 7.0,
+   "iv": 0.15670000076293944,
+   "fills": [
+    {
+     "t": "2026-09-25 09:53:00-04:00",
+     "qty": 1,
+     "px": 1.39,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-25 09:57:00-04:00",
+     "qty": 2,
+     "px": 1.09,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (742.81) / EMA9 (741.85)",
+   "entry_time": "2026-09-25 10:30:00-04:00",
+   "exit_time": "2026-09-25 10:32:00-04:00",
+   "date": "2026-09-25",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.24,
+   "qty": 3,
+   "strike": 740.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.048,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.21239999771118165,
+   "fills": [
+    {
+     "t": "2026-09-25 10:32:00-04:00",
+     "qty": 3,
+     "px": 0.98,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (768.42) / EMA9 (768.18)",
+   "entry_time": "2026-09-25 11:00:00-04:00",
+   "exit_time": "2026-09-25 11:12:00-04:00",
+   "date": "2026-09-25",
+   "hour": 11,
+   "weekday": 4,
+   "entry_price": 1.08,
+   "qty": 3,
+   "strike": 769.0,
+   "pnl": 33.0,
+   "pnl_pct_of_risk": 0.509,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 12.0,
+   "iv": 0.15670000076293944,
+   "fills": [
+    {
+     "t": "2026-09-25 11:03:00-04:00",
+     "qty": 1,
+     "px": 1.39,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-25 11:12:00-04:00",
+     "qty": 2,
+     "px": 1.09,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Confirmed ORB Bearish Breakdown below 766.97 (RelVol: 1.2x)",
+   "entry_time": "2026-09-28 11:15:00-04:00",
+   "exit_time": "2026-09-28 11:35:00-04:00",
+   "date": "2026-09-28",
+   "hour": 11,
+   "weekday": 0,
+   "entry_price": 1.0,
+   "qty": 3,
+   "strike": 765.0,
+   "pnl": -12.0,
+   "pnl_pct_of_risk": -0.2,
+   "exit_reason": "STAGNATION_TIME_EXIT",
+   "hold_min": 20.0,
+   "iv": 0.14869999885559082,
+   "fills": [
+    {
+     "t": "2026-09-28 11:35:00-04:00",
+     "qty": 3,
+     "px": 0.96,
+     "reason": "STAGNATION_TIME_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (766.79) / EMA9 (767.29)",
+   "entry_time": "2026-09-28 13:55:00-04:00",
+   "exit_time": "2026-09-28 13:57:00-04:00",
+   "date": "2026-09-28",
+   "hour": 13,
+   "weekday": 0,
+   "entry_price": 0.48,
+   "qty": 3,
+   "strike": 768.0,
+   "pnl": -33.0,
+   "pnl_pct_of_risk": -1.146,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.14869999885559082,
+   "fills": [
+    {
+     "t": "2026-09-28 13:57:00-04:00",
+     "qty": 3,
+     "px": 0.37,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (766.83) / EMA9 (767.06)",
+   "entry_time": "2026-09-28 14:35:00-04:00",
+   "exit_time": "2026-09-28 14:42:00-04:00",
+   "date": "2026-09-28",
+   "hour": 14,
+   "weekday": 0,
+   "entry_price": 0.71,
+   "qty": 3,
+   "strike": 767.0,
+   "pnl": 22.0,
+   "pnl_pct_of_risk": 0.516,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 7.0,
+   "iv": 0.14869999885559082,
+   "fills": [
+    {
+     "t": "2026-09-28 14:38:00-04:00",
+     "qty": 1,
+     "px": 0.91,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-09-28 14:42:00-04:00",
+     "qty": 2,
+     "px": 0.72,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (765.73) / EMA9 (765.50)",
+   "entry_time": "2026-09-29 09:45:00-04:00",
+   "exit_time": "2026-09-29 09:52:00-04:00",
+   "date": "2026-09-29",
+   "hour": 9,
+   "weekday": 1,
+   "entry_price": 1.27,
+   "qty": 3,
+   "strike": 765.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.024,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.1606999969482422,
+   "fills": [
+    {
+     "t": "2026-09-29 09:52:00-04:00",
+     "qty": 3,
+     "px": 1.01,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (765.48) / EMA9 (765.24)",
+   "entry_time": "2026-09-29 10:00:00-04:00",
+   "exit_time": "2026-09-29 10:02:00-04:00",
+   "date": "2026-09-29",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.45,
+   "qty": 2,
+   "strike": 765.0,
+   "pnl": -60.0,
+   "pnl_pct_of_risk": -1.034,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.1606999969482422,
+   "fills": [
+    {
+     "t": "2026-09-29 10:02:00-04:00",
+     "qty": 2,
+     "px": 1.15,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (738.12) / EMA9 (737.52)",
+   "entry_time": "2026-09-29 10:05:00-04:00",
+   "exit_time": "2026-09-29 10:07:00-04:00",
+   "date": "2026-09-29",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.38,
+   "qty": 2,
+   "strike": 739.0,
+   "pnl": -58.0,
+   "pnl_pct_of_risk": -1.051,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.221299991607666,
+   "fills": [
+    {
+     "t": "2026-09-29 10:07:00-04:00",
+     "qty": 2,
+     "px": 1.09,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Confirmed ORB Bullish Breakout above 742.75 (RelVol: 1.4x)",
+   "entry_time": "2026-09-30 11:20:00-04:00",
+   "exit_time": "2026-09-30 11:22:00-04:00",
+   "date": "2026-09-30",
+   "hour": 11,
+   "weekday": 2,
+   "entry_price": 1.29,
+   "qty": 3,
+   "strike": 744.0,
+   "pnl": -81.0,
+   "pnl_pct_of_risk": -1.047,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.2206999969482422,
+   "fills": [
+    {
+     "t": "2026-09-30 11:22:00-04:00",
+     "qty": 3,
+     "px": 1.02,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (742.95) / EMA9 (743.15)",
+   "entry_time": "2026-09-30 13:30:00-04:00",
+   "exit_time": "2026-09-30 13:32:00-04:00",
+   "date": "2026-09-30",
+   "hour": 13,
+   "weekday": 2,
+   "entry_price": 0.97,
+   "qty": 3,
+   "strike": 742.0,
+   "pnl": -60.0,
+   "pnl_pct_of_risk": -1.031,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.2206999969482422,
+   "fills": [
+    {
+     "t": "2026-09-30 13:32:00-04:00",
+     "qty": 3,
+     "px": 0.77,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Confirmed ORB Bullish Breakout above 742.75 (RelVol: 1.9x)",
+   "entry_time": "2026-09-30 14:00:00-04:00",
+   "exit_time": "2026-09-30 14:02:00-04:00",
+   "date": "2026-09-30",
+   "hour": 14,
+   "weekday": 2,
+   "entry_price": 0.99,
+   "qty": 3,
+   "strike": 744.0,
+   "pnl": -63.0,
+   "pnl_pct_of_risk": -1.061,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.2206999969482422,
+   "fills": [
+    {
+     "t": "2026-09-30 14:02:00-04:00",
+     "qty": 3,
+     "px": 0.78,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (764.41) / EMA9 (764.59)",
+   "entry_time": "2026-10-01 09:45:00-04:00",
+   "exit_time": "2026-10-01 09:47:00-04:00",
+   "date": "2026-10-01",
+   "hour": 9,
+   "weekday": 3,
+   "entry_price": 1.14,
+   "qty": 3,
+   "strike": 763.0,
+   "pnl": -72.0,
+   "pnl_pct_of_risk": -1.053,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.1634000015258789,
+   "fills": [
+    {
+     "t": "2026-10-01 09:47:00-04:00",
+     "qty": 3,
+     "px": 0.9,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Confirmed ORB Bearish Breakdown below 741.04 (RelVol: 1.2x)",
+   "entry_time": "2026-10-01 09:50:00-04:00",
+   "exit_time": "2026-10-01 09:52:00-04:00",
+   "date": "2026-10-01",
+   "hour": 9,
+   "weekday": 3,
+   "entry_price": 1.6,
+   "qty": 2,
+   "strike": 740.0,
+   "pnl": -66.0,
+   "pnl_pct_of_risk": -1.031,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.22459999084472657,
+   "fills": [
+    {
+     "t": "2026-10-01 09:52:00-04:00",
+     "qty": 2,
+     "px": 1.27,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (764.05) / EMA9 (763.80)",
+   "entry_time": "2026-10-01 10:00:00-04:00",
+   "exit_time": "2026-10-01 10:03:00-04:00",
+   "date": "2026-10-01",
+   "hour": 10,
+   "weekday": 3,
+   "entry_price": 1.05,
+   "qty": 3,
+   "strike": 762.0,
+   "pnl": 249.0,
+   "pnl_pct_of_risk": 3.952,
+   "exit_reason": "TARGET_2_HIT (+80%)",
+   "hold_min": 3.0,
+   "iv": 0.1634000015258789,
+   "fills": [
+    {
+     "t": "2026-10-01 10:03:00-04:00",
+     "qty": 3,
+     "px": 1.88,
+     "reason": "TARGET_2_HIT (+80%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (770.07) / EMA9 (769.18)",
+   "entry_time": "2026-10-02 15:20:00-04:00",
+   "exit_time": "2026-10-02 15:21:00-04:00",
+   "date": "2026-10-02",
+   "hour": 15,
+   "weekday": 4,
+   "entry_price": 0.65,
+   "qty": 3,
+   "strike": 769.0,
+   "pnl": -12.0,
+   "pnl_pct_of_risk": -0.308,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.16389999389648438,
+   "fills": [
+    {
+     "t": "2026-10-02 15:21:00-04:00",
+     "qty": 3,
+     "px": 0.61,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (770.50) / EMA9 (770.08)",
+   "entry_time": "2026-10-05 09:45:00-04:00",
+   "exit_time": "2026-10-05 10:02:00-04:00",
+   "date": "2026-10-05",
+   "hour": 9,
+   "weekday": 0,
+   "entry_price": 1.12,
+   "qty": 3,
+   "strike": 771.0,
+   "pnl": -69.0,
+   "pnl_pct_of_risk": -1.027,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 17.0,
+   "iv": 0.15310000419616698,
+   "fills": [
+    {
+     "t": "2026-10-05 10:02:00-04:00",
+     "qty": 3,
+     "px": 0.89,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (761.13) / EMA9 (760.97)",
+   "entry_time": "2026-10-06 14:05:00-04:00",
+   "exit_time": "2026-10-06 14:12:00-04:00",
+   "date": "2026-10-06",
+   "hour": 14,
+   "weekday": 1,
+   "entry_price": 0.76,
+   "qty": 3,
+   "strike": 762.0,
+   "pnl": -48.0,
+   "pnl_pct_of_risk": -1.053,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.21700000762939453,
+   "fills": [
+    {
+     "t": "2026-10-06 14:12:00-04:00",
+     "qty": 3,
+     "px": 0.6,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (761.12) / EMA9 (760.93)",
+   "entry_time": "2026-10-06 14:35:00-04:00",
+   "exit_time": "2026-10-06 14:47:00-04:00",
+   "date": "2026-10-06",
+   "hour": 14,
+   "weekday": 1,
+   "entry_price": 0.6,
+   "qty": 3,
+   "strike": 760.0,
+   "pnl": -39.0,
+   "pnl_pct_of_risk": -1.083,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 12.0,
+   "iv": 0.21700000762939453,
+   "fills": [
+    {
+     "t": "2026-10-06 14:47:00-04:00",
+     "qty": 3,
+     "px": 0.47,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (779.88) / EMA9 (780.00)",
+   "entry_time": "2026-10-06 15:05:00-04:00",
+   "exit_time": "2026-10-06 15:07:00-04:00",
+   "date": "2026-10-06",
+   "hour": 15,
+   "weekday": 1,
+   "entry_price": 0.62,
+   "qty": 3,
+   "strike": 780.0,
+   "pnl": -39.0,
+   "pnl_pct_of_risk": -1.048,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.15520000457763672,
+   "fills": [
+    {
+     "t": "2026-10-06 15:07:00-04:00",
+     "qty": 3,
+     "px": 0.49,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (775.40) / EMA9 (775.59)",
+   "entry_time": "2026-10-08 11:05:00-04:00",
+   "exit_time": "2026-10-08 11:27:00-04:00",
+   "date": "2026-10-08",
+   "hour": 11,
+   "weekday": 3,
+   "entry_price": 1.02,
+   "qty": 3,
+   "strike": 775.0,
+   "pnl": 48.0,
+   "pnl_pct_of_risk": 0.784,
+   "exit_reason": "STAGNATION_TIME_EXIT",
+   "hold_min": 22.0,
+   "iv": 0.15079999923706056,
+   "fills": [
+    {
+     "t": "2026-10-08 11:13:00-04:00",
+     "qty": 1,
+     "px": 1.32,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-10-08 11:27:00-04:00",
+     "qty": 2,
+     "px": 1.11,
+     "reason": "STAGNATION_TIME_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (774.02) / EMA9 (773.03)",
+   "entry_time": "2026-10-08 15:25:00-04:00",
+   "exit_time": "2026-10-08 15:26:00-04:00",
+   "date": "2026-10-08",
+   "hour": 15,
+   "weekday": 3,
+   "entry_price": 0.27,
+   "qty": 3,
+   "strike": 774.0,
+   "pnl": -15.0,
+   "pnl_pct_of_risk": -0.926,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.15079999923706056,
+   "fills": [
+    {
+     "t": "2026-10-08 15:26:00-04:00",
+     "qty": 3,
+     "px": 0.22,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (750.55) / EMA9 (749.66)",
+   "entry_time": "2026-10-09 10:35:00-04:00",
+   "exit_time": "2026-10-09 10:37:00-04:00",
+   "date": "2026-10-09",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.44,
+   "qty": 2,
+   "strike": 751.0,
+   "pnl": -60.0,
+   "pnl_pct_of_risk": -1.042,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.21979999542236328,
+   "fills": [
+    {
+     "t": "2026-10-09 10:37:00-04:00",
+     "qty": 2,
+     "px": 1.14,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (750.47) / EMA9 (749.81)",
+   "entry_time": "2026-10-09 10:55:00-04:00",
+   "exit_time": "2026-10-09 11:07:00-04:00",
+   "date": "2026-10-09",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.39,
+   "qty": 2,
+   "strike": 751.0,
+   "pnl": -58.0,
+   "pnl_pct_of_risk": -1.043,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 12.0,
+   "iv": 0.21979999542236328,
+   "fills": [
+    {
+     "t": "2026-10-09 11:07:00-04:00",
+     "qty": 2,
+     "px": 1.1,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (750.32) / EMA9 (750.79)",
+   "entry_time": "2026-10-09 14:15:00-04:00",
+   "exit_time": "2026-10-09 14:32:00-04:00",
+   "date": "2026-10-09",
+   "hour": 14,
+   "weekday": 4,
+   "entry_price": 0.98,
+   "qty": 3,
+   "strike": 751.0,
+   "pnl": -63.0,
+   "pnl_pct_of_risk": -1.071,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 17.0,
+   "iv": 0.21979999542236328,
+   "fills": [
+    {
+     "t": "2026-10-09 14:32:00-04:00",
+     "qty": 3,
+     "px": 0.77,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (748.28) / EMA9 (749.77)",
+   "entry_time": "2026-10-12 09:45:00-04:00",
+   "exit_time": "2026-10-12 09:47:00-04:00",
+   "date": "2026-10-12",
+   "hour": 9,
+   "weekday": 0,
+   "entry_price": 1.63,
+   "qty": 2,
+   "strike": 748.0,
+   "pnl": -68.0,
+   "pnl_pct_of_risk": -1.043,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.20549999237060546,
+   "fills": [
+    {
+     "t": "2026-10-12 09:47:00-04:00",
+     "qty": 2,
+     "px": 1.29,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (748.20) / EMA9 (749.07)",
+   "entry_time": "2026-10-12 09:55:00-04:00",
+   "exit_time": "2026-10-12 09:57:00-04:00",
+   "date": "2026-10-12",
+   "hour": 9,
+   "weekday": 0,
+   "entry_price": 1.26,
+   "qty": 3,
+   "strike": 747.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.032,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.20549999237060546,
+   "fills": [
+    {
+     "t": "2026-10-12 09:57:00-04:00",
+     "qty": 3,
+     "px": 1.0,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (778.65) / EMA9 (778.22)",
+   "entry_time": "2026-10-12 10:25:00-04:00",
+   "exit_time": "2026-10-12 10:45:00-04:00",
+   "date": "2026-10-12",
+   "hour": 10,
+   "weekday": 0,
+   "entry_price": 1.27,
+   "qty": 3,
+   "strike": 778.0,
+   "pnl": -21.0,
+   "pnl_pct_of_risk": -0.276,
+   "exit_reason": "STAGNATION_TIME_EXIT",
+   "hold_min": 20.0,
+   "iv": 0.1484000015258789,
+   "fills": [
+    {
+     "t": "2026-10-12 10:45:00-04:00",
+     "qty": 3,
+     "px": 1.2,
+     "reason": "STAGNATION_TIME_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (741.98) / EMA9 (743.76)",
+   "entry_time": "2026-10-13 10:15:00-04:00",
+   "exit_time": "2026-10-13 10:16:00-04:00",
+   "date": "2026-10-13",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.46,
+   "qty": 2,
+   "strike": 743.0,
+   "pnl": -12.0,
+   "pnl_pct_of_risk": -0.205,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.2084000015258789,
+   "fills": [
+    {
+     "t": "2026-10-13 10:16:00-04:00",
+     "qty": 2,
+     "px": 1.4,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (777.89) / EMA9 (777.73)",
+   "entry_time": "2026-10-13 10:20:00-04:00",
+   "exit_time": "2026-10-13 10:27:00-04:00",
+   "date": "2026-10-13",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.01,
+   "qty": 3,
+   "strike": 777.0,
+   "pnl": -63.0,
+   "pnl_pct_of_risk": -1.04,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.15210000038146973,
+   "fills": [
+    {
+     "t": "2026-10-13 10:27:00-04:00",
+     "qty": 3,
+     "px": 0.8,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (742.65) / EMA9 (743.37)",
+   "entry_time": "2026-10-13 10:30:00-04:00",
+   "exit_time": "2026-10-13 10:37:00-04:00",
+   "date": "2026-10-13",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.26,
+   "qty": 3,
+   "strike": 742.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.032,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.2084000015258789,
+   "fills": [
+    {
+     "t": "2026-10-13 10:37:00-04:00",
+     "qty": 3,
+     "px": 1.0,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (738.32) / EMA9 (740.26)",
+   "entry_time": "2026-10-14 09:55:00-04:00",
+   "exit_time": "2026-10-14 09:58:00-04:00",
+   "date": "2026-10-14",
+   "hour": 9,
+   "weekday": 2,
+   "entry_price": 1.52,
+   "qty": 2,
+   "strike": 738.0,
+   "pnl": 242.0,
+   "pnl_pct_of_risk": 3.98,
+   "exit_reason": "TARGET_2_HIT (+80%)",
+   "hold_min": 3.0,
+   "iv": 0.21139999389648437,
+   "fills": [
+    {
+     "t": "2026-10-14 09:58:00-04:00",
+     "qty": 2,
+     "px": 2.73,
+     "reason": "TARGET_2_HIT (+80%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (736.74) / EMA9 (735.99)",
+   "entry_time": "2026-10-14 11:05:00-04:00",
+   "exit_time": "2026-10-14 11:17:00-04:00",
+   "date": "2026-10-14",
+   "hour": 11,
+   "weekday": 2,
+   "entry_price": 1.51,
+   "qty": 2,
+   "strike": 735.0,
+   "pnl": 45.0,
+   "pnl_pct_of_risk": 0.745,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 12.0,
+   "iv": 0.21139999389648437,
+   "fills": [
+    {
+     "t": "2026-10-14 11:08:00-04:00",
+     "qty": 1,
+     "px": 1.95,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-10-14 11:17:00-04:00",
+     "qty": 1,
+     "px": 1.52,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (766.19) / EMA9 (767.81)",
+   "entry_time": "2026-10-15 09:45:00-04:00",
+   "exit_time": "2026-10-15 09:46:00-04:00",
+   "date": "2026-10-15",
+   "hour": 9,
+   "weekday": 3,
+   "entry_price": 1.49,
+   "qty": 2,
+   "strike": 767.0,
+   "pnl": -12.0,
+   "pnl_pct_of_risk": -0.201,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.16870000839233398,
+   "fills": [
+    {
+     "t": "2026-10-15 09:46:00-04:00",
+     "qty": 2,
+     "px": 1.43,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (766.12) / EMA9 (766.92)",
+   "entry_time": "2026-10-15 09:55:00-04:00",
+   "exit_time": "2026-10-15 09:57:00-04:00",
+   "date": "2026-10-15",
+   "hour": 9,
+   "weekday": 3,
+   "entry_price": 1.07,
+   "qty": 3,
+   "strike": 764.0,
+   "pnl": -66.0,
+   "pnl_pct_of_risk": -1.028,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.16870000839233398,
+   "fills": [
+    {
+     "t": "2026-10-15 09:57:00-04:00",
+     "qty": 3,
+     "px": 0.85,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (768.35) / EMA9 (770.15)",
+   "entry_time": "2026-10-15 14:25:00-04:00",
+   "exit_time": "2026-10-15 14:26:00-04:00",
+   "date": "2026-10-15",
+   "hour": 14,
+   "weekday": 3,
+   "entry_price": 0.54,
+   "qty": 3,
+   "strike": 769.0,
+   "pnl": -12.0,
+   "pnl_pct_of_risk": -0.37,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.16870000839233398,
+   "fills": [
+    {
+     "t": "2026-10-15 14:26:00-04:00",
+     "qty": 3,
+     "px": 0.5,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (723.68) / EMA9 (725.07)",
+   "entry_time": "2026-10-16 09:50:00-04:00",
+   "exit_time": "2026-10-16 10:12:00-04:00",
+   "date": "2026-10-16",
+   "hour": 9,
+   "weekday": 4,
+   "entry_price": 1.59,
+   "qty": 2,
+   "strike": 722.0,
+   "pnl": 51.0,
+   "pnl_pct_of_risk": 0.802,
+   "exit_reason": "STAGNATION_TIME_EXIT",
+   "hold_min": 22.0,
+   "iv": 0.22889999389648438,
+   "fills": [
+    {
+     "t": "2026-10-16 09:53:00-04:00",
+     "qty": 1,
+     "px": 2.06,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-10-16 10:12:00-04:00",
+     "qty": 1,
+     "px": 1.63,
+     "reason": "STAGNATION_TIME_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (771.79) / EMA9 (771.28)",
+   "entry_time": "2026-10-16 10:30:00-04:00",
+   "exit_time": "2026-10-16 10:32:00-04:00",
+   "date": "2026-10-16",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.33,
+   "qty": 3,
+   "strike": 771.0,
+   "pnl": -84.0,
+   "pnl_pct_of_risk": -1.053,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.16459999084472657,
+   "fills": [
+    {
+     "t": "2026-10-16 10:32:00-04:00",
+     "qty": 3,
+     "px": 1.05,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (771.79) / EMA9 (771.74)",
+   "entry_time": "2026-10-16 10:50:00-04:00",
+   "exit_time": "2026-10-16 10:52:00-04:00",
+   "date": "2026-10-16",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.03,
+   "qty": 3,
+   "strike": 773.0,
+   "pnl": -66.0,
+   "pnl_pct_of_risk": -1.068,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.16459999084472657,
+   "fills": [
+    {
+     "t": "2026-10-16 10:52:00-04:00",
+     "qty": 3,
+     "px": 0.81,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Confirmed ORB Bullish Breakout above 768.06 (RelVol: 1.5x)",
+   "entry_time": "2026-10-19 11:15:00-04:00",
+   "exit_time": "2026-10-19 12:01:00-04:00",
+   "date": "2026-10-19",
+   "hour": 11,
+   "weekday": 0,
+   "entry_price": 1.3,
+   "qty": 3,
+   "strike": 769.0,
+   "pnl": 42.0,
+   "pnl_pct_of_risk": 0.538,
+   "exit_reason": "STAGNATION_TIME_EXIT",
+   "hold_min": 46.0,
+   "iv": 0.19989999771118164,
+   "fills": [
+    {
+     "t": "2026-10-19 11:23:00-04:00",
+     "qty": 1,
+     "px": 1.68,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-10-19 12:01:00-04:00",
+     "qty": 2,
+     "px": 1.32,
+     "reason": "STAGNATION_TIME_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (768.03) / EMA9 (767.56)",
+   "entry_time": "2026-10-19 15:05:00-04:00",
+   "exit_time": "2026-10-19 15:07:00-04:00",
+   "date": "2026-10-19",
+   "hour": 15,
+   "weekday": 0,
+   "entry_price": 0.63,
+   "qty": 3,
+   "strike": 768.0,
+   "pnl": -42.0,
+   "pnl_pct_of_risk": -1.111,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.19989999771118164,
+   "fills": [
+    {
+     "t": "2026-10-19 15:07:00-04:00",
+     "qty": 3,
+     "px": 0.49,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (768.02) / EMA9 (767.61)",
+   "entry_time": "2026-10-19 15:15:00-04:00",
+   "exit_time": "2026-10-19 15:16:00-04:00",
+   "date": "2026-10-19",
+   "hour": 15,
+   "weekday": 0,
+   "entry_price": 0.48,
+   "qty": 3,
+   "strike": 768.0,
+   "pnl": -12.0,
+   "pnl_pct_of_risk": -0.417,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.19989999771118164,
+   "fills": [
+    {
+     "t": "2026-10-19 15:16:00-04:00",
+     "qty": 3,
+     "px": 0.44,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Confirmed ORB Bullish Breakout above 766.18 (RelVol: 1.1x)",
+   "entry_time": "2026-10-20 11:20:00-04:00",
+   "exit_time": "2026-10-20 11:22:00-04:00",
+   "date": "2026-10-20",
+   "hour": 11,
+   "weekday": 1,
+   "entry_price": 1.28,
+   "qty": 3,
+   "strike": 770.0,
+   "pnl": -81.0,
+   "pnl_pct_of_risk": -1.055,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.18440000534057618,
+   "fills": [
+    {
+     "t": "2026-10-20 11:22:00-04:00",
+     "qty": 3,
+     "px": 1.01,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (768.98) / EMA9 (769.26)",
+   "entry_time": "2026-10-20 13:40:00-04:00",
+   "exit_time": "2026-10-20 13:57:00-04:00",
+   "date": "2026-10-20",
+   "hour": 13,
+   "weekday": 1,
+   "entry_price": 0.78,
+   "qty": 3,
+   "strike": 770.0,
+   "pnl": -51.0,
+   "pnl_pct_of_risk": -1.09,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 17.0,
+   "iv": 0.18440000534057618,
+   "fills": [
+    {
+     "t": "2026-10-20 13:57:00-04:00",
+     "qty": 3,
+     "px": 0.61,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Confirmed ORB Bullish Breakout above 766.18 (RelVol: 1.1x)",
+   "entry_time": "2026-10-20 14:10:00-04:00",
+   "exit_time": "2026-10-20 14:22:00-04:00",
+   "date": "2026-10-20",
+   "hour": 14,
+   "weekday": 1,
+   "entry_price": 0.63,
+   "qty": 3,
+   "strike": 770.0,
+   "pnl": -42.0,
+   "pnl_pct_of_risk": -1.111,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 12.0,
+   "iv": 0.18440000534057618,
+   "fills": [
+    {
+     "t": "2026-10-20 14:22:00-04:00",
+     "qty": 3,
+     "px": 0.49,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (770.47) / EMA9 (769.82)",
+   "entry_time": "2026-10-21 09:50:00-04:00",
+   "exit_time": "2026-10-21 09:52:00-04:00",
+   "date": "2026-10-21",
+   "hour": 9,
+   "weekday": 2,
+   "entry_price": 1.53,
+   "qty": 2,
+   "strike": 771.0,
+   "pnl": -64.0,
+   "pnl_pct_of_risk": -1.046,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.17309999465942383,
+   "fills": [
+    {
+     "t": "2026-10-21 09:52:00-04:00",
+     "qty": 2,
+     "px": 1.21,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (721.95) / EMA9 (720.91)",
+   "entry_time": "2026-10-21 10:00:00-04:00",
+   "exit_time": "2026-10-21 10:07:00-04:00",
+   "date": "2026-10-21",
+   "hour": 10,
+   "weekday": 2,
+   "entry_price": 1.72,
+   "qty": 2,
+   "strike": 723.0,
+   "pnl": -70.0,
+   "pnl_pct_of_risk": -1.017,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.2521999931335449,
+   "fills": [
+    {
+     "t": "2026-10-21 10:07:00-04:00",
+     "qty": 2,
+     "px": 1.37,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (721.81) / EMA9 (721.54)",
+   "entry_time": "2026-10-21 10:35:00-04:00",
+   "exit_time": "2026-10-21 10:37:00-04:00",
+   "date": "2026-10-21",
+   "hour": 10,
+   "weekday": 2,
+   "entry_price": 1.69,
+   "qty": 2,
+   "strike": 723.0,
+   "pnl": -70.0,
+   "pnl_pct_of_risk": -1.036,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.2521999931335449,
+   "fills": [
+    {
+     "t": "2026-10-21 10:37:00-04:00",
+     "qty": 2,
+     "px": 1.34,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Confirmed ORB Bearish Breakdown below 765.95 (RelVol: 1.7x)",
+   "entry_time": "2026-10-22 13:40:00-04:00",
+   "exit_time": "2026-10-22 13:42:00-04:00",
+   "date": "2026-10-22",
+   "hour": 13,
+   "weekday": 3,
+   "entry_price": 0.66,
+   "qty": 3,
+   "strike": 763.0,
+   "pnl": -42.0,
+   "pnl_pct_of_risk": -1.061,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.16680000305175782,
+   "fills": [
+    {
+     "t": "2026-10-22 13:42:00-04:00",
+     "qty": 3,
+     "px": 0.52,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (760.19) / EMA9 (761.12)",
+   "entry_time": "2026-10-23 09:55:00-04:00",
+   "exit_time": "2026-10-23 09:57:00-04:00",
+   "date": "2026-10-23",
+   "hour": 9,
+   "weekday": 4,
+   "entry_price": 1.35,
+   "qty": 2,
+   "strike": 760.0,
+   "pnl": -56.0,
+   "pnl_pct_of_risk": -1.037,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.19030000686645507,
+   "fills": [
+    {
+     "t": "2026-10-23 09:57:00-04:00",
+     "qty": 2,
+     "px": 1.07,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (703.30) / EMA9 (704.18)",
+   "entry_time": "2026-10-23 10:00:00-04:00",
+   "exit_time": "2026-10-23 10:02:00-04:00",
+   "date": "2026-10-23",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.92,
+   "qty": 2,
+   "strike": 706.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.016,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.28719999313354494,
+   "fills": [
+    {
+     "t": "2026-10-23 10:02:00-04:00",
+     "qty": 2,
+     "px": 1.53,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (703.70) / EMA9 (704.68)",
+   "entry_time": "2026-10-23 10:10:00-04:00",
+   "exit_time": "2026-10-23 10:12:00-04:00",
+   "date": "2026-10-23",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.92,
+   "qty": 2,
+   "strike": 706.0,
+   "pnl": -78.0,
+   "pnl_pct_of_risk": -1.016,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.28719999313354494,
+   "fills": [
+    {
+     "t": "2026-10-23 10:12:00-04:00",
+     "qty": 2,
+     "px": 1.53,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (762.72) / EMA9 (761.83)",
+   "entry_time": "2026-10-26 09:50:00-04:00",
+   "exit_time": "2026-10-26 10:00:00-04:00",
+   "date": "2026-10-26",
+   "hour": 9,
+   "weekday": 0,
+   "entry_price": 1.2,
+   "qty": 3,
+   "strike": 764.0,
+   "pnl": 37.0,
+   "pnl_pct_of_risk": 0.514,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 10.0,
+   "iv": 0.19450000762939454,
+   "fills": [
+    {
+     "t": "2026-10-26 09:58:00-04:00",
+     "qty": 1,
+     "px": 1.55,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-10-26 10:00:00-04:00",
+     "qty": 2,
+     "px": 1.21,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (762.91) / EMA9 (762.64)",
+   "entry_time": "2026-10-26 10:05:00-04:00",
+   "exit_time": "2026-10-26 10:07:00-04:00",
+   "date": "2026-10-26",
+   "hour": 10,
+   "weekday": 0,
+   "entry_price": 1.46,
+   "qty": 2,
+   "strike": 764.0,
+   "pnl": -60.0,
+   "pnl_pct_of_risk": -1.027,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.19450000762939454,
+   "fills": [
+    {
+     "t": "2026-10-26 10:07:00-04:00",
+     "qty": 2,
+     "px": 1.16,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (763.09) / EMA9 (763.20)",
+   "entry_time": "2026-10-26 10:15:00-04:00",
+   "exit_time": "2026-10-26 10:25:00-04:00",
+   "date": "2026-10-26",
+   "hour": 10,
+   "weekday": 0,
+   "entry_price": 1.4,
+   "qty": 2,
+   "strike": 765.0,
+   "pnl": 42.0,
+   "pnl_pct_of_risk": 0.75,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 10.0,
+   "iv": 0.19450000762939454,
+   "fills": [
+    {
+     "t": "2026-10-26 10:18:00-04:00",
+     "qty": 1,
+     "px": 1.81,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-10-26 10:25:00-04:00",
+     "qty": 1,
+     "px": 1.41,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (715.86) / EMA9 (715.06)",
+   "entry_time": "2026-10-27 10:30:00-04:00",
+   "exit_time": "2026-10-27 10:37:00-04:00",
+   "date": "2026-10-27",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.61,
+   "qty": 2,
+   "strike": 717.0,
+   "pnl": 48.0,
+   "pnl_pct_of_risk": 0.745,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 7.0,
+   "iv": 0.26399999618530273,
+   "fills": [
+    {
+     "t": "2026-10-27 10:33:00-04:00",
+     "qty": 1,
+     "px": 2.08,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-10-27 10:37:00-04:00",
+     "qty": 1,
+     "px": 1.62,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (766.95) / EMA9 (766.96)",
+   "entry_time": "2026-10-27 10:50:00-04:00",
+   "exit_time": "2026-10-27 11:23:00-04:00",
+   "date": "2026-10-27",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.3,
+   "qty": 3,
+   "strike": 768.0,
+   "pnl": 244.0,
+   "pnl_pct_of_risk": 3.128,
+   "exit_reason": "TARGET_2_HIT (+80%)",
+   "hold_min": 33.0,
+   "iv": 0.18389999389648437,
+   "fills": [
+    {
+     "t": "2026-10-27 10:58:00-04:00",
+     "qty": 1,
+     "px": 1.68,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-10-27 11:23:00-04:00",
+     "qty": 2,
+     "px": 2.33,
+     "reason": "TARGET_2_HIT (+80%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (770.71) / EMA9 (770.51)",
+   "entry_time": "2026-10-28 10:05:00-04:00",
+   "exit_time": "2026-10-28 10:07:00-04:00",
+   "date": "2026-10-28",
+   "hour": 10,
+   "weekday": 2,
+   "entry_price": 1.42,
+   "qty": 2,
+   "strike": 771.0,
+   "pnl": -58.0,
+   "pnl_pct_of_risk": -1.021,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.1752000045776367,
+   "fills": [
+    {
+     "t": "2026-10-28 10:07:00-04:00",
+     "qty": 2,
+     "px": 1.13,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (770.70) / EMA9 (770.59)",
+   "entry_time": "2026-10-28 10:15:00-04:00",
+   "exit_time": "2026-10-28 10:27:00-04:00",
+   "date": "2026-10-28",
+   "hour": 10,
+   "weekday": 2,
+   "entry_price": 1.4,
+   "qty": 2,
+   "strike": 771.0,
+   "pnl": -58.0,
+   "pnl_pct_of_risk": -1.036,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 12.0,
+   "iv": 0.1752000045776367,
+   "fills": [
+    {
+     "t": "2026-10-28 10:27:00-04:00",
+     "qty": 2,
+     "px": 1.11,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (722.52) / EMA9 (721.64)",
+   "entry_time": "2026-10-28 10:55:00-04:00",
+   "exit_time": "2026-10-28 11:02:00-04:00",
+   "date": "2026-10-28",
+   "hour": 10,
+   "weekday": 2,
+   "entry_price": 1.71,
+   "qty": 2,
+   "strike": 721.0,
+   "pnl": -70.0,
+   "pnl_pct_of_risk": -1.023,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.2490999984741211,
+   "fills": [
+    {
+     "t": "2026-10-28 11:02:00-04:00",
+     "qty": 2,
+     "px": 1.36,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (768.15) / EMA9 (769.46)",
+   "entry_time": "2026-10-29 09:50:00-04:00",
+   "exit_time": "2026-10-29 09:52:00-04:00",
+   "date": "2026-10-29",
+   "hour": 9,
+   "weekday": 3,
+   "entry_price": 1.07,
+   "qty": 3,
+   "strike": 767.0,
+   "pnl": -66.0,
+   "pnl_pct_of_risk": -1.028,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.1690999984741211,
+   "fills": [
+    {
+     "t": "2026-10-29 09:52:00-04:00",
+     "qty": 3,
+     "px": 0.85,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (768.87) / EMA9 (768.50)",
+   "entry_time": "2026-10-29 13:40:00-04:00",
+   "exit_time": "2026-10-29 13:53:00-04:00",
+   "date": "2026-10-29",
+   "hour": 13,
+   "weekday": 3,
+   "entry_price": 0.79,
+   "qty": 3,
+   "strike": 768.0,
+   "pnl": 147.0,
+   "pnl_pct_of_risk": 3.101,
+   "exit_reason": "TARGET_2_HIT (+80%)",
+   "hold_min": 13.0,
+   "iv": 0.1690999984741211,
+   "fills": [
+    {
+     "t": "2026-10-29 13:48:00-04:00",
+     "qty": 1,
+     "px": 1.02,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-10-29 13:53:00-04:00",
+     "qty": 2,
+     "px": 1.41,
+     "reason": "TARGET_2_HIT (+80%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (753.78) / EMA9 (754.54)",
+   "entry_time": "2026-11-03 10:50:00-05:00",
+   "exit_time": "2026-11-03 11:12:00-05:00",
+   "date": "2026-11-03",
+   "hour": 10,
+   "weekday": 1,
+   "entry_price": 1.31,
+   "qty": 3,
+   "strike": 756.0,
+   "pnl": 33.0,
+   "pnl_pct_of_risk": 0.42,
+   "exit_reason": "STAGNATION_TIME_EXIT",
+   "hold_min": 22.0,
+   "iv": 0.21149999618530274,
+   "fills": [
+    {
+     "t": "2026-11-03 11:12:00-05:00",
+     "qty": 3,
+     "px": 1.42,
+     "reason": "STAGNATION_TIME_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (686.06) / EMA9 (686.99)",
+   "entry_time": "2026-11-03 14:15:00-05:00",
+   "exit_time": "2026-11-03 14:17:00-05:00",
+   "date": "2026-11-03",
+   "hour": 14,
+   "weekday": 1,
+   "entry_price": 1.05,
+   "qty": 3,
+   "strike": 686.0,
+   "pnl": -57.0,
+   "pnl_pct_of_risk": -0.905,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 2.0,
+   "iv": 0.30889999389648437,
+   "fills": [
+    {
+     "t": "2026-11-03 14:17:00-05:00",
+     "qty": 3,
+     "px": 0.86,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (754.75) / EMA9 (755.83)",
+   "entry_time": "2026-11-03 14:25:00-05:00",
+   "exit_time": "2026-11-03 14:26:00-05:00",
+   "date": "2026-11-03",
+   "hour": 14,
+   "weekday": 1,
+   "entry_price": 0.69,
+   "qty": 3,
+   "strike": 755.0,
+   "pnl": -15.0,
+   "pnl_pct_of_risk": -0.362,
+   "exit_reason": "UNDERLYING_INVALIDATION_EXIT",
+   "hold_min": 1.0,
+   "iv": 0.21149999618530274,
+   "fills": [
+    {
+     "t": "2026-11-03 14:26:00-05:00",
+     "qty": 3,
+     "px": 0.64,
+     "reason": "UNDERLYING_INVALIDATION_EXIT"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (692.96) / EMA9 (693.13)",
+   "entry_time": "2026-11-04 11:25:00-05:00",
+   "exit_time": "2026-11-04 11:32:00-05:00",
+   "date": "2026-11-04",
+   "hour": 11,
+   "weekday": 2,
+   "entry_price": 1.49,
+   "qty": 2,
+   "strike": 690.0,
+   "pnl": 45.0,
+   "pnl_pct_of_risk": 0.755,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 7.0,
+   "iv": 0.3053000068664551,
+   "fills": [
+    {
+     "t": "2026-11-04 11:28:00-05:00",
+     "qty": 1,
+     "px": 1.93,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-11-04 11:32:00-05:00",
+     "qty": 1,
+     "px": 1.5,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (693.36) / EMA9 (694.30)",
+   "entry_time": "2026-11-04 13:55:00-05:00",
+   "exit_time": "2026-11-04 14:02:00-05:00",
+   "date": "2026-11-04",
+   "hour": 13,
+   "weekday": 2,
+   "entry_price": 1.38,
+   "qty": 2,
+   "strike": 693.0,
+   "pnl": -58.0,
+   "pnl_pct_of_risk": -1.051,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 7.0,
+   "iv": 0.3053000068664551,
+   "fills": [
+    {
+     "t": "2026-11-04 14:02:00-05:00",
+     "qty": 2,
+     "px": 1.09,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "PUT",
+   "setup": "Bearish Trend Rejection off VWAP (693.38) / EMA9 (694.18)",
+   "entry_time": "2026-11-04 14:25:00-05:00",
+   "exit_time": "2026-11-04 14:27:00-05:00",
+   "date": "2026-11-04",
+   "hour": 14,
+   "weekday": 2,
+   "entry_price": 1.35,
+   "qty": 2,
+   "strike": 694.0,
+   "pnl": -56.0,
+   "pnl_pct_of_risk": -1.037,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.3053000068664551,
+   "fills": [
+    {
+     "t": "2026-11-04 14:27:00-05:00",
+     "qty": 2,
+     "px": 1.07,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "QQQ",
+   "action": "CALL",
+   "setup": "Confirmed ORB Bullish Breakout above 661.73 (RelVol: 1.1x)",
+   "entry_time": "2026-11-06 09:50:00-05:00",
+   "exit_time": "2026-11-06 09:52:00-05:00",
+   "date": "2026-11-06",
+   "hour": 9,
+   "weekday": 4,
+   "entry_price": 2.12,
+   "qty": 1,
+   "strike": 664.0,
+   "pnl": -43.0,
+   "pnl_pct_of_risk": -1.014,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.382599983215332,
+   "fills": [
+    {
+     "t": "2026-11-06 09:52:00-05:00",
+     "qty": 1,
+     "px": 1.69,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (737.89) / EMA9 (739.16)",
+   "entry_time": "2026-11-06 10:15:00-05:00",
+   "exit_time": "2026-11-06 10:17:00-05:00",
+   "date": "2026-11-06",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.72,
+   "qty": 2,
+   "strike": 742.0,
+   "pnl": -70.0,
+   "pnl_pct_of_risk": -1.017,
+   "exit_reason": "STOP_LOSS_HIT (-20%)",
+   "hold_min": 2.0,
+   "iv": 0.2818000030517578,
+   "fills": [
+    {
+     "t": "2026-11-06 10:17:00-05:00",
+     "qty": 2,
+     "px": 1.37,
+     "reason": "STOP_LOSS_HIT (-20%)"
+    }
+   ]
+  },
+  {
+   "symbol": "SPY",
+   "action": "CALL",
+   "setup": "Bullish Trend Bounce off VWAP (738.17) / EMA9 (739.13)",
+   "entry_time": "2026-11-06 10:50:00-05:00",
+   "exit_time": "2026-11-06 10:55:00-05:00",
+   "date": "2026-11-06",
+   "hour": 10,
+   "weekday": 4,
+   "entry_price": 1.67,
+   "qty": 2,
+   "strike": 741.0,
+   "pnl": 50.0,
+   "pnl_pct_of_risk": 0.749,
+   "exit_reason": "BREAKEVEN_STOP",
+   "hold_min": 5.0,
+   "iv": 0.2818000030517578,
+   "fills": [
+    {
+     "t": "2026-11-06 10:53:00-05:00",
+     "qty": 1,
+     "px": 2.16,
+     "reason": "TARGET_1_SCALE_OUT (+30%)"
+    },
+    {
+     "t": "2026-11-06 10:55:00-05:00",
+     "qty": 1,
+     "px": 1.68,
+     "reason": "BREAKEVEN_STOP"
+    }
+   ]
+  }
+ ],
+ "metrics": {
+  "trades": 135,
+  "win_rate": 23.0,
+  "pnl": -2690.0,
+  "expectancy": -19.93,
+  "profit_factor": 0.51,
+  "avg_win": 90.48,
+  "avg_loss": -52.84,
+  "max_dd": -2766.0,
+  "sharpe_per_trade": -0.264,
+  "avg_hold_min": 7.1
+ },
+ "by_setup": {
+  "Bearish Trend Rejection off VWAP": {
+   "trades": 63,
+   "win_rate": 23.8,
+   "pnl": -1215.0,
+   "expectancy": -19.29,
+   "profit_factor": 0.52,
+   "avg_win": 86.87,
+   "avg_loss": -52.46,
+   "max_dd": -1239.0,
+   "sharpe_per_trade": -0.257,
+   "avg_hold_min": 5.9
+  },
+  "Bullish Trend Bounce off VWAP": {
+   "trades": 54,
+   "win_rate": 24.1,
+   "pnl": -977.0,
+   "expectancy": -18.09,
+   "profit_factor": 0.55,
+   "avg_win": 91.92,
+   "avg_loss": -52.98,
+   "max_dd": -1208.0,
+   "sharpe_per_trade": -0.236,
+   "avg_hold_min": 7.6
+  },
+  "Confirmed ORB Bearish Breakdown below 71": {
+   "trades": 2,
+   "win_rate": 0.0,
+   "pnl": -135.0,
+   "expectancy": -67.5,
+   "profit_factor": 0.0,
+   "avg_win": 0.0,
+   "avg_loss": -67.5,
+   "max_dd": -135.0,
+   "sharpe_per_trade": -6.429,
+   "avg_hold_min": 7.0
+  },
+  "Confirmed ORB Bearish Breakdown below 74": {
+   "trades": 1,
+   "win_rate": 0.0,
+   "pnl": -66.0,
+   "expectancy": -66.0,
+   "profit_factor": 0.0,
+   "avg_win": 0.0,
+   "avg_loss": -66.0,
+   "max_dd": -66.0,
+   "sharpe_per_trade": 0.0,
+   "avg_hold_min": 2.0
+  },
+  "Confirmed ORB Bearish Breakdown below 76": {
+   "trades": 5,
+   "win_rate": 0.0,
+   "pnl": -195.0,
+   "expectancy": -39.0,
+   "profit_factor": 0.0,
+   "avg_win": 0.0,
+   "avg_loss": -39.0,
+   "max_dd": -195.0,
+   "sharpe_per_trade": -2.53,
+   "avg_hold_min": 10.6
+  },
+  "Confirmed ORB Bearish Breakdown below 77": {
+   "trades": 1,
+   "win_rate": 0.0,
+   "pnl": -57.0,
+   "expectancy": -57.0,
+   "profit_factor": 0.0,
+   "avg_win": 0.0,
+   "avg_loss": -57.0,
+   "max_dd": -57.0,
+   "sharpe_per_trade": 0.0,
+   "avg_hold_min": 7.0
+  },
+  "Confirmed ORB Bullish Breakout above 661": {
+   "trades": 1,
+   "win_rate": 0.0,
+   "pnl": -43.0,
+   "expectancy": -43.0,
+   "profit_factor": 0.0,
+   "avg_win": 0.0,
+   "avg_loss": -43.0,
+   "max_dd": -43.0,
+   "sharpe_per_trade": 0.0,
+   "avg_hold_min": 2.0
+  },
+  "Confirmed ORB Bullish Breakout above 713": {
+   "trades": 1,
+   "win_rate": 100.0,
+   "pnl": 237.0,
+   "expectancy": 237.0,
+   "profit_factor": Infinity,
+   "avg_win": 237.0,
+   "avg_loss": 0.0,
+   "max_dd": 0.0,
+   "sharpe_per_trade": 0.0,
+   "avg_hold_min": 8.0
+  },
+  "Confirmed ORB Bullish Breakout above 716": {
+   "trades": 1,
+   "win_rate": 0.0,
+   "pnl": -42.0,
+   "expectancy": -42.0,
+   "profit_factor": 0.0,
+   "avg_win": 0.0,
+   "avg_loss": -42.0,
+   "max_dd": -42.0,
+   "sharpe_per_trade": 0.0,
+   "avg_hold_min": 12.0
+  },
+  "Confirmed ORB Bullish Breakout above 742": {
+   "trades": 2,
+   "win_rate": 0.0,
+   "pnl": -144.0,
+   "expectancy": -72.0,
+   "profit_factor": 0.0,
+   "avg_win": 0.0,
+   "avg_loss": -72.0,
+   "max_dd": -144.0,
+   "sharpe_per_trade": -8.0,
+   "avg_hold_min": 2.0
+  },
+  "Confirmed ORB Bullish Breakout above 759": {
+   "trades": 1,
+   "win_rate": 100.0,
+   "pnl": 28.0,
+   "expectancy": 28.0,
+   "profit_factor": Infinity,
+   "avg_win": 28.0,
+   "avg_loss": 0.0,
+   "max_dd": 0.0,
+   "sharpe_per_trade": 0.0,
+   "avg_hold_min": 7.0
+  },
+  "Confirmed ORB Bullish Breakout above 766": {
+   "trades": 2,
+   "win_rate": 0.0,
+   "pnl": -123.0,
+   "expectancy": -61.5,
+   "profit_factor": 0.0,
+   "avg_win": 0.0,
+   "avg_loss": -61.5,
+   "max_dd": -123.0,
+   "sharpe_per_trade": -3.154,
+   "avg_hold_min": 7.0
+  },
+  "Confirmed ORB Bullish Breakout above 768": {
+   "trades": 1,
+   "win_rate": 100.0,
+   "pnl": 42.0,
+   "expectancy": 42.0,
+   "profit_factor": Infinity,
+   "avg_win": 42.0,
+   "avg_loss": 0.0,
+   "max_dd": 0.0,
+   "sharpe_per_trade": 0.0,
+   "avg_hold_min": 46.0
+  }
+ },
+ "by_hour": {
+  "09h": {
+   "trades": 27,
+   "win_rate": 18.5,
+   "pnl": -761.0,
+   "expectancy": -28.19,
+   "profit_factor": 0.44,
+   "avg_win": 120.4,
+   "avg_loss": -61.95,
+   "max_dd": -784.0,
+   "sharpe_per_trade": -0.336,
+   "avg_hold_min": 5.1
+  },
+  "10h": {
+   "trades": 45,
+   "win_rate": 28.9,
+   "pnl": -683.0,
+   "expectancy": -15.18,
+   "profit_factor": 0.68,
+   "avg_win": 112.08,
+   "avg_loss": -66.88,
+   "max_dd": -921.0,
+   "sharpe_per_trade": -0.16,
+   "avg_hold_min": 7.7
+  },
+  "11h": {
+   "trades": 14,
+   "win_rate": 57.1,
+   "pnl": 161.0,
+   "expectancy": 11.5,
+   "profit_factor": 1.45,
+   "avg_win": 64.75,
+   "avg_loss": -59.5,
+   "max_dd": -179.0,
+   "sharpe_per_trade": 0.143,
+   "avg_hold_min": 12.8
+  },
+  "13h": {
+   "trades": 18,
+   "win_rate": 11.1,
+   "pnl": -505.0,
+   "expectancy": -28.06,
+   "profit_factor": 0.25,
+   "avg_win": 82.5,
+   "avg_loss": -41.88,
+   "max_dd": -612.0,
+   "sharpe_per_trade": -0.599,
+   "avg_hold_min": 7.9
+  },
+  "14h": {
+   "trades": 18,
+   "win_rate": 11.1,
+   "pnl": -666.0,
+   "expectancy": -37.0,
+   "profit_factor": 0.07,
+   "avg_win": 25.0,
+   "avg_loss": -44.75,
+   "max_dd": -666.0,
+   "sharpe_per_trade": -1.346,
+   "avg_hold_min": 6.3
+  },
+  "15h": {
+   "trades": 13,
+   "win_rate": 7.7,
+   "pnl": -236.0,
+   "expectancy": -18.15,
+   "profit_factor": 0.05,
+   "avg_win": 13.0,
+   "avg_loss": -20.75,
+   "max_dd": -236.0,
+   "sharpe_per_trade": -1.184,
+   "avg_hold_min": 2.7
+  }
+ },
+ "by_symbol_side": {
+  "QQQ CALL": {
+   "trades": 24,
+   "win_rate": 12.5,
+   "pnl": -636.0,
+   "expectancy": -26.5,
+   "profit_factor": 0.45,
+   "avg_win": 172.33,
+   "avg_loss": -54.9,
+   "max_dd": -955.0,
+   "sharpe_per_trade": -0.316,
+   "avg_hold_min": 6.9
+  },
+  "QQQ PUT": {
+   "trades": 37,
+   "win_rate": 21.6,
+   "pnl": -964.0,
+   "expectancy": -26.05,
+   "profit_factor": 0.44,
+   "avg_win": 94.62,
+   "avg_loss": -59.34,
+   "max_dd": -1106.0,
+   "sharpe_per_trade": -0.338,
+   "avg_hold_min": 5.2
+  },
+  "SPY CALL": {
+   "trades": 39,
+   "win_rate": 33.3,
+   "pnl": -386.0,
+   "expectancy": -9.9,
+   "profit_factor": 0.72,
+   "avg_win": 75.77,
+   "avg_loss": -52.73,
+   "max_dd": -569.0,
+   "sharpe_per_trade": -0.13,
+   "avg_hold_min": 8.6
+  },
+  "SPY PUT": {
+   "trades": 35,
+   "win_rate": 20.0,
+   "pnl": -704.0,
+   "expectancy": -20.11,
+   "profit_factor": 0.44,
+   "avg_win": 78.0,
+   "avg_loss": -44.64,
+   "max_dd": -854.0,
+   "sharpe_per_trade": -0.312,
+   "avg_hold_min": 7.4
+  }
+ },
+ "by_exit": {
+  "BREAKEVEN_STOP": {
+   "trades": 15,
+   "win_rate": 100.0,
+   "pnl": 571.0,
+   "expectancy": 38.07,
+   "profit_factor": Infinity,
+   "avg_win": 38.07,
+   "avg_loss": 0.0,
+   "max_dd": 0.0,
+   "sharpe_per_trade": 3.753,
+   "avg_hold_min": 9.8
+  },
+  "STAGNATION_TIME_EXIT": {
+   "trades": 11,
+   "win_rate": 63.6,
+   "pnl": 217.0,
+   "expectancy": 19.73,
+   "profit_factor": 5.52,
+   "avg_win": 37.86,
+   "avg_loss": -12.0,
+   "max_dd": -21.0,
+   "sharpe_per_trade": 0.756,
+   "avg_hold_min": 23.7
+  },
+  "STOP_LOSS_HIT": {
+   "trades": 83,
+   "win_rate": 0.0,
+   "pnl": -5126.0,
+   "expectancy": -61.76,
+   "profit_factor": 0.0,
+   "avg_win": 0.0,
+   "avg_loss": -61.76,
+   "max_dd": -5126.0,
+   "sharpe_per_trade": -4.561,
+   "avg_hold_min": 4.6
+  },
+  "TARGET_2_HIT": {
+   "trades": 9,
+   "win_rate": 100.0,
+   "pnl": 1969.0,
+   "expectancy": 218.78,
+   "profit_factor": Infinity,
+   "avg_win": 218.78,
+   "avg_loss": 0.0,
+   "max_dd": 0.0,
+   "sharpe_per_trade": 5.723,
+   "avg_hold_min": 15.8
+  },
+  "UNDERLYING_INVALIDATION_EXIT": {
+   "trades": 17,
+   "win_rate": 0.0,
+   "pnl": -321.0,
+   "expectancy": -18.88,
+   "profit_factor": 0.0,
+   "avg_win": 0.0,
+   "avg_loss": -18.88,
+   "max_dd": -321.0,
+   "sharpe_per_trade": -1.346,
+   "avg_hold_min": 1.1
+  }
+ }
+}

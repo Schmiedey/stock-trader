@@ -21,12 +21,49 @@ DATA_DIR = SCALPER_DIR / "data"
 PID_FILE = DATA_DIR / "runner.pid"
 LOG_FILE = DATA_DIR / "runner.log"
 STATUS_FILE = DATA_DIR / "live_status.json"
+JOURNAL_FILE = DATA_DIR / "signal_journal.jsonl"
+IV_CAL_FILE = DATA_DIR / "iv_calibration.jsonl"
+
+
+def journal(record: dict, path: Path = JOURNAL_FILE):
+    """Append one JSON line. Used to diff live decisions against the research replay."""
+    try:
+        record = {"ts": datetime.datetime.now().isoformat(timespec="seconds"), **record}
+        with open(path, "a") as f:
+            f.write(json.dumps(record, default=str) + "\n")
+    except Exception:
+        pass
+
+
+def log_iv_calibration(symbol: str):
+    """Record real 0DTE ATM straddle price vs Black-Scholes at VIX/VXN (validates research pricing)."""
+    import yfinance as yf
+    from zero_dte_scalper.src.greeks import black_scholes_price
+    t = yf.Ticker(symbol)
+    exp = t.options[0]
+    spot = float(t.fast_info.last_price)
+    ch = t.option_chain(exp)
+    k = min(ch.calls.strike, key=lambda x: abs(x - spot))
+    c = ch.calls[ch.calls.strike == k].iloc[0]
+    p = ch.puts[ch.puts.strike == k].iloc[0]
+    straddle = (c.bid + c.ask) / 2 + (p.bid + p.ask) / 2
+    vol = float(yf.Ticker("^VIX" if symbol == "SPY" else "^VXN").fast_info.last_price) / 100
+    # calendar-time TTE to 16:00 ET, the same convention research/replay.py prices with
+    now = datetime.datetime.now(datetime.timezone.utc).astimezone(__import__("zoneinfo").ZoneInfo("America/New_York"))
+    close = now.replace(hour=16, minute=0, second=0, microsecond=0)
+    tte = max(60.0, (close - now).total_seconds()) / (365.25 * 86400.0)
+    model = black_scholes_price(spot, k, tte, vol, option_type="call") + black_scholes_price(spot, k, tte, vol, option_type="put")
+    journal({"symbol": symbol, "expiration": exp, "spot": round(spot, 2), "strike": float(k),
+             "straddle_mid": round(straddle, 3), "model_at_index": round(model, 3),
+             "ratio": round(straddle / model, 3) if model > 0 else None, "index_iv": round(vol, 4)}, IV_CAL_FILE)
 
 sys.path.insert(0, str(BASE_DIR))
 sys.path.insert(0, str(SCALPER_DIR))
 
 from zero_dte_scalper.src.config import load_config, get_market_session_state
 from zero_dte_scalper.src.signals import evaluate_scalp_signals
+from zero_dte_scalper.src.exits import decide_exit
+from zero_dte_scalper.src.premium_seller import tick as premium_tick
 from zero_dte_scalper.src.options_selector import select_best_contract
 from zero_dte_scalper.src.risk_manager import check_trading_permissions
 from zero_dte_scalper.src.tracker import (
@@ -109,120 +146,32 @@ class ZeroDteScalperDaemon:
         for pos in list(positions):
             pos_id = pos["id"]
             contract_sym = pos["contract_symbol"]
-            curr_px = pos.get("current_price", pos["entry_price"])
-            pnl_pct = pos.get("unrealized_pnl_pct", 0.0)
-            pnl_usd = pos.get("unrealized_pnl_usd", 0.0)
-            stop_pct = self.config.get("stop_loss_pct", 0.20)
-            tp1_pct = self.config.get("take_profit_1_pct", 0.30)
-            tp2_pct = self.config.get("take_profit_2_pct", 0.80)
-            stop_px = pos.get("stop_loss_price", pos["entry_price"] * (1 - stop_pct))
-            tp1_px = pos.get("tp1_price", pos["entry_price"] * (1 + tp1_pct))
-            tp2_px = pos.get("tp2_price", pos["entry_price"] * (1 + tp2_pct))
-            elapsed_mins = pos.get("elapsed_minutes", 0.0)
-            spot_px = pos.get("current_spot_price", 0.0)
-            underlying_stop = pos.get("underlying_stop", 0.0)
+            decision = decide_exit(pos, self.config, session_phase)
 
-            # Trigger 1: Stop-Loss on premium. Requires two consecutive checks below the
-            # stop so a single bad print can't stop us out (it did, repeatedly).
-            breach_count = pos.get("stop_breach_count", 0)
-            if curr_px <= stop_px:
-                breach_count += 1
-            else:
-                breach_count = 0
-            if breach_count != pos.get("stop_breach_count", 0):
+            if decision["log"]:
+                log(f"{decision['log']} | {contract_sym}")
+
+            if decision["updates"]:
                 active_now = load_active_positions()
                 for p in active_now:
                     if p["id"] == pos_id:
-                        p["stop_breach_count"] = breach_count
+                        p.update(decision["updates"])
                 save_active_positions(active_now)
-            if breach_count == 1:
-                log(f"⚠️ [STOP WATCH] {contract_sym}: ${curr_px:.2f} <= stop ${stop_px:.2f}. Confirming on next check.")
-            if breach_count >= 2:
-                label = "BREAKEVEN_STOP" if pos.get("tp1_hit") else f"STOP_LOSS_HIT (-{stop_pct*100:.0f}%)"
-                log(f"🛑 [{label}] {contract_sym}: Quote ${curr_px:.2f} <= Stop ${stop_px:.2f} ({pnl_pct:.1f}% | ${pnl_usd:,.2f})")
-                try:
-                    close_position(position_id=pos_id, exit_price=curr_px, reason=label)
-                    self.last_exit_times[pos["symbol"]] = (time.time(), "STOP_LOSS")
-                    log(f"[✓] Position {contract_sym} closed on stop loss.")
-                except Exception as e:
-                    log(f"Error closing stop-loss: {e}")
-                continue
 
-            # Trigger 2: Target 2 on premium
-            if curr_px >= tp2_px:
-                log(f"🎯 [TARGET 2 HIT] {contract_sym}: Quote ${curr_px:.2f} >= TP2 ${tp2_px:.2f} (+{pnl_pct:.1f}% | +${pnl_usd:,.2f})")
-                try:
-                    close_position(position_id=pos_id, exit_price=curr_px, reason=f"TARGET_2_HIT (+{tp2_pct*100:.0f}%)")
-                    self.last_exit_times[pos["symbol"]] = (time.time(), "TARGET_2")
-                    log(f"[✓] Position {contract_sym} closed at Target 2.")
-                except Exception as e:
-                    log(f"Error closing target 2: {e}")
+            act = decision["action"]
+            if not act:
                 continue
-
-            # Trigger 3: Target 1 on premium: scale out half, move stop to locked profit
-            if curr_px >= tp1_px and not pos.get("tp1_hit"):
-                if pos.get("current_quantity", 1) > 1:
-                    half_qty = pos["current_quantity"] // 2
-                    log(f"💰 [TARGET 1 HIT] {contract_sym}: Quote ${curr_px:.2f} >= TP1 ${tp1_px:.2f}. Scaling out {half_qty} contracts.")
-                    try:
-                        close_position(position_id=pos_id, exit_price=curr_px, reason=f"TARGET_1_SCALE_OUT (+{tp1_pct*100:.0f}%)", partial_qty=half_qty)
-                        # Move stop to entry plus cushion so the runner can't turn into a loss
-                        cushion = self.config.get("breakeven_cushion_usd", 0.02)
-                        protected_stop = round(pos["entry_price"] + cushion, 2)
-                        active_now = load_active_positions()
-                        for p in active_now:
-                            if p["id"] == pos_id:
-                                p["tp1_hit"] = True
-                                p["stop_loss_price"] = protected_stop
-                                p["stop_breach_count"] = 0
-                        save_active_positions(active_now)
-                        log(f"[✓] Stop moved to breakeven buffer (${protected_stop:.2f}) for remaining {contract_sym} contracts.")
-                    except Exception as e:
-                        log(f"Error scaling out at target 1: {e}")
+            try:
+                curr_px = pos.get("current_price", pos["entry_price"])
+                if act["kind"] == "partial":
+                    close_position(position_id=pos_id, exit_price=curr_px, reason=act["reason"], partial_qty=act["qty"])
                 else:
-                    log(f"💰 [TARGET 1 SECURED] {contract_sym}: Quote ${curr_px:.2f} (+{pnl_pct:.1f}%). Closing 1-contract position.")
-                    try:
-                        close_position(position_id=pos_id, exit_price=curr_px, reason=f"TARGET_1_FULL (+{tp1_pct*100:.0f}%)")
-                        self.last_exit_times[pos["symbol"]] = (time.time(), "TARGET_1")
-                    except Exception as e:
-                        log(f"Error closing target 1: {e}")
-                continue  # position changed this tick; re-evaluate next loop
-
-            # Trigger 4: Stagnation / Theta Defense Exit (Held >= 25m without reaching +10%)
-            if elapsed_mins >= self.max_hold_time_minutes and pnl_pct < 10.0:
-                log(f"⏳ [STAGNATION EXIT] {contract_sym}: Open for {elapsed_mins:.1f}m without momentum (+{pnl_pct:.1f}%). Exiting to eliminate theta decay.")
-                try:
-                    close_position(position_id=pos_id, exit_price=curr_px, reason="STAGNATION_TIME_EXIT")
-                    self.last_exit_times[pos["symbol"]] = (time.time(), "STAGNATION")
-                except Exception as e:
-                    log(f"Error closing stagnation exit: {e}")
-                continue
-
-            # Trigger 5: Underlying Invalidation Exit (Underlying broken beyond key technical stop)
-            if underlying_stop > 0 and spot_px > 0:
-                is_invalid = False
-                if pos["action"] == "CALL" and spot_px < underlying_stop:
-                    is_invalid = True
-                    log(f"⚠️ [UNDERLYING INVALIDATION] {contract_sym}: Spot ${spot_px:.2f} broke below technical support ${underlying_stop:.2f}.")
-                elif pos["action"] == "PUT" and spot_px > underlying_stop:
-                    is_invalid = True
-                    log(f"⚠️ [UNDERLYING INVALIDATION] {contract_sym}: Spot ${spot_px:.2f} broke above technical resistance ${underlying_stop:.2f}.")
-
-                if is_invalid:
-                    try:
-                        close_position(position_id=pos_id, exit_price=curr_px, reason="UNDERLYING_INVALIDATION_EXIT")
-                        self.last_exit_times[pos["symbol"]] = (time.time(), "INVALIDATION")
-                    except Exception as e:
-                        log(f"Error closing underlying invalidation: {e}")
-                    continue
-
-            # Trigger 6: Mandatory End-Of-Day Expiration Exit (15:50 EST)
-            if session_phase in ["MANDATORY_FLAT", "MANDATORY_EXIT", "CLOSED"]:
-                log(f"⏰ [MANDATORY EOD EXIT] {contract_sym}: Closing before 4:00 PM EST bell @ ${curr_px:.2f}")
-                try:
-                    close_position(position_id=pos_id, exit_price=curr_px, reason="MANDATORY_EOD_EXPIRATION_EXIT")
-                except Exception as e:
-                    log(f"Error closing EOD: {e}")
+                    close_position(position_id=pos_id, exit_price=curr_px, reason=act["reason"])
+                    if act["tag"] != "EOD":
+                        self.last_exit_times[pos["symbol"]] = (time.time(), act["tag"])
+                log(f"[✓] {contract_sym}: {act['reason']} ({act['kind']} x{act['qty']})")
+            except Exception as e:
+                log(f"Error executing exit {act['reason']} for {contract_sym}: {e}")
 
     def scan_and_enter_setups(self):
         """Scan for high-conviction 0DTE scalp setups during prime sessions."""
@@ -268,8 +217,17 @@ class ZeroDteScalperDaemon:
                 sig = evaluate_scalp_signals(symbol=symbol, interval="5m")
                 action = sig.get("signal")
                 conviction = sig.get("conviction")
+                journal({"symbol": symbol, "signal": action, "conviction": conviction,
+                         "setup": sig.get("primary_setup"), "price": sig.get("current_price"),
+                         "rsi": sig.get("rsi"), "rel_vol": sig.get("rel_vol"),
+                         "vetoes": sig.get("veto_reasons", []), "reason": sig.get("reason", "")[:200]})
 
-                # Require high or medium conviction directional trigger with zero vetoes
+                # One entry per signal bar: don't re-enter the same completed-bar signal after an exit
+                bar_key = (symbol, sig.get("timestamp"))
+                if action in ["CALL", "PUT"] and bar_key == getattr(self, "last_entry_bar", {}).get(symbol):
+                    continue
+
+                # Require a directional trigger with zero vetoes
                 if action in ["CALL", "PUT"] and conviction in ["HIGH", "MEDIUM"]:
                     log(f"🔍 [SIGNAL DETECTED] {symbol} {action} ({conviction}) | Setup: {sig.get('primary_setup')}")
 
@@ -318,6 +276,11 @@ class ZeroDteScalperDaemon:
 
                     log("=" * 70)
                     log(f"⚡ [AUTONOMOUS 0DTE ENTRY] {qty}x {c['contract_symbol']} ({action})")
+                    if not hasattr(self, "last_entry_bar"):
+                        self.last_entry_bar = {}
+                    self.last_entry_bar[symbol] = bar_key
+                    journal({"symbol": symbol, "event": "ENTRY", "action": action, "contract": c["contract_symbol"],
+                             "qty": qty, "entry_price": entry_px, "setup": sig.get("primary_setup")})
                     log(f"   Spot: ${sig.get('current_price', 0.0):.2f} | Entry: ${entry_px:.2f} | Stop: ${stop_px:.2f} | TP1: ${tp1_px:.2f} | TP2: ${tp2_px:.2f}")
                     log(f"   Max Risk: ${rec.get('sizing', {}).get('projected_max_loss', 0.0):.2f} | Outlay: ${rec.get('sizing', {}).get('total_outlay', 0.0):.2f}")
                     log("=" * 70)
@@ -331,7 +294,7 @@ class ZeroDteScalperDaemon:
     def run_loop(self):
         """Main autonomous scalper loop."""
         log(f"⚡ 0DTE Autonomous Scalper Daemon v2.0 started. PID={os.getpid()}")
-        log(f"Monitoring underlyings: {', '.join(self.underlyings)} | Hard Stop: -15% | Take-Profit: +20% / +40% | Stagnation: 25m")
+        log(f"Monitoring underlyings: {', '.join(self.underlyings)} | Stop: -{self.config.get('stop_loss_pct', 0.2)*100:.0f}% | TP: +{self.config.get('take_profit_1_pct', 0.3)*100:.0f}% / +{self.config.get('take_profit_2_pct', 0.8)*100:.0f}% | Max hold: {self.max_hold_time_minutes}m")
 
         loop_count = 0
         while True:
@@ -343,6 +306,22 @@ class ZeroDteScalperDaemon:
                 if time.time() - self.last_screen_time >= 15.0:
                     self.scan_and_enter_setups()
                     self.last_screen_time = time.time()
+
+                # Paper iron-fly premium seller (independent ledger)
+                try:
+                    premium_tick(self.config, log=log)
+                except Exception as e:
+                    log(f"[IRON FLY] tick error: {e}")
+
+                # IV calibration sample every 30 min while the market is open
+                if time.time() - getattr(self, "last_iv_cal", 0) >= 1800:
+                    if get_market_session_state(self.config).get("is_market_open"):
+                        for sym in self.underlyings:
+                            try:
+                                log_iv_calibration(sym)
+                            except Exception as e:
+                                log(f"IV calibration failed for {sym}: {e}")
+                    self.last_iv_cal = time.time()
 
                 # 3. Update status telemetry every ~8s
                 if loop_count % 1 == 0:

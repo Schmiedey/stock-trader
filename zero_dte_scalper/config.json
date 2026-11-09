@@ -1,6 +1,6 @@
 {
-  "strategy": "0DTE_Intraday_Momentum_Scalper",
-  "version": "2.6.0",
+  "strategy": "0DTE_ORB_Failure_Fade",
+  "version": "3.0.0",
   "underlyings": [
     "SPY",
     "QQQ"
@@ -18,12 +18,12 @@
   "target_delta_max": 0.55,
   "optimal_target_delta": 0.48,
   "max_bid_ask_spread_usd": 0.04,
-  "stop_loss_pct": 0.2,
-  "take_profit_1_pct": 0.3,
-  "take_profit_2_pct": 0.8,
+  "stop_loss_pct": 0.35,
+  "take_profit_1_pct": 0.5,
+  "take_profit_2_pct": 1.0,
   "tp1_scale_out_pct": 0.5,
   "breakeven_cushion_usd": 0.02,
-  "max_hold_time_minutes": 20,
+  "max_hold_time_minutes": 60,
   "reentry_cooldown_seconds": 300,
   "trading_hours": {
     "timezone": "America/New_York",
@@ -42,5 +42,32 @@
     "vwap_pullback": true,
     "ema_momentum": true,
     "key_level_reversal": true
+  },
+  "signal_params": {
+    "setups": [
+      "orb_fail"
+    ],
+    "min_score": 1,
+    "apply_vetoes": false,
+    "completed_bars_only": true,
+    "orb_fail_window": [
+      "09:45",
+      "11:30"
+    ]
+  },
+  "stop_mode": "underlying",
+  "hard_stop_pct": 0.6,
+  "tp1_scale_out": false,
+  "underlying_invalidation_exit": false,
+  "research_note": "v3.0 from research/RESULTS.md: 58-day replay, PF 2.2 (IS 2.27 / OOS 2.15) at 1.2x VIX pricing, 61 trades",
+  "premium_seller": {
+    "enabled": true,
+    "symbol": "SPY",
+    "entry_time": "13:30",
+    "latest_entry_time": "13:45",
+    "close_time": "15:50",
+    "wing_width": 3,
+    "units": 2,
+    "min_credit": 0.3
   }
 }

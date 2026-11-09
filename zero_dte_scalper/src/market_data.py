@@ -110,8 +110,13 @@ def get_key_levels(symbol: str = "SPY", intraday_df: pd.DataFrame | None = None)
     if intraday_df is None:
         intraday_df = get_intraday_data(symbol, interval="5m", period="2d")
 
+    return compute_levels(intraday_df, pdh, pdl, pdc, as_of=get_ny_now(), symbol=symbol)
+
+
+def compute_levels(intraday_df: pd.DataFrame, pdh, pdl, pdc, as_of: datetime, symbol: str = "SPY") -> dict:
+    """Pure key-level computation as of a given NY time (shared by live engine and replay)."""
     # Filter to today's bars
-    ny_now = get_ny_now()
+    ny_now = as_of
     today_date = ny_now.date()
     today_bars = intraday_df[intraday_df.index.date == today_date]
 
@@ -247,6 +252,7 @@ def generate_synthetic_0dte_chain(symbol: str, spot_price: float, exp_date_str: 
         "spot_price": round(spot_price, 2),
         "expiration": exp_date_str,
         "is_true_0dte": True,
+        "synthetic": True,
         "tte_years": tte_years,
         "tte_hours": round(tte_hours, 2),
         "calls": sorted(calls, key=lambda x: x["strike"]),

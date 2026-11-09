@@ -13,9 +13,36 @@ def evaluate_scalp_signals(symbol: str = "SPY", interval: str = "5m") -> dict:
     3. Exhaustion & Extension Vetoes (no buying tops or shorting bottoms)
     4. Candle confirmation and Relative Volume surge
     """
+    from .config import load_config
+    params = {**DEFAULT_PARAMS, **load_config().get("signal_params", {})}
     raw_df = get_intraday_data(symbol=symbol, interval=interval, period="2d")
+    if params.get("completed_bars_only"):
+        # Score only fully closed bars, exactly like the research replay
+        now = pd.Timestamp.now(tz=raw_df.index.tz)
+        if raw_df.index[-1] + pd.Timedelta(minutes=5) > now:
+            raw_df = raw_df.iloc[:-1]
     df = calculate_indicators(raw_df)
     levels = get_key_levels(symbol=symbol, intraday_df=df)
+    return score_bars(df, levels, symbol=symbol, params=params)
+
+
+# Defaults reproduce the live v2.6 engine exactly. The research replay overrides
+# these to test which setups / thresholds actually carry an edge.
+DEFAULT_PARAMS = {
+    "setups": ("orb", "pullback", "sweep", "macd"),
+    "min_score": 2,
+    "rel_vol_veto_blocks": False,  # live engine logs the low-volume veto but never blocks on it
+    "apply_vetoes": True,
+    "completed_bars_only": False,
+    "orb_fail_window": ("09:45", "11:30"),  # bar-close times
+}
+
+
+def score_bars(df: pd.DataFrame, levels: dict, symbol: str = "SPY", params: dict | None = None) -> dict:
+    """Pure scoring of the last bar of an indicator-enriched dataframe (no I/O)."""
+    P = {**DEFAULT_PARAMS, **(params or {})}
+    setups = set(P["setups"])
+    min_score = P["min_score"]
 
     latest_bar = df.iloc[-1]
     prev_bar = df.iloc[-2] if len(df) >= 2 else latest_bar
@@ -69,9 +96,21 @@ def evaluate_scalp_signals(symbol: str = "SPY", interval: str = "5m") -> dict:
         veto_reasons.append(f"Price is {vwap_dist:.2f} (>2 ATR) below VWAP. Overextended for short entries.")
 
     # =========================================================================
+    # ORB FAILURE FADE (research v3 edge): a bar that closed outside the 15m opening range
+    # followed by a bar closing back inside -> trade back through the range.
+    if "orb_fail" in setups and orb_established:
+        bar_close = (latest_bar.name + pd.Timedelta(minutes=5)).strftime("%H:%M") if hasattr(latest_bar.name, "strftime") else ""
+        w0, w1 = P["orb_fail_window"]
+        prev_close = float(prev_bar["Close"])
+        if w0 <= bar_close <= w1:
+            if prev_close < orb_low and price > orb_low:
+                bull_triggers.append(f"ORB Failed Breakdown: reclaimed {orb_low:.2f} after closing below")
+            elif prev_close > orb_high and price < orb_high:
+                bear_triggers.append(f"ORB Failed Breakout: lost {orb_high:.2f} after closing above")
+
     # 2. SETUP A: TRUE 15-MINUTE ORB BREAKOUT / BREAKDOWN (09:45 - 11:30 EST)
     # =========================================================================
-    if orb_established:
+    if orb_established and "orb" in setups:
         if price > orb_high and is_green_candle and price > vwap and ema9 > ema21 and price > ema50:
             if 50.0 <= rsi <= 68.0 and rel_vol >= 1.05:
                 bull_triggers.append(f"Confirmed ORB Bullish Breakout above {orb_high:.2f} (RelVol: {rel_vol:.1f}x)")
@@ -83,13 +122,13 @@ def evaluate_scalp_signals(symbol: str = "SPY", interval: str = "5m") -> dict:
     # 3. SETUP B: VWAP & EMA TREND PULLBACK CONTINUATION
     # =========================================================================
     # Bullish Trend Pullback: Price > EMA50, EMA9 > EMA21, price tests VWAP or EMA9 and bounces
-    if price > ema50 and ema9 > ema21:
+    if "pullback" in setups and price > ema50 and ema9 > ema21:
         tested_support = (low_bar <= vwap * 1.002 and price >= vwap) or (low_bar <= ema9 * 1.001 and price >= ema9)
         if tested_support and is_green_candle and 45.0 <= rsi <= 68.0:
             bull_triggers.append(f"Bullish Trend Bounce off VWAP ({vwap:.2f}) / EMA9 ({ema9:.2f})")
 
     # Bearish Trend Relief Rally: Price < EMA50, EMA9 < EMA21, price tests VWAP or EMA9 and rejects
-    if price < ema50 and ema9 < ema21:
+    if "pullback" in setups and price < ema50 and ema9 < ema21:
         tested_resistance = (high_bar >= vwap * 0.998 and price <= vwap) or (high_bar >= ema9 * 0.999 and price <= ema9)
         if tested_resistance and is_red_candle and 32.0 <= rsi <= 55.0:
             bear_triggers.append(f"Bearish Trend Rejection off VWAP ({vwap:.2f}) / EMA9 ({ema9:.2f})")
@@ -97,15 +136,17 @@ def evaluate_scalp_signals(symbol: str = "SPY", interval: str = "5m") -> dict:
     # =========================================================================
     # 4. SETUP C: LIQUIDITY SWEEP & MEAN REVERSION
     # =========================================================================
-    if prev_bar["Low"] < pdl and price > pdl and is_green_candle and rsi > 30.0 and rsi > prev_rsi:
+    if "sweep" in setups and prev_bar["Low"] < pdl and price > pdl and is_green_candle and rsi > 30.0 and rsi > prev_rsi:
         bull_triggers.append(f"Liquidity Sweep Reversal of PDL ({pdl:.2f}) with Bullish Candle")
-    if prev_bar["High"] > pdh and price < pdh and is_red_candle and rsi < 70.0 and rsi < prev_rsi:
+    if "sweep" in setups and prev_bar["High"] > pdh and price < pdh and is_red_candle and rsi < 70.0 and rsi < prev_rsi:
         bear_triggers.append(f"Liquidity Sweep Rejection of PDH ({pdh:.2f}) with Bearish Candle")
 
     # =========================================================================
     # 5. MOMENTUM CONFIRMATION (MACD & EMA Ribbon Expansion)
     # =========================================================================
-    if ema9 > ema21 and macd_hist > 0 and macd_hist >= prev_macd_hist:
+    if "macd" not in setups:
+        pass
+    elif ema9 > ema21 and macd_hist > 0 and macd_hist >= prev_macd_hist:
         if 50.0 <= rsi <= 68.0:
             bull_triggers.append(f"Bullish Momentum: EMA9 > EMA21 with MACD Histogram Expansion")
     elif ema9 < ema21 and macd_hist < 0 and macd_hist <= prev_macd_hist:
@@ -121,9 +162,13 @@ def evaluate_scalp_signals(symbol: str = "SPY", interval: str = "5m") -> dict:
     # Check vetoes
     call_vetoed = any("CALL" in v or "above VWAP" in v for v in veto_reasons)
     put_vetoed = any("PUT" in v or "below VWAP" in v for v in veto_reasons)
+    if not P["apply_vetoes"]:
+        call_vetoed = put_vetoed = False
+    if P["rel_vol_veto_blocks"] and any("Low relative volume" in v for v in veto_reasons):
+        call_vetoed = put_vetoed = True
 
     # Require minimum score of 2, clean edge, and zero vetoes
-    if bull_score >= 2 and bull_score > bear_score and not call_vetoed:
+    if bull_score >= min_score and bull_score > bear_score and not call_vetoed:
         signal = "CALL"
         conviction = "HIGH" if bull_score >= 3 else "MEDIUM"
         primary_setup = bull_triggers[0]
@@ -131,7 +176,7 @@ def evaluate_scalp_signals(symbol: str = "SPY", interval: str = "5m") -> dict:
         underlying_stop = max(vwap - 0.5 * atr, price - 1.0 * atr)
         underlying_target = price + 1.5 * atr
         reason = f"Bullish alignment across {bull_score} factors: {'; '.join(bull_triggers)}."
-    elif bear_score >= 2 and bear_score > bull_score and not put_vetoed:
+    elif bear_score >= min_score and bear_score > bull_score and not put_vetoed:
         signal = "PUT"
         conviction = "HIGH" if bear_score >= 3 else "MEDIUM"
         primary_setup = bear_triggers[0]
@@ -152,7 +197,7 @@ def evaluate_scalp_signals(symbol: str = "SPY", interval: str = "5m") -> dict:
             reasons.append("Active Vetoes: " + "; ".join(veto_reasons))
         if not bull_triggers and not bear_triggers:
             reasons.append("No actionable setups detected. Market in chop/consolidation.")
-        elif (call_vetoed and bull_score >= 2) or (put_vetoed and bear_score >= 2):
+        elif (call_vetoed and bull_score >= min_score) or (put_vetoed and bear_score >= min_score):
             reasons.append("Setup invalid due to overextension/exhaustion.")
         else:
             reasons.append(f"Insufficient conviction (Bull: {bull_score}, Bear: {bear_score}). Stand aside.")

@@ -30,7 +30,7 @@ def get_current_ny_time() -> datetime:
     return datetime.now(ny_tz)
 
 
-def get_market_session_state(config: dict | None = None) -> dict:
+def get_market_session_state(config: dict | None = None, now: datetime | None = None) -> dict:
     """
     Evaluate current New York time against 0DTE operational windows.
     Returns:
@@ -46,7 +46,7 @@ def get_market_session_state(config: dict | None = None) -> dict:
         config = load_config()
 
     hours = config.get("trading_hours", {})
-    now = get_current_ny_time()
+    now = now or get_current_ny_time()
     current_time_str = now.strftime("%H:%M")
     weekday = now.weekday()  # 0=Monday, 4=Friday, 5=Saturday, 6=Sunday
 

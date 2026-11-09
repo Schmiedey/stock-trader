@@ -185,6 +185,11 @@ svg text{font-family:var(--mono)}
   </div>
 
   <div class="grid row2" style="margin-bottom:14px">
+    <div class="card"><h3>Iron Fly Seller <span class="r" id="flyMeta">—</span></h3><div id="fly"></div></div>
+    <div class="card"><h3>Iron Fly Ledger <span class="r" id="flyCount"></span></h3><svg id="flyEq" width="100%" height="120"></svg><div class="hscroll" style="max-height:200px"><table id="flyHist"></table></div></div>
+  </div>
+
+  <div class="grid row2" style="margin-bottom:14px">
     <div class="card"><h3>Trade Log <span class="r" id="histCount"></span></h3><div class="hscroll"><table id="hist"></table></div></div>
     <div class="card"><h3>0DTE Chain <span class="r" id="chainSym">near ATM</span></h3><table class="chain" id="chain"></table><div id="riskBox" style="margin-top:14px"></div></div>
   </div>
@@ -301,7 +306,7 @@ function renderTop(){
   const cfg=S.config||{};
   $('modePill').textContent=cfg.paper_mode===false?'LIVE MODE':'PAPER MODE';
   $('modePill').style.color=cfg.paper_mode===false?'var(--dn)':'var(--amb)';
-  if(cfg.version)$('ver').textContent=`SPY · QQQ MOMENTUM · v${cfg.version}`;
+  if(cfg.version)$('ver').textContent=`${(cfg.strategy||'SPY · QQQ').replace(/^0DTE_/,'').replace(/_/g,' ').toUpperCase()} · v${cfg.version}`;
   const age=S.market_updated_at?Math.round(S.timestamp-S.market_updated_at):null;
   $('ageTxt').textContent=age==null?'—':age+'s ago';$('ageTxt').className='num'+(age>60?' stale':'');
 }
@@ -427,7 +432,36 @@ function renderChain(){
   const cfg=S.config||{};
   $('riskBox').innerHTML=`<h3>Risk Rules</h3><div class="pstats" style="margin-top:0;grid-template-columns:repeat(3,1fr);gap:10px">
     <div>Risk/trade<b>${fmt$(cfg.max_risk_per_trade_usd||0)}</b></div><div>Outlay cap<b>${fmt$(cfg.max_position_outlay_usd||0)}</b></div><div>Max hold<b>${cfg.max_hold_time_minutes||0}m</b></div>
-    <div>Stop<b class="dn">-${((cfg.stop_loss_pct||0)*100).toFixed(0)}%</b></div><div>TP1<b class="up">+${((cfg.take_profit_1_pct||0)*100).toFixed(0)}%</b></div><div>TP2<b class="up">+${((cfg.take_profit_2_pct||0)*100).toFixed(0)}%</b></div></div>`;
+    <div>Stop<b class="dn">${cfg.stop_mode==='underlying'?'hard -'+((cfg.hard_stop_pct||0)*100).toFixed(0)+'%':'-'+((cfg.stop_loss_pct||0)*100).toFixed(0)+'%'}</b></div><div>TP1<b class="up">+${((cfg.take_profit_1_pct||0)*100).toFixed(0)}%</b></div><div>TP2<b class="up">+${((cfg.take_profit_2_pct||0)*100).toFixed(0)}%</b></div></div>`;
+}
+
+function renderFly(){
+  const P=S.premium||{},c=P.config||{},pos=(P.positions||[])[0],H=P.history||[];
+  $('flyMeta').textContent=c.enabled?`${c.symbol||'SPY'} · ${c.entry_time||'13:30'} → ${c.close_time||'15:50'} · ±${c.wing_width||3} · ${c.units||1}x`:'disabled';
+  if(!pos){
+    const done=H.find(h=>h.entry_date===new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'}));
+    $('fly').innerHTML=`<div class="empty"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 18L9 6l3 6 3-6 7 12"/></svg><div>${done?`Today's fly closed ${sgn$(done.realized_pnl_usd)}`:`Sells an ATM iron butterfly at ${c.entry_time||'13:30'} ET`}</div><div class="dim" style="font-size:11px">Short premium · defined risk · held to ${c.close_time||'15:50'}</div></div>`;
+  } else {
+    const k=pos.center,w=pos.width,cr=pos.credit,u=pos.units,spot=pos.spot||pos.entry_spot;
+    const W=Math.max(320,$('fly').clientWidth||420),H2=170,lo=k-w*1.8,hi=k+w*1.8,X=v=>10+(v-lo)/(hi-lo)*(W-20);
+    const pnl=s=>{let v=cr;pos.legs.forEach(l=>{const i=l.kind==='call'?Math.max(0,s-l.strike):Math.max(0,l.strike-s);v+=l.side==='short'?-i:i});return v*100*u};
+    const mx=cr*100*u,mn=-(w-cr)*100*u,Y=v=>12+(mx-v)/(mx-mn)*(H2-30);
+    const pts=[];for(let s=lo;s<=hi;s+=(hi-lo)/120)pts.push([X(s),Y(pnl(s))]);
+    const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join('');
+    const be1=k-cr,be2=k+cr,inProfit=spot>be1&&spot<be2;
+    $('fly').innerHTML=`<div class="pos-h"><span class="tag CALL" style="background:var(--ac2);color:var(--ac)">IRON FLY</span><b class="num">${pos.symbol} ${k-w}/${k}/${k+w}</b><span class="dim">×${u}</span><div class="spacer"></div>
+      <span class="num ${cls(pos.unrealized_pnl_usd)}" style="font-size:18px;font-weight:700">${sgn$(pos.unrealized_pnl_usd)}</span></div>
+      <svg width="100%" height="${H2}" viewBox="0 0 ${W} ${H2}"><rect x="${X(be1)}" y="0" width="${X(be2)-X(be1)}" height="${H2-18}" fill="rgba(33,208,122,.07)"/>
+      <line x1="0" x2="${W}" y1="${Y(0)}" y2="${Y(0)}" stroke="#3a4a60" stroke-dasharray="3 3"/><path d="${d}" fill="none" stroke="#5b8cff" stroke-width="2"/>
+      <line x1="${X(spot)}" x2="${X(spot)}" y1="0" y2="${H2-18}" stroke="${inProfit?'#21d07a':'#ff4d6a'}" stroke-width="2"/>
+      <text x="${X(spot)}" y="${H2-4}" text-anchor="middle" fill="${inProfit?'#21d07a':'#ff4d6a'}" font-size="10">spot ${(+spot).toFixed(2)}</text>
+      <text x="${X(be1)}" y="10" text-anchor="middle" fill="#5a6779" font-size="9">BE ${be1.toFixed(2)}</text><text x="${X(be2)}" y="10" text-anchor="middle" fill="#5a6779" font-size="9">BE ${be2.toFixed(2)}</text></svg>
+      <div class="pstats" style="margin-top:6px"><div>Credit<b>${fmt$(cr,2)}</b></div><div>To close<b>${fmt$(pos.mark_cost,2)}</b></div><div>Max profit<b class="up">${fmt$(pos.max_profit_usd)}</b></div><div>Max loss<b class="dn">${fmt$(-pos.max_loss_usd)}</b></div></div>`;
+  }
+  $('flyCount').textContent=H.length+' closed · '+sgn$(H.reduce((a,h)=>a+(h.realized_pnl_usd||0),0));
+  let c2=0;spark($('flyEq'),[0,...H.map(h=>c2+=h.realized_pnl_usd||0)],c2>=0?'#21d07a':'#ff4d6a');
+  $('flyHist').innerHTML=`<tr><th>Date</th><th>Strikes</th><th class="r">Credit</th><th class="r">Paid</th><th class="r">P&amp;L</th></tr>`+
+    [...H].reverse().map(h=>`<tr><td class="num dim">${h.entry_date}</td><td class="num">${h.center-h.width}/${h.center}/${h.center+h.width}</td><td class="num r">${(+h.credit).toFixed(2)}</td><td class="num r">${(+h.exit_cost).toFixed(2)}</td><td class="num r ${cls(h.realized_pnl_usd)}" style="font-weight:700">${sgn$(h.realized_pnl_usd)}</td></tr>`).join('');
 }
 
 function renderLogs(){
@@ -437,7 +471,7 @@ function renderLogs(){
   if(atBottom)el.scrollTop=el.scrollHeight;
 }
 
-function render(){if(!S)return;renderTop();renderKPIs();drawChart();renderSignal();renderPositions();renderEquity();renderEdge();renderHistory();renderChain();renderLogs()}
+function render(){if(!S)return;renderTop();renderKPIs();drawChart();renderSignal();renderPositions();renderEquity();renderEdge();renderHistory();renderChain();renderFly();renderLogs()}
 
 async function poll(){
   try{const r=await fetch('/api/state');S=await r.json();render()}catch(e){$('daemonTxt').textContent='Dashboard server unreachable';$('daemonDot').className='dot off'}
