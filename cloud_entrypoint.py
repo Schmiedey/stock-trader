@@ -17,7 +17,7 @@ import ledger_sync
 BASE_DIR = Path(__file__).resolve().parent
 SCALPER_DATA_DIR = BASE_DIR / "zero_dte_scalper/data"
 
-SCALPER_
+SCALPER_DATA_DIR.mkdir(parents=True, exist_ok=True)
 processes = {}
 
 

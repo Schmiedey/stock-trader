@@ -274,6 +274,10 @@ class Handler(BaseHTTPRequestHandler):
         path = urlparse(self.path).path
         if path == "/api/state":
             return self._json(full_state())
+        if path == "/api/ledger":
+            sys.path.insert(0, str(BASE_DIR))
+            import ledger_sync
+            return self._json(ledger_sync.snapshot())
         if path.startswith("/api/"):
             return self._json({"ok": False, "error": "use POST for actions"}, 405)
         body = HTML_PATH.read_bytes() if HTML_PATH.exists() else b"<h1>Dashboard HTML not found.</h1>"

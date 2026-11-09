@@ -1,0 +1,68 @@
+name: Paper ledger sync
+
+# Pulls the live paper-trading ledgers from the Render app and commits them to the
+# paper-ledger branch, so they survive Render free-tier redeploys (its disk is wiped).
+# The app restores from this branch on boot. Uses only the built-in GITHUB_TOKEN.
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ledger-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      APP_URL: https://stock-trader-cakh.onrender.com
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: paper-ledger
+
+      - name: Fetch ledger snapshot
+        run: |
+          curl -sf --retry 3 --retry-delay 20 --max-time 90 "$APP_URL/api/ledger" -o /tmp/ledger.json
+          python3 - <<'PY'
+          import json, pathlib
+          snap = json.load(open("/tmp/ledger.json"))
+          if not snap:
+              raise SystemExit("empty snapshot; refusing to overwrite")
+          def size(rel, text):
+              if rel.endswith(".jsonl"):
+                  return len([l for l in text.splitlines() if l.strip()])
+              if rel.endswith("_history.json"):
+                  try:
+                      return len(json.loads(text or "[]"))
+                  except Exception:
+                      return 0
+              return None
+          # Guard: never let a fresh container (that failed to restore) shrink the saved history
+          for rel, text in snap.items():
+              old = pathlib.Path(rel)
+              if old.exists():
+                  n_old, n_new = size(rel, old.read_text()), size(rel, text)
+                  if n_old is not None and n_new < n_old:
+                      raise SystemExit(f"{rel}: app has {n_new} records < saved {n_old}; not overwriting")
+          for rel, text in snap.items():
+              assert rel.startswith("zero_dte_scalper/data/") and ".." not in rel, rel
+              p = pathlib.Path(rel)
+              p.parent.mkdir(parents=True, exist_ok=True)
+              p.write_text(text)
+          print("files:", ", ".join(sorted(snap)))
+          PY
+
+      - name: Commit if changed
+        run: |
+          git config user.name "ledger-sync[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add zero_dte_scalper/data
+          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          git commit -m "paper ledger sync $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push origin HEAD:paper-ledger

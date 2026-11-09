@@ -284,6 +284,66 @@ def calculate_time_to_expiration_years(expiration_date_str: str) -> float:
     return max(1e-5, tte_years)
 
 
+_CBOE_CACHE: dict = {}
+_OCC = __import__("re").compile(r"^([A-Z]+)(\d{6})([CP])(\d{8})$")
+
+
+def fetch_cboe_chain(symbol: str, exp_date_str: str, max_age_s: float = 60.0) -> dict | None:
+    """
+    Real 0DTE chain from CBOE's free delayed-quotes feed (~15 min delay, no key).
+    Used when Yahoo refuses cookies (fresh cloud containers can't get a Yahoo crumb).
+    """
+    import time as _t
+    import requests
+    now = _t.time()
+    hit = _CBOE_CACHE.get(symbol)
+    if hit and now - hit[0] < max_age_s:
+        data = hit[1]
+    else:
+        r = requests.get(f"https://cdn.cboe.com/api/global/delayed_quotes/options/{symbol}.json",
+                         timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+        r.raise_for_status()
+        data = r.json()["data"]
+        _CBOE_CACHE[symbol] = (now, data)
+
+    exp_code = datetime.strptime(exp_date_str, "%Y-%m-%d").strftime("%y%m%d")
+    spot = float(data.get("current_price") or 0.0)
+    calls, puts = [], []
+    for o in data.get("options", []):
+        m = _OCC.match(o.get("option", ""))
+        if not m or m.group(2) != exp_code:
+            continue
+        strike = int(m.group(4)) / 1000.0
+        if spot and abs(strike - spot) > 25:
+            continue
+        bid, ask = float(o.get("bid") or 0), float(o.get("ask") or 0)
+        mid = round((bid + ask) / 2, 3) if bid > 0 and ask > 0 else float(o.get("last_trade_price") or 0)
+        row = {"contract_symbol": o["option"], "strike": strike, "bid": bid, "ask": ask, "mid": mid,
+               "last_price": float(o.get("last_trade_price") or mid), "spread": round(max(0.0, ask - bid), 3),
+               "volume": int(o.get("volume") or 0), "open_interest": int(o.get("open_interest") or 0),
+               "iv": float(o.get("iv") or 0.16), "delta": float(o.get("delta") or 0.0),
+               "gamma": float(o.get("gamma") or 0.0), "theta": float(o.get("theta") or 0.0)}
+        (calls if m.group(3) == "C" else puts).append(row)
+    if not calls or not puts:
+        return None
+    tte_years = calculate_time_to_expiration_years(exp_date_str)
+    return {"symbol": symbol, "spot_price": round(spot, 2), "expiration": exp_date_str,
+            "is_true_0dte": exp_date_str == get_ny_now().strftime("%Y-%m-%d"),
+            "source": "cboe_delayed", "quote_time": data.get("last_trade_time"),
+            "tte_years": tte_years, "tte_hours": round(tte_years * 252.0 * 6.5, 2),
+            "calls": sorted(calls, key=lambda x: x["strike"]), "puts": sorted(puts, key=lambda x: x["strike"])}
+
+
+def _cboe_or_synthetic(symbol: str, spot_price: float, exp_date_str: str) -> dict:
+    try:
+        chain = fetch_cboe_chain(symbol, exp_date_str)
+        if chain:
+            return chain
+    except Exception:
+        pass
+    return generate_synthetic_0dte_chain(symbol, spot_price, exp_date_str)
+
+
 def fetch_0dte_chain(symbol: str = "SPY") -> dict:
     """
     Fetch and process the full 0DTE option chain with Delta, Gamma, Theta, and spreads.
@@ -312,9 +372,9 @@ def fetch_0dte_chain(symbol: str = "SPY") -> dict:
     try:
         chain = ticker.option_chain(exp_date_str)
         if chain is None or (len(chain.calls) == 0 and len(chain.puts) == 0):
-            return generate_synthetic_0dte_chain(symbol, spot_price, exp_date_str)
+            return _cboe_or_synthetic(symbol, spot_price, exp_date_str)
     except Exception:
-        return generate_synthetic_0dte_chain(symbol, spot_price, exp_date_str)
+        return _cboe_or_synthetic(symbol, spot_price, exp_date_str)
     ny_now = get_ny_now()
     is_true_0dte = (exp_date_str == ny_now.strftime("%Y-%m-%d"))
 

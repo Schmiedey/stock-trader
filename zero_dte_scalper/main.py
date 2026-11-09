@@ -303,7 +303,7 @@ def cmd_status(args):
     for p in positions:
         total_unrealized_usd += p["unrealized_pnl_usd"]
         pnl_color = "green" if p["unrealized_pnl_usd"] >= 0 else "red"
-        pnl_str = f"[{pnl_color}]${p["unrealized_pnl_usd"]:+.2f} ({p["unrealized_pnl_pct"]:+.1f}%)[/{pnl_color}]"
+        pnl_str = f"[{pnl_color}]${p['unrealized_pnl_usd']:+.2f} ({p['unrealized_pnl_pct']:+.1f}%)[/{pnl_color}]"
 
         alert = "HOLDING"
         if p["current_price"] <= p["stop_loss_price"]:

@@ -39,22 +39,26 @@ def log_iv_calibration(symbol: str):
     """Record real 0DTE ATM straddle price vs Black-Scholes at VIX/VXN (validates research pricing)."""
     import yfinance as yf
     from zero_dte_scalper.src.greeks import black_scholes_price
-    t = yf.Ticker(symbol)
-    exp = t.options[0]
-    spot = float(t.fast_info.last_price)
-    ch = t.option_chain(exp)
-    k = min(ch.calls.strike, key=lambda x: abs(x - spot))
-    c = ch.calls[ch.calls.strike == k].iloc[0]
-    p = ch.puts[ch.puts.strike == k].iloc[0]
-    straddle = (c.bid + c.ask) / 2 + (p.bid + p.ask) / 2
+    from zero_dte_scalper.src.market_data import fetch_0dte_chain
+    chain = fetch_0dte_chain(symbol)
+    if chain.get("synthetic"):
+        raise RuntimeError("only synthetic chain available")
+    spot = float(chain["spot_price"])
+    k = min((c["strike"] for c in chain["calls"]), key=lambda x: abs(x - spot))
+    c = next(x for x in chain["calls"] if x["strike"] == k)
+    p = next(x for x in chain["puts"] if x["strike"] == k)
+    straddle = (c["bid"] + c["ask"]) / 2 + (p["bid"] + p["ask"]) / 2
     vol = float(yf.Ticker("^VIX" if symbol == "SPY" else "^VXN").fast_info.last_price) / 100
-    # calendar-time TTE to 16:00 ET, the same convention research/replay.py prices with
-    now = datetime.datetime.now(datetime.timezone.utc).astimezone(__import__("zoneinfo").ZoneInfo("America/New_York"))
+    # calendar-time TTE to 16:00 ET from the quote time, the same convention research/replay.py prices with
+    import zoneinfo
+    ny = zoneinfo.ZoneInfo("America/New_York")
+    qt = chain.get("quote_time")
+    now = datetime.datetime.fromisoformat(qt).replace(tzinfo=ny) if qt else datetime.datetime.now(ny)
     close = now.replace(hour=16, minute=0, second=0, microsecond=0)
     tte = max(60.0, (close - now).total_seconds()) / (365.25 * 86400.0)
     model = black_scholes_price(spot, k, tte, vol, option_type="call") + black_scholes_price(spot, k, tte, vol, option_type="put")
-    journal({"symbol": symbol, "expiration": exp, "spot": round(spot, 2), "strike": float(k),
-             "straddle_mid": round(straddle, 3), "model_at_index": round(model, 3),
+    journal({"symbol": symbol, "source": chain.get("source", "yahoo"), "quote_time": qt, "spot": round(spot, 2),
+             "strike": float(k), "straddle_mid": round(straddle, 3), "model_at_index": round(model, 3),
              "ratio": round(straddle / model, 3) if model > 0 else None, "index_iv": round(vol, 4)}, IV_CAL_FILE)
 
 sys.path.insert(0, str(BASE_DIR))

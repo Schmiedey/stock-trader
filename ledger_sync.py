@@ -4,7 +4,9 @@ Persist the paper-trading ledgers to a GitHub branch so they survive Render rede
 
 - restore(): on container start, download each ledger file from the branch (if present).
 - sync():    commit every changed ledger file to the branch in ONE commit (Git Data API).
-- Runs only when GITHUB_TOKEN is set; otherwise every call is a no-op (local dev).
+- Without GITHUB_TOKEN: restore() reads the public branch anonymously, and the
+  .github/workflows/ledger-sync.yml Action pulls /api/ledger and commits it (no secrets needed).
+  sync() is then a no-op.
 
 Env:
   GITHUB_TOKEN   fine-grained PAT with "Contents: read and write" on the repo
@@ -93,11 +95,42 @@ def _hash(b: bytes) -> str:
     return hashlib.sha1(b).hexdigest()
 
 
+def _restore_public(log=print) -> int:
+    """Anonymous restore from raw.githubusercontent.com (public repo, no token)."""
+    _, repo, branch = _cfg()
+    n = 0
+    for rel in FILES:
+        url = f"https://raw.githubusercontent.com/{repo}/{branch}/{rel}"
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "scalper-ledger-sync"})
+            with urllib.request.urlopen(req, timeout=30, context=_SSL) as r:
+                data = r.read()
+        except urllib.error.HTTPError as e:
+            if e.code == 404:
+                continue
+            raise
+        p = BASE_DIR / rel
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(data)
+        n += 1
+    log(f"[LEDGER] restored {n} ledger file(s) from public {repo}@{branch} (GitHub Action keeps it updated)")
+    return n
+
+
+def snapshot() -> dict:
+    """Current ledger files as {path: text}, served at /api/ledger for the sync Action."""
+    out = {}
+    for rel in FILES:
+        p = BASE_DIR / rel
+        if p.exists():
+            out[rel] = p.read_text()
+    return out
+
+
 def restore(log=print) -> int:
     """Download ledgers from the branch into the working tree. Returns files restored."""
     if not enabled():
-        log("[LEDGER] GITHUB_TOKEN not set; ledgers will NOT survive redeploys")
-        return 0
+        return _restore_public(log)
     _, repo, branch = _cfg()
     if _branch_head() is None:
         log(f"[LEDGER] branch '{branch}' not found yet; it will be created on first sync")

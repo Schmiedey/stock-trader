@@ -9,11 +9,14 @@ Paper-trading 0DTE options scalper for SPY / QQQ, plus a live dashboard.
 
 ## Paper ledger persistence (Render)
 
-Render's free disk is wiped on every deploy. `ledger_sync.py` restores the paper ledgers from the
-`paper-ledger` branch on startup and commits changes back every 5 minutes and on shutdown.
+Render's free disk is wiped on every deploy, so the paper ledgers live on the `paper-ledger` branch:
 
-Setup: in Render → the service → Environment, add `GITHUB_TOKEN` = a fine-grained GitHub token
-scoped to `Schmiedey/stock-trader` with **Contents: Read and write**. Without it the bot still runs,
-but ledgers reset on each deploy (the log says so at startup).
+- On boot, `ledger_sync.py` restores them from the public branch (no token needed).
+- `.github/workflows/ledger-sync.yml` pulls `GET /api/ledger` from the app every 10 minutes and commits
+  any changes, using GitHub's built-in Actions token. It refuses to commit if the app's history is
+  shorter than what's saved (protects against a container that failed to restore).
+- Optional: set `GITHUB_TOKEN` on Render to push from the app itself every 5 minutes and on shutdown.
+
+At most ~10 minutes of ledger activity can be lost on a redeploy (less if pushes avoid market hours).
 
 View the cloud ledger: https://github.com/Schmiedey/stock-trader/tree/paper-ledger/zero_dte_scalper/data
