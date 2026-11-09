@@ -67,7 +67,20 @@ body{background:radial-gradient(1200px 500px at 15% -10%,rgba(91,140,255,.10),tr
 .chead .px{font-family:var(--mono);font-size:28px;font-weight:700}
 .legend{display:flex;gap:14px;font-size:11px;color:var(--tx2)}
 .legend i{display:inline-block;width:10px;height:2px;margin-right:5px;vertical-align:middle;border-radius:2px}
-#chart{height:430px}
+#chart{height:470px}
+.cwrap{position:relative}
+#ovl{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2}
+#ovl .box{position:absolute;border-left:1px solid;border-right:1px solid}
+#ovl .lbl{position:absolute;font:600 10px var(--mono);padding:2px 6px;border-radius:4px;white-space:nowrap;transform:translateY(-50%)}
+#ohlc{position:absolute;left:8px;top:6px;z-index:3;font:11px var(--mono);color:var(--tx2);pointer-events:none;display:flex;gap:10px;flex-wrap:wrap;max-width:75%}
+#ohlc b{color:var(--tx);font-weight:500}
+#ohlc .tr{color:var(--tx);background:rgba(15,20,28,.85);border:1px solid var(--line2);border-radius:5px;padding:1px 6px}
+#pnlWrap{position:relative;border-top:1px solid var(--line);margin-top:4px}
+#pnlChart{height:130px}
+#pnlTag{position:absolute;left:8px;top:6px;z-index:3;font:11px var(--mono);color:var(--tx2);pointer-events:none}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font:600 12px var(--mono);padding:5px 10px;border-radius:8px;background:var(--bg2);border:1px solid var(--line2)}
+.chip small{font:600 9.5px Inter;color:var(--tx3);letter-spacing:.08em;margin-right:6px}
 #vol{height:0}
 
 /* signal */
@@ -155,6 +168,7 @@ svg text{font-family:var(--mono)}
         <div class="tabs"><button class="tab on" data-s="SPY">SPY</button><button class="tab" data-s="QQQ">QQQ</button></div>
         <div class="px" id="cPx">—</div>
         <div id="cChg" class="num">—</div>
+        <div class="chips" id="chips"></div>
         <div class="spacer"></div>
         <div class="legend">
           <span><i style="background:var(--amb)"></i>VWAP</span>
@@ -163,7 +177,8 @@ svg text{font-family:var(--mono)}
           <span class="dim">5m · today</span>
         </div>
       </div>
-      <div id="chart"></div>
+      <div class="cwrap"><div id="ohlc"></div><div id="ovl"></div><div id="chart"></div></div>
+      <div id="pnlWrap"><div id="pnlTag">DAY P&amp;L · all strategies</div><div id="pnlChart"></div></div>
     </div>
 
     <div class="card">
@@ -236,6 +251,97 @@ const mkLine=c=>chart.addLineSeries({color:c,lineWidth:2,lastValueVisible:false,
 const sVW=mkLine('#ffb547'),sE9=mkLine('#5b8cff'),sE21=mkLine('#b07cff');
 sVW.applyOptions({lineStyle:LC.LineStyle.Dashed});
 let priceLines=[], lastChartKey='';
+chart.applyOptions({timeScale:{visible:false}});
+const pchart=LC.createChart($('pnlChart'),{
+  layout:{background:{type:'solid',color:'transparent'},textColor:'#8a98ab',fontFamily:'JetBrains Mono',fontSize:10},
+  grid:{vertLines:{color:'rgba(28,37,50,.55)'},horzLines:{color:'rgba(28,37,50,.35)'}},
+  rightPriceScale:{borderColor:'#1c2532',scaleMargins:{top:.15,bottom:.1},minimumWidth:70},
+  timeScale:{borderColor:'#1c2532',timeVisible:true,secondsVisible:false},
+  crosshair:{mode:LC.CrosshairMode.Normal,vertLine:{color:'#3a4a60',labelBackgroundColor:'#263243'},horzLine:{color:'#3a4a60',labelBackgroundColor:'#263243'}},
+  autoSize:true});
+chart.applyOptions({rightPriceScale:{minimumWidth:70}});
+const pnlS=pchart.addBaselineSeries({baseValue:{type:'price',price:0},topLineColor:'#21d07a',topFillColor1:'rgba(33,208,122,.28)',topFillColor2:'rgba(33,208,122,.02)',
+  bottomLineColor:'#ff4d6a',bottomFillColor1:'rgba(255,77,106,.02)',bottomFillColor2:'rgba(255,77,106,.28)',lineWidth:2,priceFormat:{type:'custom',formatter:v=>sgn$(v)}});
+let syncing=false;
+const syncTo=(a,b)=>a.timeScale().subscribeVisibleLogicalRangeChange(r=>{if(syncing||!r)return;syncing=true;b.timeScale().setVisibleLogicalRange(r);syncing=false;drawBoxes()});
+syncTo(chart,pchart);syncTo(pchart,chart);
+new ResizeObserver(()=>drawBoxes()).observe($('chart'));
+
+// Parse "YYYY-MM-DD HH:MM:SS" (already NY time, no zone) -> epoch seconds
+const parseNYPlain=s=>s?Date.parse(s.replace(' ','T')+'Z')/1000-ETOFF:null;
+const todayNY=()=>new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'});
+let barTimes=[];  // chart-time (ET-shifted) of each candle
+const toLogical=et=>{ // et = ET-shifted seconds -> fractional logical index (extends past last bar)
+  if(!barTimes.length)return null;
+  const last=barTimes.length-1;
+  if(et>=barTimes[last])return last+(et-barTimes[last])/300;
+  let i=barTimes.findIndex(x=>x>et);if(i<=0)return 0;return i-1+(et-barTimes[i-1])/300;
+};
+function flyFor(symbol){
+  const P=S?.premium||{};
+  const open=(P.positions||[]).filter(p=>p.symbol===symbol).map(p=>({...p,open:true}));
+  const closed=(P.history||[]).filter(h=>h.symbol===symbol&&h.entry_date===todayNY());
+  return [...closed,...open];
+}
+function drawBoxes(){
+  const ovl=$('ovl');if(!ovl||!S)return;
+  const ts=chart.timeScale(),html=[];
+  const W=$('chart').clientWidth-70;
+  flyFor(sym).forEach(f=>{
+    const t0=parseNYPlain(f.entry_time),t1=f.open?parseNYPlain(f.entry_date+' '+(S.premium?.config?.close_time||'15:50')+':00'):parseNYPlain(f.exit_time);
+    const l0=toLogical(t0+ETOFF),l1=toLogical(t1+ETOFF);if(l0==null)return;
+    // logicalToCoordinate only accepts whole bar indexes; interpolate between bars
+    const lc=l=>{const f=Math.floor(l),a0=ts.logicalToCoordinate(f),a1=ts.logicalToCoordinate(f+1);return a0==null||a1==null?null:a0+(l-f)*(a1-a0)};
+    let x0=lc(l0),x1=lc(l1);if(x0==null||x1==null)return;
+    x0=Math.max(0,x0);x1=Math.min(W,x1);if(x1<=x0)return;
+    const k=f.center,w=f.width,cr=f.credit,y=v=>cs.priceToCoordinate(v);
+    const yWU=y(k+w),yBU=y(k+cr),yC=y(k),yBL=y(k-cr),yWL=y(k-w);
+    if([yWU,yBU,yC,yBL,yWL].some(v=>v==null))return;
+    const pnl=f.open?f.unrealized_pnl_usd:f.realized_pnl_usd;
+    const box=(top,bot,bg,bc)=>`<div class="box" style="left:${x0}px;width:${x1-x0}px;top:${Math.min(top,bot)}px;height:${Math.abs(bot-top)}px;background:${bg};border-color:${bc}"></div>`;
+    html.push(box(yWU,yBU,'rgba(255,77,106,.13)','rgba(255,77,106,.5)'));
+    html.push(box(yBU,yBL,'rgba(33,208,122,.16)','rgba(33,208,122,.55)'));
+    html.push(box(yBL,yWL,'rgba(255,77,106,.13)','rgba(255,77,106,.5)'));
+    html.push(`<div class="box" style="left:${x0}px;width:${x1-x0}px;top:${yC}px;height:0;border-top:1px dashed rgba(91,140,255,.8)"></div>`);
+    const tag=(yy,txt,bg,fg)=>`<div class="lbl" style="left:${x0+4}px;top:${yy}px;background:${bg};color:${fg}">${txt}</div>`;
+    html.push(tag(yWU,`wing ${k+w}`,'rgba(255,77,106,.85)','#fff'));
+    html.push(tag(yC,`SOLD FLY ${k-w}/${k}/${k+w} · ${f.units}x @ ${(+cr).toFixed(2)} cr · ${f.open?'OPEN':'CLOSED'} <b style="color:${pnl>=0?'#b6ffd6':'#ffd0d8'}">${sgn$(pnl)}</b>`,'rgba(91,140,255,.92)','#fff'));
+    html.push(tag(yWL,`wing ${k-w}`,'rgba(255,77,106,.85)','#fff'));
+  });
+  ovl.innerHTML=html.join('');
+}
+function drawPnl(c){
+  const t=x=>x.ts+ETOFF, day=todayNY();
+  const ev=[];
+  (S.history||[]).forEach(h=>{const e=parseNY(h.exit_timestamp);if(e&&(h.entry_date===day))ev.push([e+ETOFF,h.realized_pnl_usd||0])});
+  (S.premium?.history||[]).forEach(h=>{if(h.entry_date===day){const e=parseNYPlain(h.exit_time);if(e)ev.push([e+ETOFF,h.realized_pnl_usd||0])}});
+  const unreal=(S.active_positions||[]).reduce((a,p)=>a+(p.unrealized_pnl_usd||0),0)+(S.premium?.positions||[]).reduce((a,p)=>a+(p.unrealized_pnl_usd||0),0);
+  const data=c.map((x,i)=>{const tt=t(x);let v=ev.filter(e=>e[0]<=tt+300).reduce((a,e)=>a+e[1],0);if(i===c.length-1)v+=unreal;return{time:tt,value:+v.toFixed(2)}});
+  pnlS.setData(data);
+  const last=data.at(-1)?.value||0;
+  $('pnlTag').innerHTML=`DAY P&amp;L · all strategies <b class="${cls(last)}" style="margin-left:6px">${sgn$(last)}</b>`;
+}
+function renderChips(){
+  const t=S.today_stats||{},m=S.metrics||{},P=S.premium||{},day=todayNY();
+  const flyToday=(P.history||[]).filter(h=>h.entry_date===day).reduce((a,h)=>a+(h.realized_pnl_usd||0),0);
+  const flyAll=(P.history||[]).reduce((a,h)=>a+(h.realized_pnl_usd||0),0);
+  const open=(S.active_positions||[]).reduce((a,p)=>a+(p.unrealized_pnl_usd||0),0)+(P.positions||[]).reduce((a,p)=>a+(p.unrealized_pnl_usd||0),0);
+  const today=(t.realized_pnl_usd||0)+flyToday, all=(m.total_realized_pnl_usd||0)+flyAll;
+  const chip=(l,v)=>`<span class="chip"><small>${l}</small><span class="${cls(v)}">${sgn$(v)}</span></span>`;
+  $('chips').innerHTML=chip('TODAY',today)+chip('OPEN',open)+chip('ALL-TIME',all);
+}
+chart.subscribeCrosshairMove(p=>{
+  const el=$('ohlc');if(!el)return;
+  const bar=p?.seriesData?.get(cs);
+  const d=S?.symbols?.[sym]||{},c=(d.candles||[]).filter(x=>x.ts);
+  const b=bar||(c.length?{open:c.at(-1).o,high:c.at(-1).h,low:c.at(-1).l,close:c.at(-1).c}:null);
+  if(!b){el.innerHTML='';return}
+  const col=b.close>=b.open?'var(--up)':'var(--dn)';
+  let trades='';
+  if(bar&&p.time){(markerIndex[p.time]||[]).forEach(m=>trades+=`<span class="tr">${m}</span>`)}
+  el.innerHTML=`<span>${sym} · 5m</span><span>O <b style="color:${col}">${b.open.toFixed(2)}</b></span><span>H <b style="color:${col}">${b.high.toFixed(2)}</b></span><span>L <b style="color:${col}">${b.low.toFixed(2)}</b></span><span>C <b style="color:${col}">${b.close.toFixed(2)}</b></span>${trades}`;
+});
+let markerIndex={};
 
 function drawChart(){
   const d=S?.symbols?.[sym]||{}; const c=(d.candles||[]).filter(x=>x.ts);
@@ -250,16 +356,32 @@ function drawChart(){
     // trade markers (snap to 5m bar)
     const times=new Set(c.map(t));
     const snap=e=>{if(!e)return null;const v=Math.floor((e+ETOFF)/300)*300;return times.has(v)?v:null};
-    const mk=[];
+    barTimes=c.map(t);
+    const mk=[];markerIndex={};
+    const note=(tm,txt)=>(markerIndex[tm]=markerIndex[tm]||[]).push(txt);
+    const seenEntry=new Set();
     [...(S.history||[]),...(S.active_positions||[])].filter(h=>h.symbol===sym).forEach(h=>{
-      const en=snap(parseNY(h.entry_timestamp)); if(en)mk.push({time:en,position:h.action==='CALL'?'belowBar':'aboveBar',color:h.action==='CALL'?'#21d07a':'#ff4d6a',shape:h.action==='CALL'?'arrowUp':'arrowDown',text:h.action[0]+' '+h.strike});
-      const ex=snap(parseNY(h.exit_timestamp)); if(ex)mk.push({time:ex,position:'aboveBar',color:h.realized_pnl_usd>=0?'#21d07a':'#ff4d6a',shape:'circle',text:sgn$(h.realized_pnl_usd)});
+      const qty=h.initial_quantity||h.quantity_closed||h.current_quantity||1, k=String(h.strike).replace(/\.0$/,''), side=h.action==='CALL'?'C':'P';
+      const en=snap(parseNY(h.entry_timestamp)), eid=h.id+'|'+h.entry_timestamp;
+      if(en&&!seenEntry.has(eid)){seenEntry.add(eid);
+        const txt=`BUY ${qty}x ${k}${side} @ ${(+h.entry_price).toFixed(2)}`;
+        mk.push({time:en,position:h.action==='CALL'?'belowBar':'aboveBar',color:h.action==='CALL'?'#21d07a':'#ff4d6a',shape:h.action==='CALL'?'arrowUp':'arrowDown',text:txt});note(en,txt)}
+      const ex=snap(parseNY(h.exit_timestamp));
+      if(ex){const txt=`SELL ${h.quantity_closed}x @ ${(+h.exit_price).toFixed(2)} ${sgn$(h.realized_pnl_usd)}`;
+        mk.push({time:ex,position:h.action==='CALL'?'aboveBar':'belowBar',color:h.realized_pnl_usd>=0?'#21d07a':'#ff4d6a',shape:'circle',text:txt});note(ex,txt)}
+    });
+    flyFor(sym).forEach(f=>{
+      const en=snap(parseNYPlain(f.entry_time)-0);
+      if(en){const txt=`SELL FLY ${f.units}x ${f.center} @ ${(+f.credit).toFixed(2)}`;mk.push({time:en,position:'aboveBar',color:'#5b8cff',shape:'arrowDown',text:txt});note(en,txt)}
+      const ex=!f.open&&snap(parseNYPlain(f.exit_time));
+      if(ex){const txt=`CLOSE FLY @ ${(+f.exit_cost).toFixed(2)} ${sgn$(f.realized_pnl_usd)}`;mk.push({time:ex,position:'belowBar',color:f.realized_pnl_usd>=0?'#21d07a':'#ff4d6a',shape:'circle',text:txt});note(ex,txt)}
     });
     mk.sort((a,b)=>a.time-b.time); cs.setMarkers(mk);
     // Show the whole 09:30-16:00 session (78 x 5m bars) so the day fills in left to right
-    if(!lastChartKey.startsWith(sym)) requestAnimationFrame(()=>chart.timeScale().setVisibleLogicalRange({from:-1,to:Math.max(c.length+3,79)}));
+    if(!lastChartKey.startsWith(sym)) requestAnimationFrame(()=>{const r={from:-1,to:Math.max(c.length+3,79)};chart.timeScale().setVisibleLogicalRange(r);pchart.timeScale().setVisibleLogicalRange(r)});
     lastChartKey=key;
   }
+  drawPnl(c);renderChips();requestAnimationFrame(drawBoxes);
   priceLines.forEach(p=>cs.removePriceLine(p)); priceLines=[];
   const add=(price,color,title,style=LC.LineStyle.Dotted)=>price&&priceLines.push(cs.createPriceLine({price,color,lineWidth:1,lineStyle:style,axisLabelVisible:true,title}));
   if(d.signal==='CALL'||d.signal==='PUT'){add(d.underlying_stop,'#ff4d6a','stop');add(d.underlying_target,'#21d07a','target')}
