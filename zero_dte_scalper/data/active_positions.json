@@ -1,1 +1,33 @@
-[]
+[
+  {
+    "id": "6afdc459",
+    "symbol": "SPY",
+    "action": "CALL",
+    "contract_symbol": "SPY261110C00748000",
+    "strike": 748.0,
+    "expiration": "2026-11-10",
+    "entry_timestamp": "2026-11-10 11:05:12 EST",
+    "entry_epoch": 1794326712.2239532,
+    "entry_date": "2026-11-10",
+    "entry_price": 1.66,
+    "entry_spot_price": 748.03,
+    "current_spot_price": 746.49,
+    "iv": 0.2433,
+    "initial_quantity": 2,
+    "current_quantity": 2,
+    "stop_loss_price": 1.08,
+    "tp1_price": 2.49,
+    "tp2_price": 3.32,
+    "tp1_hit": false,
+    "current_price": 1.17,
+    "unrealized_pnl_usd": -98.0,
+    "unrealized_pnl_pct": -29.52,
+    "elapsed_minutes": 47.2,
+    "status": "OPEN",
+    "setup": "ORB Failed Breakdown: reclaimed 747.05 after closing below",
+    "notes": "",
+    "underlying_stop": 748.26,
+    "model_price": 1.33,
+    "quote_source": "LIVE"
+  }
+]
