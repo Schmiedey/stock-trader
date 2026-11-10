@@ -249,5 +249,26 @@
     "is_partial": false,
     "entry_spot_price": 674.14,
     "exit_spot_price": 674.09
+  },
+  {
+    "id": "6afdc459",
+    "symbol": "SPY",
+    "action": "CALL",
+    "contract_symbol": "SPY261110C00748000",
+    "strike": 748.0,
+    "expiration": "2026-11-10",
+    "entry_timestamp": "2026-11-10 11:05:12 EST",
+    "exit_timestamp": "2026-11-10 12:05:09 EST",
+    "entry_date": "2026-11-10",
+    "entry_price": 1.66,
+    "exit_price": 1.32,
+    "quantity_closed": 2,
+    "realized_pnl_usd": -68.0,
+    "realized_pnl_pct": -20.48,
+    "exit_reason": "STAGNATION_TIME_EXIT",
+    "setup": "ORB Failed Breakdown: reclaimed 747.05 after closing below",
+    "is_partial": false,
+    "entry_spot_price": 748.03,
+    "exit_spot_price": 746.47
   }
 ]
