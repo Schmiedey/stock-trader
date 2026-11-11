@@ -84,5 +84,48 @@
     "exit_cost": 2.55,
     "realized_pnl_usd": -148.0,
     "exit_reason": "TIME_CLOSE"
+  },
+  {
+    "id": "0a16e9d0",
+    "symbol": "SPY",
+    "entry_date": "2026-11-11",
+    "entry_time": "2026-11-11 13:30:07",
+    "entry_spot": 761.25,
+    "center": 761.0,
+    "width": 3,
+    "units": 2,
+    "legs": [
+      {
+        "kind": "call",
+        "strike": 761.0,
+        "side": "short"
+      },
+      {
+        "kind": "put",
+        "strike": 761.0,
+        "side": "short"
+      },
+      {
+        "kind": "call",
+        "strike": 764.0,
+        "side": "long"
+      },
+      {
+        "kind": "put",
+        "strike": 758.0,
+        "side": "long"
+      }
+    ],
+    "credit": 1.29,
+    "max_loss_usd": 342.0,
+    "max_profit_usd": 258.0,
+    "unrealized_pnl_usd": 54.0,
+    "mark_cost": 1.02,
+    "spot": 760.26,
+    "opened_epoch": 1794421809.5188239,
+    "exit_time": "2026-11-11 15:50:04",
+    "exit_cost": 1.02,
+    "realized_pnl_usd": 54.0,
+    "exit_reason": "TIME_CLOSE"
   }
 ]
