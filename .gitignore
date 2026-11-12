@@ -11,3 +11,11 @@ venv/
 
 # research caches (derived; bar caches are committed so history grows)
 zero_dte_scalper/data/cache/sig_*.pkl
+
+# large research downloads (rebuild with research/fetch_duka.py / fetch_hist.py)
+zero_dte_scalper/data/cache/duka/
+zero_dte_scalper/data/cache/*_1m_long.pkl
+zero_dte_scalper/data/cache/*_1m.pkl
+zero_dte_scalper/data/cache/*_1h.pkl
+zero_dte_scalper/data/cache/IWM_*.pkl
+zero_dte_scalper/data/cache/stocks/

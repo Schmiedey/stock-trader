@@ -68,6 +68,7 @@ from zero_dte_scalper.src.config import load_config, get_market_session_state
 from zero_dte_scalper.src.signals import evaluate_scalp_signals
 from zero_dte_scalper.src.exits import decide_exit
 from zero_dte_scalper.src.premium_seller import tick as premium_tick
+from zero_dte_scalper.src.momentum import momentum_exit
 from zero_dte_scalper.src.options_selector import select_best_contract
 from zero_dte_scalper.src.risk_manager import check_trading_permissions
 from zero_dte_scalper.src.tracker import (
@@ -147,9 +148,22 @@ class ZeroDteScalperDaemon:
         session = get_market_session_state(self.config)
         session_phase = session.get("session_phase", "")
 
+        sp = self.config.get("signal_params", {})
         for pos in list(positions):
             pos_id = pos["id"]
             contract_sym = pos["contract_symbol"]
+            if sp.get("mode") == "momentum":
+                # v4 signal exit: only evaluated at the 30-minute marks on completed bars
+                try:
+                    why = momentum_exit(pos["symbol"], pos["action"], sp.get("momentum", {}))
+                except Exception as e:
+                    why = None
+                    log(f"Momentum exit check failed for {pos['symbol']}: {e}")
+                if why:
+                    close_position(position_id=pos_id, exit_price=pos.get("current_price", pos["entry_price"]), reason=why)
+                    log(f"↩️ [{why}] | {contract_sym}")
+                    journal({"symbol": pos["symbol"], "event": "EXIT", "reason": why, "contract": contract_sym})
+                    continue
             decision = decide_exit(pos, self.config, session_phase)
 
             if decision["log"]:
@@ -253,6 +267,14 @@ class ZeroDteScalperDaemon:
                         continue
 
                     entry_px = rec.get("entry_price", c.get("ask", 0.50))
+                    # CBOE quotes are ~15 min old. A momentum entry fires right after a move, so a stale
+                    # ask would be a free head start: shift it by delta x (spot now - spot in the quote).
+                    spot_now, spot_q = float(sig.get("current_price") or 0), float(rec.get("chain_spot") or 0)
+                    if rec.get("chain_source") == "cboe_delayed" and spot_now > 0 and spot_q > 0:
+                        d = abs(float(c.get("delta") or 0.5)) * (1 if action == "CALL" else -1)
+                        adj = round(max(0.05, entry_px + d * (spot_now - spot_q)), 2)
+                        log(f"   Delayed-quote adjustment: ask ${entry_px:.2f} @ spot {spot_q:.2f} -> ${adj:.2f} @ spot {spot_now:.2f}")
+                        entry_px = adj
                     qty = max(1, rec.get("sizing", {}).get("suggested_contracts", rec.get("sizing", {}).get("contracts", 1)))
 
                     t = rec.get("targets", {})

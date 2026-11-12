@@ -1,0 +1,72 @@
+== QQQ: fade when >=k stretch signals agree (first minute it happens), midday 10:30-14:30
+  k>=2 hold  5m all                              IS   0.36bp t= 4.04 n=19276 | OOS   0.05bp t= 0.63 n=18154
+  k>=2 hold 15m all                              IS   0.34bp t= 2.35 n=19276 | OOS   0.01bp t= 0.08 n=18154
+  k>=2 hold 15m inside noise band                IS   0.18bp t= 0.96 n=12963 | OOS   0.09bp t= 0.58 n=12793
+  k>=2 hold 15m outside noise band               IS   0.69bp t= 2.86 n= 6313 | OOS  -0.17bp t=-0.60 n= 5361
+  k>=2 hold 15m low-vol regime                   IS   0.05bp t= 0.32 n= 6953 | OOS  -0.02bp t=-0.12 n=11472
+  k>=2 hold 15m high-vol regime                  IS   0.51bp t= 2.44 n=12323 | OOS   0.06bp t= 0.19 n= 6682
+  k>=2 hold 30m all                              IS   0.32bp t= 1.56 n=19276 | OOS   0.07bp t= 0.37 n=18154
+  k>=3 hold  5m all                              IS   0.40bp t= 3.87 n=14462 | OOS   0.13bp t= 1.33 n=13805
+  k>=3 hold 15m all                              IS   0.43bp t= 2.49 n=14462 | OOS   0.17bp t= 1.03 n=13805
+  k>=3 hold 15m inside noise band                IS   0.17bp t= 0.79 n= 9597 | OOS   0.25bp t= 1.35 n= 9653
+  k>=3 hold 15m outside noise band               IS   0.93bp t= 3.40 n= 4865 | OOS  -0.02bp t=-0.06 n= 4152
+  k>=3 hold 15m low-vol regime                   IS   0.07bp t= 0.34 n= 5231 | OOS   0.05bp t= 0.31 n= 8775
+  k>=3 hold 15m high-vol regime                  IS   0.63bp t= 2.58 n= 9231 | OOS   0.38bp t= 1.04 n= 5030
+  k>=3 hold 30m all                              IS   0.57bp t= 2.41 n=14462 | OOS   0.16bp t= 0.71 n=13805
+  k>=4 hold  5m all                              IS   0.34bp t= 2.94 n=11337 | OOS   0.18bp t= 1.58 n=10584
+  k>=4 hold 15m all                              IS   0.34bp t= 1.81 n=11337 | OOS   0.17bp t= 0.91 n=10584
+  k>=4 hold 15m inside noise band                IS  -0.03bp t=-0.14 n= 7339 | OOS   0.25bp t= 1.14 n= 7218
+  k>=4 hold 15m outside noise band               IS   1.04bp t= 3.53 n= 3998 | OOS  -0.01bp t=-0.01 n= 3366
+  k>=4 hold 15m low-vol regime                   IS   0.04bp t= 0.18 n= 4061 | OOS  -0.05bp t=-0.29 n= 6718
+  k>=4 hold 15m high-vol regime                  IS   0.51bp t= 1.90 n= 7276 | OOS   0.55bp t= 1.33 n= 3866
+  k>=4 hold 30m all                              IS   0.54bp t= 2.01 n=11337 | OOS   0.01bp t= 0.04 n=10584
+  k>=5 hold  5m all                              IS   0.34bp t= 2.52 n= 8563 | OOS   0.12bp t= 0.97 n= 7998
+  k>=5 hold 15m all                              IS   0.21bp t= 0.93 n= 8563 | OOS   0.15bp t= 0.73 n= 7998
+  k>=5 hold 15m inside noise band                IS  -0.13bp t=-0.43 n= 5340 | OOS   0.29bp t= 1.25 n= 5312
+  k>=5 hold 15m outside noise band               IS   0.77bp t= 2.32 n= 3223 | OOS  -0.14bp t=-0.36 n= 2686
+  k>=5 hold 15m low-vol regime                   IS  -0.18bp t=-0.69 n= 3024 | OOS   0.03bp t= 0.13 n= 5083
+  k>=5 hold 15m high-vol regime                  IS   0.42bp t= 1.34 n= 5539 | OOS   0.36bp t= 0.83 n= 2915
+  k>=5 hold 30m all                              IS   0.29bp t= 0.93 n= 8563 | OOS  -0.11bp t=-0.37 n= 7998
+  k>=6 hold  5m all                              IS   0.28bp t= 1.73 n= 5970 | OOS   0.09bp t= 0.58 n= 5502
+  k>=6 hold 15m all                              IS   0.25bp t= 0.92 n= 5970 | OOS   0.00bp t= 0.01 n= 5502
+  k>=6 hold 15m inside noise band                IS   0.12bp t= 0.31 n= 3608 | OOS   0.17bp t= 0.56 n= 3527
+  k>=6 hold 15m outside noise band               IS   0.46bp t= 1.19 n= 2362 | OOS  -0.29bp t=-0.64 n= 1975
+  k>=6 hold 15m low-vol regime                   IS   0.07bp t= 0.23 n= 2101 | OOS  -0.21bp t=-0.81 n= 3513
+  k>=6 hold 15m high-vol regime                  IS   0.35bp t= 0.91 n= 3869 | OOS   0.37bp t= 0.69 n= 1989
+  k>=6 hold 30m all                              IS   0.41bp t= 1.07 n= 5970 | OOS  -0.46bp t=-1.23 n= 5502
+== SPY: fade when >=k stretch signals agree (first minute it happens), midday 10:30-14:30
+  k>=2 hold  5m all                              IS   0.32bp t= 4.75 n=19109 | OOS   0.08bp t= 1.25 n=18119
+  k>=2 hold 15m all                              IS   0.32bp t= 2.89 n=19109 | OOS  -0.00bp t=-0.04 n=18119
+  k>=2 hold 15m inside noise band                IS   0.10bp t= 0.70 n=13034 | OOS   0.02bp t= 0.14 n=12643
+  k>=2 hold 15m outside noise band               IS   0.81bp t= 4.16 n= 6075 | OOS  -0.06bp t=-0.26 n= 5476
+  k>=2 hold 15m low-vol regime                   IS   0.09bp t= 0.73 n= 7121 | OOS   0.00bp t= 0.03 n=11216
+  k>=2 hold 15m high-vol regime                  IS   0.46bp t= 2.84 n=11988 | OOS  -0.02bp t=-0.07 n= 6903
+  k>=2 hold 30m all                              IS   0.22bp t= 1.42 n=19109 | OOS  -0.09bp t=-0.55 n=18119
+  k>=3 hold  5m all                              IS   0.32bp t= 4.12 n=14462 | OOS   0.08bp t= 0.97 n=13694
+  k>=3 hold 15m all                              IS   0.36bp t= 2.82 n=14462 | OOS   0.01bp t= 0.07 n=13694
+  k>=3 hold 15m inside noise band                IS   0.09bp t= 0.58 n= 9679 | OOS   0.07bp t= 0.46 n= 9417
+  k>=3 hold 15m outside noise band               IS   0.90bp t= 4.18 n= 4783 | OOS  -0.13bp t=-0.55 n= 4277
+  k>=3 hold 15m low-vol regime                   IS   0.11bp t= 0.79 n= 5419 | OOS   0.01bp t= 0.07 n= 8536
+  k>=3 hold 15m high-vol regime                  IS   0.51bp t= 2.74 n= 9043 | OOS   0.01bp t= 0.04 n= 5158
+  k>=3 hold 30m all                              IS   0.18bp t= 0.98 n=14462 | OOS  -0.05bp t=-0.30 n=13694
+  k>=4 hold  5m all                              IS   0.32bp t= 3.72 n=11264 | OOS   0.10bp t= 1.11 n=10548
+  k>=4 hold 15m all                              IS   0.44bp t= 3.04 n=11264 | OOS  -0.03bp t=-0.21 n=10548
+  k>=4 hold 15m inside noise band                IS   0.09bp t= 0.47 n= 7409 | OOS  -0.02bp t=-0.10 n= 7122
+  k>=4 hold 15m outside noise band               IS   1.12bp t= 4.74 n= 3855 | OOS  -0.06bp t=-0.21 n= 3426
+  k>=4 hold 15m low-vol regime                   IS   0.11bp t= 0.71 n= 4194 | OOS  -0.14bp t=-1.06 n= 6544
+  k>=4 hold 15m high-vol regime                  IS   0.63bp t= 3.02 n= 7070 | OOS   0.14bp t= 0.43 n= 4004
+  k>=4 hold 30m all                              IS   0.27bp t= 1.33 n=11264 | OOS  -0.32bp t=-1.50 n=10548
+  k>=5 hold  5m all                              IS   0.29bp t= 2.88 n= 8604 | OOS   0.03bp t= 0.34 n= 7983
+  k>=5 hold 15m all                              IS   0.34bp t= 2.00 n= 8604 | OOS  -0.16bp t=-0.98 n= 7983
+  k>=5 hold 15m inside noise band                IS   0.04bp t= 0.16 n= 5500 | OOS  -0.18bp t=-0.98 n= 5222
+  k>=5 hold 15m outside noise band               IS   0.87bp t= 3.29 n= 3104 | OOS  -0.11bp t=-0.37 n= 2761
+  k>=5 hold 15m low-vol regime                   IS   0.14bp t= 0.79 n= 3177 | OOS  -0.19bp t=-1.23 n= 4940
+  k>=5 hold 15m high-vol regime                  IS   0.45bp t= 1.84 n= 5427 | OOS  -0.11bp t=-0.32 n= 3043
+  k>=5 hold 30m all                              IS   0.14bp t= 0.59 n= 8604 | OOS  -0.53bp t=-2.25 n= 7983
+  k>=6 hold  5m all                              IS   0.33bp t= 2.66 n= 6054 | OOS   0.02bp t= 0.18 n= 5616
+  k>=6 hold 15m all                              IS   0.17bp t= 0.85 n= 6054 | OOS  -0.11bp t=-0.57 n= 5616
+  k>=6 hold 15m inside noise band                IS  -0.06bp t=-0.23 n= 3758 | OOS  -0.17bp t=-0.76 n= 3573
+  k>=6 hold 15m outside noise band               IS   0.56bp t= 1.82 n= 2296 | OOS  -0.01bp t=-0.02 n= 2043
+  k>=6 hold 15m low-vol regime                   IS   0.05bp t= 0.22 n= 2205 | OOS  -0.17bp t=-0.90 n= 3489
+  k>=6 hold 15m high-vol regime                  IS   0.25bp t= 0.83 n= 3849 | OOS  -0.01bp t=-0.03 n= 2127
+  k>=6 hold 30m all                              IS  -0.16bp t=-0.57 n= 6054 | OOS  -0.64bp t=-2.12 n= 5616

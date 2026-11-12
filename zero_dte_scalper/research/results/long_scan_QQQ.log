@@ -1,0 +1,43 @@
+
+######## QQQ: 1448 full sessions 2021-01-04 -> 2026-11-11 ########
+A. CLOSE FADE: fade sign(prev close -> entry). gross bps unless noted; years: [2021, 2022, 2023, 2024, 2025, 2026]
+  15:30->15:54                           n= 1447 mean=  0.04 t=  0.06 hit=49.8% PF=1.00 |  -1.71  -4.40   1.90   3.62   1.13  -0.36
+  15:30->15:55                           n= 1447 mean= -0.65 t= -0.98 hit=50.0% PF=0.93 |  -3.90  -5.67   1.53   2.75   1.11   0.45
+  15:30->15:57                           n= 1447 mean= -0.12 t= -0.17 hit=50.2% PF=0.99 |  -1.40  -4.94   0.30   2.55   2.45   0.38
+  15:30->15:59c                          n= 1447 mean= -0.31 t= -0.40 hit=49.6% PF=0.97 |  -1.66  -6.16   0.01   2.26   3.34   0.47
+  15:51->15:54                           n= 1447 mean= -0.56 t= -2.51 hit=46.8% PF=0.83 |  -0.70  -1.10   0.38  -0.59  -1.25  -0.07
+  15:51->15:55                           n= 1447 mean= -1.21 t= -4.13 hit=44.5% PF=0.74 |  -2.74  -2.23   0.25  -1.84  -1.11   0.66
+  15:51->15:57                           n= 1447 mean= -0.74 t= -2.02 hit=47.2% PF=0.86 |  -0.27  -1.59  -0.56  -2.25  -0.16   0.57
+  15:51->15:59c                          n= 1447 mean= -1.08 t= -2.35 hit=48.4% PF=0.84 |  -0.21  -3.48  -1.54  -2.85   1.01   0.86
+  15:51->15:55 NET 0.5bp                 n= 1447 mean= -1.71 t= -5.83 hit=43.2% PF=0.65 |  -3.24  -2.73  -0.25  -2.34  -1.61   0.16
+    up days                              n=  777 mean= -1.00 t= -2.91 hit=44.9% PF=0.75 |  -2.01  -1.84   0.72  -1.14  -1.71   0.17
+    down days                            n=  670 mean= -1.47 t= -2.96 hit=44.0% PF=0.73 |  -3.68  -2.55  -0.29  -2.75  -0.25   1.19
+    |day move| 0-20bp                    n=  246 mean= -0.29 t= -0.48 hit=48.4% PF=0.92 |  -0.51  -0.94   1.27  -2.74   2.15  -0.03
+    |day move| 20-50bp                   n=  281 mean= -0.30 t= -0.52 hit=48.8% PF=0.92 |  -1.69   6.11  -0.26  -1.93  -1.46   0.57
+    |day move| 50-100bp                  n=  347 mean= -1.36 t= -2.52 hit=41.8% PF=0.69 |  -3.16  -4.98   1.11  -2.45  -0.80   1.12
+    |day move| 100-9999bp                n=  573 mean= -1.98 t= -3.62 hit=42.4% PF=0.66 |  -4.32  -3.31  -0.61  -0.65  -2.93   0.67
+    signal = open->15:51 instead         n= 1448 mean= -1.25 t= -4.27 hit=44.9% PF=0.73 |  -2.60  -2.45  -0.48  -0.99  -1.21   0.43
+    day & intraday signs agree           n= 1166 mean= -1.52 t= -4.51 hit=43.6% PF=0.69 |  -3.14  -2.70  -0.14  -1.76  -1.53   0.71
+    last 30m WITH day move               n=  784 mean= -0.88 t= -2.15 hit=44.4% PF=0.81 |  -2.58  -1.56   0.91  -1.80  -0.13   0.33
+    last 30m AGAINST day move            n=  663 mean= -1.61 t= -3.80 hit=44.6% PF=0.66 |  -2.96  -3.33  -0.53  -1.88  -2.11   0.99
+    follow 15:50 minute's direction      n= 1448 mean=  0.37 t=  1.27 hit=52.6% PF=1.10 |   1.17  -0.24   0.69   0.84  -0.26  -0.03
+B. TIME-OF-DAY PROFILE (5-min buckets): momentum-signed bps; shown if |t|>3 and same sign in >=80% of years
+  signal=move since prev close: 15:05:+1.29(t+4.7)
+  signal=move since day open  : 10:30:+1.22(t+3.2)  11:00:+1.03(t+3.1)  15:05:+0.91(t+3.3)
+  signal=move since 30m ago   : none
+  signal=move since 5m ago    : 12:35:-0.85(t-3.3)  14:35:-1.11(t-3.6)
+D. NOISE-BAND MOMENTUM (30-min checks, 14d lookback), per-day bps net of 1.0bp/trade
+  x0.8 exit=band                         n=  985 mean=  6.30 t=  2.61 hit=45.7% PF=1.28 |   4.04  13.68  10.40   5.68   1.72  -0.22
+  x0.8 exit=open                         n=  985 mean=  5.86 t=  2.08 hit=53.2% PF=1.20 |   2.86  14.70   6.98   4.76   4.48  -1.01
+  x0.8 exit=eod                          n=  985 mean=  5.03 t=  1.62 hit=55.0% PF=1.16 |  -0.96  17.19   6.16   4.89   0.48  -0.53
+  x1.0 exit=band                         n=  850 mean=  7.01 t=  2.82 hit=45.3% PF=1.34 |   4.90  11.05  10.10   5.65   5.65   3.52
+  x1.0 exit=open                         n=  850 mean=  8.86 t=  2.98 hit=55.2% PF=1.33 |   5.01  18.27  12.60   5.61   8.58   0.66
+  x1.0 exit=eod                          n=  850 mean= 10.04 t=  3.15 hit=57.8% PF=1.37 |   2.49  23.55  11.48   7.54   8.97   3.22
+  x1.3 exit=band                         n=  667 mean=  8.46 t=  2.98 hit=46.3% PF=1.43 |   7.94  13.76   8.22   7.79   5.33   5.98
+  x1.3 exit=open                         n=  667 mean= 11.71 t=  3.43 hit=57.3% PF=1.46 |  10.79  20.82  12.70   7.19  14.10   1.73
+  x1.3 exit=eod                          n=  667 mean= 13.00 t=  3.58 hit=59.5% PF=1.51 |   6.44  26.02  12.17   9.35  14.09   6.07
+E. ORB(15m) FAILURE FADE on 5-min closes, 09:45-11:30: fade-signed forward bps from next bar open
+  first fail of day, fwd 15m             n=  988 mean=  0.46 t=  0.54 hit=49.1% PF=1.05 |   3.36   1.64   4.63  -2.80  -1.83  -2.56
+  first fail of day, fwd 30m             n=  988 mean=  0.78 t=  0.67 hit=49.9% PF=1.06 |   2.06   1.73   4.82  -1.23  -1.09  -1.93
+  first fail of day, fwd 60m             n=  988 mean=  1.39 t=  0.94 hit=51.5% PF=1.08 |   3.61   1.10   2.03  -1.93   0.33   3.29
+  first fail of day, fwd EOD             n=  988 mean= -1.18 t= -0.39 hit=47.2% PF=0.97 |  -0.03  -3.80   0.90  -5.17  -2.83   4.20

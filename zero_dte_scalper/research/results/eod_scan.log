@@ -1,0 +1,84 @@
+
+=== SPY hourly, GROSS fade return 15:30->16:00 (bps) ===
+unconditional last30 (drift)                   n= 722 mean=  0.00bp t= 0.01 hit=49.9% thirds=[  0.4   0.6  -1.0]
+fade | up day                                  n= 401 mean=  1.87bp t= 2.00 hit=54.1% thirds=[  2.1   0.4   3.1]
+fade | down day                                n= 320 mean=  2.35bp t= 1.70 hit=55.6% thirds=[  2.9   2.9   1.3]
+fade | |day move| 0-25bp                       n= 219 mean=  0.41bp t= 0.32 hit=50.7% thirds=[  3.5  -1.7  -0.5]
+fade | |day move| 25-50bp                      n= 149 mean=  2.74bp t= 1.75 hit=59.1% thirds=[  4.1  -1.4   5.4]
+fade | |day move| 50-100bp                     n= 205 mean=  3.62bp t= 2.49 hit=55.6% thirds=[  1.7   5.0   4.2]
+fade | |day move| 100-999bp                    n= 148 mean=  1.76bp t= 0.78 hit=55.4% thirds=[  0.9   4.2   0.2]
+fade | prior VIX 0-14                          n=  11 mean= -0.13bp t=-0.07 hit=36.4% thirds=[  1.5  -1.6  -0.2]
+fade | prior VIX 14-17                         n= 229 mean=  1.51bp t= 1.48 hit=59.0% thirds=[ -0.5   2.2   2.8]
+fade | prior VIX 17-21                         n= 165 mean=  1.77bp t= 1.18 hit=54.5% thirds=[  3.0   0.9   1.3]
+fade | prior VIX 21-99                         n=  87 mean=  2.44bp t= 0.64 hit=54.0% thirds=[  1.4   3.1   2.8]
+fade | at day extreme (top/bottom 20%)         n= 311 mean=  1.70bp t= 1.46 hit=55.0% thirds=[  0.2   2.4   2.5]
+fade | already retraced >50%                   n= 168 mean=  1.29bp t= 0.71 hit=51.2% thirds=[  5.2  -2.9   1.6]
+fade | 14:30-15:30 hour WITH day move          n= 437 mean=  2.32bp t= 2.22 hit=53.8% thirds=[  2.7   3.2   1.1]
+fade | 14:30-15:30 hour AGAINST day move       n= 284 mean=  1.71bp t= 1.36 hit=56.3% thirds=[  2.9   0.1   2.1]
+fade last hour (14:30->15:30) instead          n= 722 mean=  0.75bp t= 0.93 hit=49.9% thirds=[  0.6   2.2  -0.5]
+fade | hour with move & |day|>=25bp            n= 317 mean=  2.59bp t= 1.95 hit=54.6% thirds=[  2.4   3.2   2.1]
+--- SPY 5m (63 days): fade sign(prev close -> entry), entry time x exit time, gross bps (t) ---
+entry              15:45           15:50           15:55           16:00
+14:00       2.52( 0.97)     2.85( 1.21)     5.35( 2.03)     6.23( 2.28) 
+14:30       0.49( 0.22)     1.23( 0.58)     3.34( 1.39)     3.77( 1.52) 
+15:00      -2.46(-1.59)    -1.24(-0.78)     1.41( 0.69)     2.30( 0.96) 
+15:15      -0.60(-0.63)     0.52( 0.44)     3.55( 1.97)     4.15( 2.06) 
+15:30      -1.00(-1.29)     0.12( 0.12)     3.15( 1.91)     3.74( 2.06) 
+15:40      -0.04(-0.10)     1.09( 1.59)     4.12( 3.07)     4.71( 3.08) 
+15:45                       1.13( 1.78)     4.15( 3.33)     4.75( 3.37) 
+
+=== QQQ hourly, GROSS fade return 15:30->16:00 (bps) ===
+unconditional last30 (drift)                   n= 722 mean=  0.30bp t= 0.30 hit=52.2% thirds=[ -0.0   1.1  -0.2]
+fade | up day                                  n= 395 mean=  1.61bp t= 1.35 hit=49.4% thirds=[  2.1   1.4   1.3]
+fade | down day                                n= 325 mean=  2.64bp t= 1.56 hit=54.5% thirds=[  2.0   5.5   0.5]
+fade | |day move| 0-25bp                       n= 166 mean=  0.26bp t= 0.15 hit=44.0% thirds=[  0.7   2.2  -2.1]
+fade | |day move| 25-50bp                      n= 120 mean=  2.12bp t= 0.97 hit=48.3% thirds=[  1.9   3.9   0.6]
+fade | |day move| 50-100bp                     n= 174 mean=  2.76bp t= 1.19 hit=56.3% thirds=[  4.2   6.3  -2.2]
+fade | |day move| 100-999bp                    n= 260 mean=  3.02bp t= 1.71 hit=55.0% thirds=[  2.0   4.5   2.5]
+fade | prior VIX 0-14                          n=  11 mean=  1.57bp t= 0.55 hit=54.5% thirds=[ -3.9   4.4   3.1]
+fade | prior VIX 14-17                         n= 229 mean=  0.42bp t= 0.33 hit=51.1% thirds=[  1.0   2.6  -2.4]
+fade | prior VIX 17-21                         n= 165 mean=  1.58bp t= 0.77 hit=55.8% thirds=[  4.3   0.8  -0.3]
+fade | prior VIX 21-99                         n=  87 mean=  6.70bp t= 1.44 hit=50.6% thirds=[ 14.1   3.3   2.7]
+fade | at day extreme (top/bottom 20%)         n= 309 mean=  2.76bp t= 1.77 hit=53.1% thirds=[  1.4   6.3   0.5]
+fade | already retraced >50%                   n= 177 mean= -1.27bp t=-0.75 hit=47.5% thirds=[  0.9  -3.4  -1.4]
+fade | 14:30-15:30 hour WITH day move          n= 435 mean=  2.26bp t= 1.74 hit=52.6% thirds=[  2.6   4.3  -0.1]
+fade | 14:30-15:30 hour AGAINST day move       n= 286 mean=  1.79bp t= 1.12 hit=50.0% thirds=[  1.3   3.8   0.3]
+fade last hour (14:30->15:30) instead          n= 722 mean=  0.72bp t= 0.72 hit=51.2% thirds=[  0.7   1.9  -0.4]
+fade | hour with move & |day|>=25bp            n= 347 mean=  2.83bp t= 1.86 hit=54.8% thirds=[  3.6   5.0  -0.1]
+--- QQQ 5m (63 days): fade sign(prev close -> entry), entry time x exit time, gross bps (t) ---
+entry              15:45           15:50           15:55           16:00
+14:00      -0.58(-0.17)    -0.02(-0.01)     4.66( 1.27)     3.79( 0.97) 
+14:30      -1.75(-0.55)    -1.33(-0.44)     3.13( 0.91)     2.45( 0.68) 
+15:00      -2.27(-0.87)    -1.38(-0.54)     2.64( 0.87)     2.41( 0.68) 
+15:15      -0.60(-0.41)     0.35( 0.21)     4.97( 2.16)     4.43( 1.68) 
+15:30      -2.47(-1.74)    -1.68(-1.15)     2.25( 1.03)     2.12( 0.85) 
+15:40       0.24( 0.45)     1.10( 1.12)     4.70( 2.62)     4.74( 2.28) 
+15:45                       0.84( 0.93)     4.61( 2.79)     4.53( 2.35) 
+
+=== IWM hourly, GROSS fade return 15:30->16:00 (bps) ===
+unconditional last30 (drift)                   n= 722 mean= -0.12bp t=-0.13 hit=53.0% thirds=[ -1.6   0.3   0.9]
+fade | up day                                  n= 373 mean=  2.48bp t= 2.05 hit=47.5% thirds=[  2.4   4.5   0.6]
+fade | down day                                n= 348 mean=  2.48bp t= 1.82 hit=54.0% thirds=[ -0.5   5.3   2.7]
+fade | |day move| 0-25bp                       n= 107 mean=  4.68bp t= 1.77 hit=52.3% thirds=[  1.9  10.2   2.1]
+fade | |day move| 25-50bp                      n= 126 mean=  0.40bp t= 0.24 hit=52.4% thirds=[  1.9   2.1  -2.9]
+fade | |day move| 50-100bp                     n= 211 mean=  0.77bp t= 0.58 hit=51.2% thirds=[ -3.8   1.9   4.1]
+fade | |day move| 100-999bp                    n= 277 mean=  3.89bp t= 2.26 hit=48.7% thirds=[  4.6   4.9   2.2]
+fade | prior VIX 0-14                          n=  11 mean= -3.34bp t=-0.75 hit=45.5% thirds=[  1.3 -16.2   1.6]
+fade | prior VIX 14-17                         n= 229 mean=  1.54bp t= 1.21 hit=51.1% thirds=[  1.8   1.7   1.1]
+fade | prior VIX 17-21                         n= 165 mean=  3.02bp t= 1.61 hit=51.5% thirds=[  5.7   2.5   0.9]
+fade | prior VIX 21-99                         n=  87 mean=  8.39bp t= 2.37 hit=51.7% thirds=[ 16.8   1.9   6.4]
+fade | at day extreme (top/bottom 20%)         n= 300 mean=  2.88bp t= 1.95 hit=49.0% thirds=[ -0.6   7.1   2.1]
+fade | already retraced >50%                   n= 165 mean=  1.85bp t= 1.08 hit=54.5% thirds=[ -1.1   6.1   0.5]
+fade | 14:30-15:30 hour WITH day move          n= 419 mean=  3.09bp t= 2.37 hit=50.4% thirds=[  1.4   5.7   2.2]
+fade | 14:30-15:30 hour AGAINST day move       n= 302 mean=  1.63bp t= 1.36 hit=51.0% thirds=[ -0.7   4.4   1.2]
+fade last hour (14:30->15:30) instead          n= 722 mean=  1.16bp t= 1.28 hit=49.7% thirds=[  1.1   1.8   0.6]
+fade | hour with move & |day|>=25bp            n= 361 mean=  2.61bp t= 1.90 hit=50.1% thirds=[  1.6   3.9   2.3]
+--- IWM 5m (60 days): fade sign(prev close -> entry), entry time x exit time, gross bps (t) ---
+entry              15:45           15:50           15:55           16:00
+14:00       0.38( 0.11)     1.19( 0.38)     4.24( 1.23)     4.39( 1.27) 
+14:30      -0.68(-0.23)     0.36( 0.13)     4.09( 1.31)     4.75( 1.50) 
+15:00      -3.44(-1.67)    -1.41(-0.67)     1.62( 0.62)     1.95( 0.66) 
+15:15      -1.92(-1.27)     0.11( 0.06)     3.14( 1.32)     3.47( 1.32) 
+15:30      -1.02(-0.78)     1.01( 0.61)     4.04( 1.87)     4.37( 1.82) 
+15:40      -0.08(-0.12)     1.87( 1.77)     5.15( 3.00)     5.62( 2.81) 
+15:45                       1.85( 2.10)     4.71( 2.98)     4.51( 2.38) 

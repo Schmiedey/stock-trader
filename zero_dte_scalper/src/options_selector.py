@@ -102,6 +102,8 @@ def select_best_contract(
         "action": action,
         "contract": best_contract,
         "entry_price": entry_price,
+        "chain_spot": chain_data.get("spot_price", 0.0),
+        "chain_source": chain_data.get("source", ""),
         "sizing": {
             "suggested_contracts": suggested_qty,
             "contract_unit_cost": round(contract_unit_cost, 2),

@@ -1,0 +1,17 @@
+ORB stocks-in-play, net of 3bp round trip. bps are on position notional.
+paper rule: top5, stop 10% ATR, exit close   n= 194 win= 8.2% avg= -20.5bp (-0.58R) PF=0.46 day-t=-2.51 hold=  0m | 1m-bar days only: n= 80 avg= -17.2bp
+  top 10                                     n= 384 win= 8.9% avg= -19.1bp (-0.59R) PF=0.49 day-t=-2.65 hold=  0m | 1m-bar days only: n=165 avg= -12.7bp
+  top 20                                     n= 765 win= 9.8% avg= -16.3bp (-0.55R) PF=0.55 day-t=-3.04 hold=  0m | 1m-bar days only: n=328 avg=  -8.8bp
+  top 3                                      n= 119 win= 4.2% avg= -28.0bp (-0.87R) PF=0.27 day-t=-3.29 hold=  0m | 1m-bar days only: n= 50 avg= -19.7bp
+  RVOL >= 2                                  n= 186 win= 8.1% avg= -20.1bp (-0.57R) PF=0.47 day-t=-2.54 hold=  0m | 1m-bar days only: n= 78 avg= -16.5bp
+  RVOL >= 3, top 10                          n= 188 win= 5.3% avg= -26.8bp (-0.73R) PF=0.32 day-t=-2.48 hold=  0m | 1m-bar days only: n=101 avg= -24.6bp
+  no RVOL filter, random-ish (top 173)       n=6519 win=13.0% avg=  -9.3bp (-0.31R) PF=0.74 day-t=-2.50 hold=  1m | 1m-bar days only: n=2801 avg=  -1.1bp
+  stop 5% ATR                                n= 194 win= 3.1% avg= -15.8bp (-0.85R) PF=0.27 day-t=-5.20 hold=  0m | 1m-bar days only: n= 80 avg= -11.5bp
+  stop 20% ATR                               n= 194 win=20.6% avg= -20.1bp (-0.24R) PF=0.68 day-t=-1.57 hold=  5m | 1m-bar days only: n= 80 avg= -11.6bp
+  stop 50% ATR                               n= 194 win=47.4% avg=   5.7bp (+0.04R) PF=1.07 day-t= 0.35 hold=345m | 1m-bar days only: n= 80 avg=  -4.5bp
+  target 2R                                  n= 194 win=14.9% avg= -24.1bp (-0.65R) PF=0.32 day-t=-7.07 hold=  0m | 1m-bar days only: n= 80 avg= -26.2bp
+  target 5R                                  n= 194 win= 8.8% avg= -22.6bp (-0.61R) PF=0.41 day-t=-4.25 hold=  0m | 1m-bar days only: n= 80 avg= -24.1bp
+  target 10R                                 n= 194 win= 8.2% avg= -19.9bp (-0.57R) PF=0.48 day-t=-2.46 hold=  0m | 1m-bar days only: n= 80 avg= -16.1bp
+  market at 09:35, stop = candle far side    n= 230 win=41.7% avg=  14.0bp (+0.13R) PF=1.16 day-t= 0.79 hold=362m | 1m-bar days only: n=100 avg=  -6.2bp
+  FADE the candle (control)                  n= 115 win= 4.3% avg= -33.7bp (-0.90R) PF=0.13 day-t=-9.52 hold=  0m | 1m-bar days only: n= 50 avg= -40.1bp
+  cost 8bp                                   n= 194 win= 8.2% avg= -25.5bp (-0.73R) PF=0.40 day-t=-3.17 hold=  0m | 1m-bar days only: n= 80 avg= -22.2bp

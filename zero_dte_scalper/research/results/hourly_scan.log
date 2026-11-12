@@ -1,0 +1,87 @@
+
+=== SPY  722 days  2023-12-15 -> 2026-11-12  (net of 1.0bp/trade) ===
+last30 mom | sign(day ret (prev close->15:30)) n= 721 mean= -3.08bp t=-3.83 hit=42.6% PF=0.65 thirds=[  -3.8   -2.5   -3.0] sum=  -2221
+   ...only top-30% |move|                    n= 202 mean= -3.29bp t=-1.97 hit=39.6% PF=0.67 thirds=[  -3.2   -3.7   -3.0] sum=   -665
+last30 mom | sign(intraday ret (open->15:30)) n= 722 mean= -2.89bp t=-3.61 hit=42.1% PF=0.67 thirds=[  -3.3   -2.3   -3.1] sum=  -2089
+   ...only top-30% |move|                    n= 195 mean= -1.57bp t=-0.78 hit=42.1% PF=0.85 thirds=[  -0.7   -1.1   -2.9] sum=   -306
+last30 mom | sign(first hour ret)            n= 721 mean= -1.84bp t=-2.28 hit=46.0% PF=0.78 thirds=[  -1.6   -1.5   -2.4] sum=  -1329
+   ...only top-30% |move|                    n= 213 mean= -3.80bp t=-2.20 hit=42.3% PF=0.64 thirds=[  -2.7   -6.7   -2.0] sum=   -809
+last30 mom | sign(14:30->15:30 ret)          n= 722 mean= -1.75bp t=-2.17 hit=46.5% PF=0.79 thirds=[  -1.6   -3.2   -0.5] sum=  -1260
+   ...only top-30% |move|                    n= 202 mean= -2.47bp t=-1.22 hit=44.1% PF=0.77 thirds=[   0.4   -5.2   -2.6] sum=   -499
+continuation 09:30->10:30 bar                n= 722 mean= -0.19bp t=-0.18 hit=52.2% PF=0.98 thirds=[   1.8   -1.2   -1.1] sum=   -140
+continuation 10:30->11:30 bar                n= 722 mean= -0.05bp t=-0.05 hit=49.7% PF=0.99 thirds=[   0.6   -0.7   -0.1] sum=    -35
+continuation 11:30->12:30 bar                n= 722 mean= -0.12bp t=-0.10 hit=49.3% PF=0.99 thirds=[  -0.2   -0.2   -0.0] sum=    -86
+continuation 12:30->13:30 bar                n= 722 mean= -1.30bp t=-1.38 hit=48.1% PF=0.85 thirds=[   0.8   -1.4   -3.3] sum=   -938
+continuation 13:30->14:30 bar                n= 722 mean= -0.51bp t=-0.61 hit=46.1% PF=0.93 thirds=[  -0.8   -1.1    0.4] sum=   -369
+continuation 14:30->15:30 bar                n= 722 mean= -1.76bp t=-2.19 hit=46.3% PF=0.78 thirds=[  -1.6   -3.3   -0.5] sum=  -1270
+gap continuation in first hour               n= 721 mean=  0.43bp t= 0.32 hit=48.4% PF=1.03 thirds=[   0.3   -0.0    1.0] sum=    307
+   ...|gap|>40bp                             n= 256 mean= -0.10bp t=-0.04 hit=52.7% PF=0.99 thirds=[   5.7   -6.5    0.5] sum=    -26
+first hour dir -> rest of day                n= 722 mean=  0.95bp t= 0.37 hit=53.2% PF=1.05 thirds=[   3.3    1.6   -2.0] sum=    688
+first hour (from prev close) -> rest of day  n= 721 mean= -4.40bp t=-1.73 hit=48.8% PF=0.81 thirds=[  -4.0   -7.2   -2.1] sum=  -3171
+noise-band mom x0.75 exit=band (per day)     n= 463 mean= -0.51bp t=-0.24 hit=45.4% PF=0.97 thirds=[   1.9    0.3   -3.7] sum=   -237
+noise-band mom x0.75 exit=open (per day)     n= 463 mean= -0.14bp t=-0.06 hit=50.3% PF=0.99 thirds=[  -1.5    3.3   -2.2] sum=    -67
+noise-band mom x0.75 exit=hold (per day)     n= 463 mean=  0.98bp t= 0.40 hit=52.1% PF=1.05 thirds=[  -1.7    6.0   -1.3] sum=    452
+noise-band mom x1.0 exit=band (per day)      n= 387 mean= -1.51bp t=-0.61 hit=41.9% PF=0.91 thirds=[  -0.2    0.7   -5.1] sum=   -583
+noise-band mom x1.0 exit=open (per day)      n= 387 mean= -2.20bp t=-0.84 hit=47.8% PF=0.89 thirds=[  -3.7    1.8   -4.7] sum=   -852
+noise-band mom x1.0 exit=hold (per day)      n= 387 mean= -0.49bp t=-0.18 hit=49.9% PF=0.97 thirds=[  -3.1    5.5   -3.9] sum=   -191
+noise-band mom x1.25 exit=band (per day)     n= 324 mean= -2.01bp t=-0.75 hit=42.3% PF=0.88 thirds=[  -3.3    0.6   -3.3] sum=   -652
+noise-band mom x1.25 exit=open (per day)     n= 324 mean= -2.90bp t=-1.01 hit=46.0% PF=0.85 thirds=[  -6.1    1.2   -3.8] sum=   -939
+noise-band mom x1.25 exit=hold (per day)     n= 324 mean= -0.81bp t=-0.27 hit=48.1% PF=0.96 thirds=[  -6.0    6.2   -2.7] sum=   -264
+
+=== QQQ  722 days  2023-12-15 -> 2026-11-12  (net of 1.0bp/trade) ===
+last30 mom | sign(day ret (prev close->15:30)) n= 721 mean= -3.07bp t=-3.06 hit=44.9% PF=0.71 thirds=[  -3.2   -4.3   -1.7] sum=  -2215
+   ...only top-30% |move|                    n= 208 mean= -3.69bp t=-1.86 hit=41.3% PF=0.69 thirds=[  -5.0   -2.1   -4.0] sum=   -768
+last30 mom | sign(intraday ret (open->15:30)) n= 722 mean= -2.85bp t=-2.83 hit=44.0% PF=0.73 thirds=[  -2.8   -2.9   -2.8] sum=  -2056
+   ...only top-30% |move|                    n= 208 mean= -5.08bp t=-2.09 hit=38.9% PF=0.65 thirds=[  -7.0   -3.0   -5.2] sum=  -1056
+last30 mom | sign(first hour ret)            n= 721 mean= -1.77bp t=-1.76 hit=45.2% PF=0.82 thirds=[  -1.7   -1.9   -1.7] sum=  -1279
+   ...only top-30% |move|                    n= 215 mean= -2.16bp t=-0.96 hit=44.7% PF=0.82 thirds=[  -4.4   -0.9   -1.2] sum=   -465
+last30 mom | sign(14:30->15:30 ret)          n= 722 mean= -1.72bp t=-1.72 hit=45.7% PF=0.83 thirds=[  -1.7   -2.9   -0.6] sum=  -1243
+   ...only top-30% |move|                    n= 203 mean= -3.08bp t=-1.19 hit=44.3% PF=0.79 thirds=[  -0.8   -6.0   -2.5] sum=   -625
+continuation 09:30->10:30 bar                n= 722 mean= -0.63bp t=-0.44 hit=51.8% PF=0.95 thirds=[   2.0   -1.6   -2.3] sum=   -455
+continuation 10:30->11:30 bar                n= 722 mean= -0.79bp t=-0.65 hit=48.9% PF=0.93 thirds=[   0.3   -1.4   -1.2] sum=   -574
+continuation 11:30->12:30 bar                n= 722 mean= -0.83bp t=-0.60 hit=47.9% PF=0.93 thirds=[  -0.2   -2.3    0.1] sum=   -600
+continuation 12:30->13:30 bar                n= 722 mean= -1.15bp t=-0.96 hit=46.3% PF=0.90 thirds=[   1.0   -1.9   -2.5] sum=   -828
+continuation 13:30->14:30 bar                n= 722 mean= -0.30bp t=-0.29 hit=47.1% PF=0.97 thirds=[  -1.4   -1.1    1.6] sum=   -219
+continuation 14:30->15:30 bar                n= 722 mean= -1.46bp t=-1.45 hit=46.0% PF=0.85 thirds=[  -1.7   -2.0   -0.6] sum=  -1052
+gap continuation in first hour               n= 721 mean=  0.68bp t= 0.32 hit=49.2% PF=1.03 thirds=[  -1.3   -0.8    4.2] sum=    490
+   ...|gap|>40bp                             n= 375 mean= -1.68bp t=-0.52 hit=49.3% PF=0.93 thirds=[   1.5   -8.7    2.2] sum=   -629
+first hour dir -> rest of day                n= 722 mean=  3.34bp t= 1.04 hit=52.8% PF=1.13 thirds=[   7.8    3.2   -1.0] sum=   2409
+first hour (from prev close) -> rest of day  n= 721 mean= -0.87bp t=-0.27 hit=50.1% PF=0.97 thirds=[   1.0   -5.5    1.9] sum=   -631
+noise-band mom x0.75 exit=band (per day)     n= 433 mean=  1.22bp t= 0.31 hit=46.0% PF=1.05 thirds=[   4.2    1.1   -1.6] sum=    527
+noise-band mom x0.75 exit=open (per day)     n= 433 mean=  1.67bp t= 0.41 hit=51.0% PF=1.06 thirds=[   2.0    2.7    0.3] sum=    725
+noise-band mom x0.75 exit=hold (per day)     n= 433 mean=  0.91bp t= 0.21 hit=52.7% PF=1.03 thirds=[   3.0   -1.4    1.1] sum=    393
+noise-band mom x1.0 exit=band (per day)      n= 356 mean=  5.14bp t= 1.20 hit=48.0% PF=1.25 thirds=[   4.9    6.0    4.5] sum=   1829
+noise-band mom x1.0 exit=open (per day)      n= 356 mean=  5.55bp t= 1.21 hit=54.8% PF=1.23 thirds=[   4.4    8.6    3.6] sum=   1975
+noise-band mom x1.0 exit=hold (per day)      n= 356 mean=  6.83bp t= 1.49 hit=56.2% PF=1.30 thirds=[   6.5    9.2    4.9] sum=   2430
+noise-band mom x1.25 exit=band (per day)     n= 296 mean=  2.49bp t= 0.65 hit=47.0% PF=1.12 thirds=[   2.6    3.9    1.0] sum=    737
+noise-band mom x1.25 exit=open (per day)     n= 296 mean=  6.63bp t= 1.27 hit=53.4% PF=1.29 thirds=[   1.5   16.3    2.1] sum=   1962
+noise-band mom x1.25 exit=hold (per day)     n= 296 mean=  8.17bp t= 1.57 hit=54.4% PF=1.37 thirds=[   3.2   17.4    4.0] sum=   2418
+
+=== IWM  722 days  2023-12-15 -> 2026-11-12  (net of 1.0bp/trade) ===
+last30 mom | sign(day ret (prev close->15:30)) n= 721 mean= -3.48bp t=-3.83 hit=46.9% PF=0.67 thirds=[  -2.4   -5.2   -2.8] sum=  -2510
+   ...only top-30% |move|                    n= 200 mean= -5.64bp t=-2.79 hit=49.5% PF=0.58 thirds=[  -7.7   -4.6   -4.7] sum=  -1128
+last30 mom | sign(intraday ret (open->15:30)) n= 722 mean= -3.30bp t=-3.64 hit=46.4% PF=0.69 thirds=[  -3.2   -3.7   -3.0] sum=  -2379
+   ...only top-30% |move|                    n= 195 mean= -7.36bp t=-3.38 hit=46.2% PF=0.49 thirds=[  -7.0   -6.4   -8.7] sum=  -1435
+last30 mom | sign(first hour ret)            n= 721 mean= -0.63bp t=-0.69 hit=48.8% PF=0.93 thirds=[   0.1   -0.8   -1.2] sum=   -454
+   ...only top-30% |move|                    n= 191 mean= -3.08bp t=-1.78 hit=47.6% PF=0.69 thirds=[  -6.8   -2.3   -0.3] sum=   -588
+last30 mom | sign(14:30->15:30 ret)          n= 722 mean= -2.16bp t=-2.38 hit=47.9% PF=0.78 thirds=[  -2.1   -2.8   -1.6] sum=  -1562
+   ...only top-30% |move|                    n= 198 mean= -3.66bp t=-1.60 hit=46.5% PF=0.72 thirds=[  -0.7   -4.3   -6.0] sum=   -724
+continuation 09:30->10:30 bar                n= 722 mean= -0.36bp t=-0.22 hit=51.1% PF=0.98 thirds=[   3.1   -2.2   -1.9] sum=   -259
+continuation 10:30->11:30 bar                n= 722 mean= -0.90bp t=-0.70 hit=49.0% PF=0.93 thirds=[  -2.2   -0.5   -0.1] sum=   -648
+continuation 11:30->12:30 bar                n= 722 mean= -3.34bp t=-2.23 hit=46.8% PF=0.76 thirds=[  -3.2   -5.7   -1.2] sum=  -2415
+continuation 12:30->13:30 bar                n= 722 mean= -0.48bp t=-0.36 hit=46.5% PF=0.96 thirds=[   1.8   -0.6   -2.7] sum=   -350
+continuation 13:30->14:30 bar                n= 722 mean=  1.29bp t= 1.04 hit=49.6% PF=1.13 thirds=[   0.7    1.5    1.7] sum=    935
+continuation 14:30->15:30 bar                n= 722 mean= -2.29bp t=-2.51 hit=47.5% PF=0.77 thirds=[  -2.2   -3.0   -1.7] sum=  -1650
+gap continuation in first hour               n= 721 mean= -5.11bp t=-2.19 hit=47.0% PF=0.81 thirds=[  -5.0   -5.6   -4.8] sum=  -3686
+   ...|gap|>40bp                             n= 399 mean= -7.77bp t=-2.42 hit=44.6% PF=0.73 thirds=[  -8.0  -11.6   -3.7] sum=  -3100
+first hour dir -> rest of day                n= 722 mean=  0.52bp t= 0.16 hit=51.2% PF=1.02 thirds=[  -1.4    2.8    0.1] sum=    378
+first hour (from prev close) -> rest of day  n= 721 mean= -3.60bp t=-1.10 hit=50.3% PF=0.89 thirds=[   3.5  -13.0   -1.3] sum=  -2595
+noise-band mom x0.75 exit=band (per day)     n= 455 mean= -5.41bp t=-1.79 hit=39.8% PF=0.80 thirds=[  -3.4   -3.9   -8.8] sum=  -2460
+noise-band mom x0.75 exit=open (per day)     n= 455 mean= -3.26bp t=-0.98 hit=47.3% PF=0.88 thirds=[  -1.5    0.2   -8.4] sum=  -1481
+noise-band mom x0.75 exit=hold (per day)     n= 455 mean= -4.31bp t=-1.20 hit=48.6% PF=0.86 thirds=[  -2.9   -0.3   -9.6] sum=  -1960
+noise-band mom x1.0 exit=band (per day)      n= 372 mean= -5.20bp t=-1.52 hit=39.2% PF=0.81 thirds=[  -8.3    2.1   -9.4] sum=  -1934
+noise-band mom x1.0 exit=open (per day)      n= 372 mean= -3.40bp t=-0.93 hit=45.7% PF=0.88 thirds=[  -5.6    4.4   -9.1] sum=  -1266
+noise-band mom x1.0 exit=hold (per day)      n= 372 mean= -5.12bp t=-1.29 hit=46.0% PF=0.83 thirds=[  -6.9    4.2  -12.7] sum=  -1906
+noise-band mom x1.25 exit=band (per day)     n= 283 mean= -1.93bp t=-0.48 hit=43.8% PF=0.92 thirds=[  -3.3    3.9   -6.3] sum=   -547
+noise-band mom x1.25 exit=open (per day)     n= 283 mean= -1.25bp t=-0.29 hit=49.1% PF=0.96 thirds=[  -4.2    8.2   -7.7] sum=   -354
+noise-band mom x1.25 exit=hold (per day)     n= 283 mean= -2.80bp t=-0.61 hit=49.1% PF=0.90 thirds=[  -6.5    6.1   -8.0] sum=   -793

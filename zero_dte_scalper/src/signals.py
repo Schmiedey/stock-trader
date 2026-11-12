@@ -23,6 +23,11 @@ def evaluate_scalp_signals(symbol: str = "SPY", interval: str = "5m") -> dict:
             raw_df = raw_df.iloc[:-1]
     df = calculate_indicators(raw_df)
     levels = get_key_levels(symbol=symbol, intraday_df=df)
+    if params.get("mode") == "momentum":
+        # v4: indicators above are for display only; the decision comes from the noise-band rule
+        from .momentum import momentum_signal
+        base = score_bars(df, levels, symbol=symbol, params={**params, "setups": ()})
+        return {**base, **momentum_signal(symbol, params.get("momentum", {}))}
     return score_bars(df, levels, symbol=symbol, params=params)
 
 

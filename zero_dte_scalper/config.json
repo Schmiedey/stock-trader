@@ -1,39 +1,39 @@
 {
-  "strategy": "0DTE_ORB_Failure_Fade",
-  "version": "3.0.0",
+  "strategy": "0DTE_Intraday_Momentum",
+  "version": "4.0.0",
   "underlyings": [
-    "SPY",
-    "QQQ"
+    "QQQ",
+    "SPY"
   ],
-  "primary_underlying": "SPY",
+  "primary_underlying": "QQQ",
   "paper_mode": true,
   "account_equity": 25000.0,
   "max_concurrent_positions": 1,
   "max_risk_per_trade_usd": 150.0,
   "max_position_outlay_usd": 400.0,
   "max_daily_loss_usd": 400.0,
-  "max_trades_per_day": 3,
+  "max_trades_per_day": 4,
   "max_contracts": 3,
-  "target_delta_min": 0.4,
-  "target_delta_max": 0.55,
-  "optimal_target_delta": 0.48,
-  "max_bid_ask_spread_usd": 0.04,
-  "stop_loss_pct": 0.35,
-  "take_profit_1_pct": 0.5,
-  "take_profit_2_pct": 1.0,
+  "target_delta_min": 0.42,
+  "target_delta_max": 0.58,
+  "optimal_target_delta": 0.5,
+  "max_bid_ask_spread_usd": 0.06,
+  "stop_loss_pct": 0.95,
+  "take_profit_1_pct": 50.0,
+  "take_profit_2_pct": 100.0,
   "tp1_scale_out_pct": 0.5,
   "breakeven_cushion_usd": 0.02,
-  "max_hold_time_minutes": 60,
-  "reentry_cooldown_seconds": 300,
+  "max_hold_time_minutes": 400,
+  "reentry_cooldown_seconds": 0,
   "trading_hours": {
     "timezone": "America/New_York",
     "market_open": "09:30",
-    "prime_morning_start": "09:45",
-    "prime_morning_end": "11:30",
-    "midday_chop_start": "11:30",
+    "prime_morning_start": "09:55",
+    "prime_morning_end": "13:30",
+    "midday_chop_start": "13:30",
     "midday_chop_end": "13:30",
     "afternoon_window_start": "13:30",
-    "afternoon_window_end": "15:30",
+    "afternoon_window_end": "15:36",
     "mandatory_exit_time": "15:50",
     "market_close": "16:00"
   },
@@ -44,24 +44,27 @@
     "key_level_reversal": true
   },
   "signal_params": {
-    "setups": [
-      "orb_fail"
-    ],
+    "mode": "momentum",
+    "completed_bars_only": true,
+    "setups": [],
     "min_score": 1,
     "apply_vetoes": false,
-    "completed_bars_only": true,
-    "orb_fail_window": [
-      "09:45",
-      "11:30"
-    ]
+    "momentum": {
+      "lookback": 14,
+      "band_mult": 1.0,
+      "step_minutes": 30,
+      "first_mark": "10:00",
+      "last_entry_mark": "15:30",
+      "use_vwap_stop": true
+    }
   },
   "stop_mode": "underlying",
-  "hard_stop_pct": 0.6,
+  "hard_stop_pct": 0.95,
   "tp1_scale_out": false,
   "underlying_invalidation_exit": false,
-  "research_note": "v3.0 from research/RESULTS.md: 58-day replay, PF 2.2 (IS 2.27 / OOS 2.15) at 1.2x VIX pricing, 61 trades",
+  "research_note": "v4.0 from research/RESULTS.md: 6-year 1-min study. Noise-band momentum is the only rule with an edge (QQQ Sharpe 1.1, positive every year 2021-2026). ORB-fade and iron fly failed the long sample.",
   "premium_seller": {
-    "enabled": true,
+    "enabled": false,
     "symbol": "SPY",
     "entry_time": "13:30",
     "latest_entry_time": "13:45",

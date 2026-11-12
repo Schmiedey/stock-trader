@@ -1,0 +1,17 @@
+== QQQ 2021-01-04 -> 2026-11-11 | shares, net of 1bp per trade | years [2021, 2022, 2023, 2024, 2025, 2026]
+base 30m, band+VWAP stop           trades=1395 (0.97/day, hold  110m) win=40.7% avg= 3.96bp Sharpe= 1.10 maxDD=  -7.7% | %/yr unlevered:    5.8   15.6   13.5    7.5    8.0    4.7
+band stop only                     trades=1221 (0.85/day, hold  125m) win=40.5% avg= 4.66bp Sharpe= 1.14 maxDD=  -7.3% | %/yr unlevered:    6.0   15.8   13.7    7.9    8.5    5.1
+check every 15m                    trades=1898 (1.32/day, hold   80m) win=35.1% avg= 1.75bp Sharpe= 0.65 maxDD=  -9.5% | %/yr unlevered:   -0.4   13.4   10.6    9.5   -2.2    2.4
+check every 5m                     trades=3398 (2.37/day, hold   45m) win=29.8% avg= 0.66bp Sharpe= 0.42 maxDD= -11.0% | %/yr unlevered:   -5.1   10.2    9.7    8.6   -1.4    0.5
+check every 1m                     trades=9944 (6.94/day, hold   15m) win=27.1% avg=-0.46bp Sharpe=-0.87 maxDD= -50.8% | %/yr unlevered:   -9.4   -5.1    0.7   -2.8  -17.1  -12.2
+band x0.7                          trades=1869 (1.30/day, hold  110m) win=38.0% avg= 2.54bp Sharpe= 0.80 maxDD= -19.9% | %/yr unlevered:    7.6   26.8   14.2    8.6   -8.5   -1.3
+band x1.3                          trades=1020 (0.71/day, hold  108m) win=42.0% avg= 5.23bp Sharpe= 1.19 maxDD=  -6.1% | %/yr unlevered:    7.8   16.3    8.9    8.5    5.7    6.2
+lookback 30d                       trades=1347 (0.94/day, hold  112m) win=38.9% avg= 3.64bp Sharpe= 0.94 maxDD= -10.0% | %/yr unlevered:    2.2   21.1    9.9    8.1    3.7    3.9
+long only                          trades= 667 (0.47/day, hold  123m) win=45.6% avg= 6.58bp Sharpe= 1.26 maxDD=  -5.0% | %/yr unlevered:    5.5   13.8   13.6    2.6    7.6    0.9
+short only                         trades= 728 (0.51/day, hold   98m) win=36.3% avg= 1.55bp Sharpe= 0.31 maxDD=  -8.2% | %/yr unlevered:    0.3    1.9   -0.1    4.9    0.4    3.9
+entries until 13:00 only           trades=1014 (0.71/day, hold  129m) win=38.6% avg= 3.50bp Sharpe= 0.75 maxDD=  -7.8% | %/yr unlevered:    3.4    1.6    6.4    7.2   11.0    5.9
+cost 3bp                           trades=1395 (0.97/day, hold  110m) win=38.7% avg= 1.96bp Sharpe= 0.54 maxDD= -12.2% | %/yr unlevered:    1.4   10.3    9.0    2.9    3.3    0.4
+-- 0DTE ATM option expression of base rule ($ per contract-share, incl. 3% spread), by IV assumption
+  IV x1.0: n=1395 avg entry $0.88 avg pnl $+0.246 win=31% PF=1.75 | $/yr per 1 contract-share:    20.0    90.9    50.3    60.3    66.3    55.7
+  IV x1.2: n=1395 avg entry $1.06 avg pnl $+0.160 win=30% PF=1.43 | $/yr per 1 contract-share:     4.3    69.4    36.6    42.1    44.1    27.2
+  IV x1.4: n=1395 avg entry $1.23 avg pnl $+0.078 win=28% PF=1.19 | $/yr per 1 contract-share:   -11.1    48.8    23.2    24.6    22.8    -0.2
