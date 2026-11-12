@@ -42,18 +42,20 @@ def parse(d, blob):
                          "Close": a["c"] / 1000.0, "Volume": a["v"].astype(float)}, index=idx)
 
 
-def main(sym, start):
+def main(sym, start, end=None, tag="long", workers=6):
     (RAW / sym).mkdir(parents=True, exist_ok=True)
-    days = [d for d in pd.bdate_range(start, pd.Timestamp.now().normalize() - pd.Timedelta(days=1))]
-    with ThreadPoolExecutor(6) as ex:
+    days = [d for d in pd.bdate_range(start, end or (pd.Timestamp.now().normalize() - pd.Timedelta(days=1)))]
+    with ThreadPoolExecutor(workers) as ex:
         blobs = list(ex.map(lambda d: get_day(sym, d), days))
     fail = sum(b is None for b in blobs)
     parts = [p for d, b in zip(days, blobs) if b and (p := parse(d, b)) is not None]
     df = pd.concat(parts).between_time("09:30", "15:59")
-    df.to_pickle(CACHE / f"{sym}_1m_long.pkl")
+    df.to_pickle(CACHE / f"{sym}_1m_{tag}.pkl")
     print(sym, df.shape, df.index[0], df.index[-1], "days", df.index.normalize().nunique(), "failed", fail)
 
 
 if __name__ == "__main__":
-    for s in sys.argv[1].split(","):
-        main(s, sys.argv[2] if len(sys.argv) > 2 else "2021-01-01")
+    # python fetch_duka.py SYMS [start] [end] [tag] [workers]   e.g. QQQ 2017-01-01 2020-12-31 hold 2
+    a = sys.argv
+    for s in a[1].split(","):
+        main(s, a[2] if len(a) > 2 else "2021-01-01", a[3] if len(a) > 3 else None, a[4] if len(a) > 4 else "long", int(a[5]) if len(a) > 5 else 6)

@@ -85,3 +85,12 @@ def test_signal_shape_and_late_entry_block(monkeypatch):
     M._BARS.clear()
     s = momentum_signal("QQQ", {"last_entry_mark": "12:30"}, now=mark_of(up, "13:00") + pd.Timedelta(seconds=5))
     assert s["signal"] == "WAIT"
+
+
+def test_watch_only_symbols_never_signal(monkeypatch):
+    up = make_bars(today_move_bps=40.0)
+    monkeypatch.setattr(M, "get_intraday_data", lambda **k: up)
+    M._BARS.clear()
+    now = mark_of(up, "13:00") + pd.Timedelta(seconds=5)
+    assert momentum_signal("SPY", {"symbols": ["QQQ"]}, now=now)["signal"] == "WAIT"
+    assert momentum_signal("QQQ", {"symbols": ["QQQ"]}, now=now)["signal"] == "CALL"

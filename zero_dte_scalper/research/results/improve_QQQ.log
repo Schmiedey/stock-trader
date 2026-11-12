@@ -1,0 +1,37 @@
+== QQQ shares, net 1bp/trade
+BASE (v4 live)                         IS: n= 712  4.90bp Sharpe  1.37  12.1%/y | OOS: n= 683  2.97bp Sharpe  0.83   7.2%/y
+long only                              IS: n= 348  9.43bp Sharpe  1.99  11.4%/y | OOS: n= 319  3.47bp Sharpe  0.60   4.0%/y
+short only                             IS: n= 364  0.57bp Sharpe  0.11   0.7%/y | OOS: n= 364  2.52bp Sharpe  0.55   3.3%/y
+stop: band only                        IS: n= 650  5.47bp Sharpe  1.39  12.3%/y | OOS: n= 571  3.75bp Sharpe  0.88   7.6%/y
+stop: VWAP only                        IS: n= 599  8.15bp Sharpe  1.78  16.9%/y | OOS: n= 597  2.26bp Sharpe  0.52   4.8%/y
+stop: day open                         IS: n= 473 10.55bp Sharpe  1.60  17.3%/y | OOS: n= 422  5.43bp Sharpe  0.80   8.2%/y
+stop: none (hold to close)             IS: n= 448 11.03bp Sharpe  1.42  17.1%/y | OOS: n= 402  4.90bp Sharpe  0.61   7.0%/y
+1 trade per day max                    IS: n= 448  3.65bp Sharpe  0.74   5.7%/y | OOS: n= 402  3.24bp Sharpe  0.72   4.7%/y
+2 trades per day max                   IS: n= 635  3.70bp Sharpe  0.96   8.1%/y | OOS: n= 577  1.81bp Sharpe  0.54   3.7%/y
+entries from 10:30                     IS: n= 641  5.37bp Sharpe  1.56  11.9%/y | OOS: n= 625  2.43bp Sharpe  0.64   5.4%/y
+entries until 14:00                    IS: n= 606  3.58bp Sharpe  0.87   7.5%/y | OOS: n= 560  3.50bp Sharpe  0.82   7.0%/y
+entries until 12:00                    IS: n= 447  1.96bp Sharpe  0.40   3.0%/y | OOS: n= 407  2.59bp Sharpe  0.59   3.8%/y
+need 2 marks outside band              IS: n= 464  5.64bp Sharpe  1.39   9.1%/y | OOS: n= 465  3.61bp Sharpe  0.77   6.0%/y
+band x0.8                              IS: n= 846  5.31bp Sharpe  1.53  15.6%/y | OOS: n= 798  1.50bp Sharpe  0.45   4.3%/y
+band x1.2                              IS: n= 580  4.57bp Sharpe  1.14   9.2%/y | OOS: n= 560  3.34bp Sharpe  0.79   6.7%/y
+band x1.5                              IS: n= 445  5.09bp Sharpe  1.14   7.8%/y | OOS: n= 426  2.87bp Sharpe  0.70   4.4%/y
+lookback 7d                            IS: n= 727  6.42bp Sharpe  1.82  16.2%/y | OOS: n= 702  2.20bp Sharpe  0.62   5.5%/y
+lookback 30d                           IS: n= 665  4.99bp Sharpe  1.26  11.5%/y | OOS: n= 682  2.31bp Sharpe  0.62   5.6%/y
+lookback 60d                           IS: n= 628  6.09bp Sharpe  1.52  13.2%/y | OOS: n= 665  1.61bp Sharpe  0.42   3.8%/y
+check every 15m                        IS: n= 960  2.46bp Sharpe  0.90   8.2%/y | OOS: n= 938  1.03bp Sharpe  0.39   3.5%/y
+check every 60m                        IS: n= 508  9.20bp Sharpe  1.85  16.2%/y | OOS: n= 487  3.71bp Sharpe  0.75   6.5%/y
+long only + hold to close              IS: n= 236 17.87bp Sharpe  1.84  14.6%/y | OOS: n= 211  3.01bp Sharpe  0.25   2.3%/y
+long only + VWAP-only stop             IS: n= 295 11.88bp Sharpe  1.89  12.1%/y | OOS: n= 276  1.40bp Sharpe  0.20   1.4%/y
+only vol index above 1y median         IS: n= 258  5.81bp Sharpe  0.79   5.2%/y | OOS: n= 393  4.06bp Sharpe  0.73   5.7%/y
+only vol index below 1y median         IS: n= 404  4.67bp Sharpe  1.25   6.5%/y | OOS: n= 290  1.49bp Sharpe  0.41   1.5%/y
+only gap > 30bp                        IS: n= 423  4.23bp Sharpe  0.91   6.2%/y | OOS: n= 373  2.58bp Sharpe  0.62   3.4%/y
+only gap <= 30bp                       IS: n= 289  5.90bp Sharpe  1.04   5.9%/y | OOS: n= 310  3.43bp Sharpe  0.56   3.8%/y
+only Mon/Fri                           IS: n= 274  3.49bp Sharpe  0.60   3.3%/y | OOS: n= 252  2.62bp Sharpe  0.50   2.4%/y
+only Tue-Thu                           IS: n= 438  5.79bp Sharpe  1.27   8.8%/y | OOS: n= 431  3.17bp Sharpe  0.66   4.9%/y
+vol-targeted size (x0.25-4)            IS: n= 712  4.90bp Sharpe  1.30   7.7%/y | OOS: n= 683  2.97bp Sharpe  0.87   6.1%/y
+== QQQ options, $ per contract per trade (IS / OOS), by strike and IV assumption
+  0.3% OTM  IVx1.0:   16.8 /   25.0 PF 2.05 | IVx1.2:    9.9 /   15.4 PF 1.50 | IVx1.5:   -0.3 /    1.2 PF 1.01
+  ATM       IVx1.0:   22.6 /   26.7 PF 1.75 | IVx1.2:   15.5 /   16.6 PF 1.43 | IVx1.5:    5.2 /    2.2 PF 1.08
+  0.5% ITM  IVx1.0:   21.4 /   18.8 PF 1.37 | IVx1.2:   17.6 /   14.6 PF 1.29 | IVx1.5:   10.9 /    6.4 PF 1.15
+  1% ITM    IVx1.0:   13.4 /    6.4 PF 1.15 | IVx1.2:   12.4 /    5.7 PF 1.14 | IVx1.5:    9.4 /    2.8 PF 1.09
+  2% ITM    IVx1.0:    0.1 /  -13.3 PF 0.92 | IVx1.2:    0.3 /  -13.1 PF 0.92 | IVx1.5:    0.1 /  -13.1 PF 0.92

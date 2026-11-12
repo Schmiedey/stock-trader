@@ -1,6 +1,6 @@
 {
   "strategy": "0DTE_Intraday_Momentum",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "underlyings": [
     "QQQ",
     "SPY"
@@ -55,7 +55,10 @@
       "step_minutes": 30,
       "first_mark": "10:00",
       "last_entry_mark": "15:30",
-      "use_vwap_stop": true
+      "use_vwap_stop": true,
+      "symbols": [
+        "QQQ"
+      ]
     }
   },
   "stop_mode": "underlying",

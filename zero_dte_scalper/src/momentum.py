@@ -110,6 +110,9 @@ def momentum_signal(symbol: str, params: dict | None = None, now=None) -> dict:
     out = {"signal": "WAIT", "conviction": "NONE", "primary_setup": "Momentum: waiting for 30-min mark",
            "active_triggers": [], "veto_reasons": [], "reason": "Between decision marks.",
            "momentum": _LAST.get(symbol)}
+    if P.get("symbols") and symbol not in P["symbols"]:
+        out.update(primary_setup="Momentum: symbol not traded", reason=f"{symbol} is watch-only (no out-of-sample edge).")
+        return out
     try:
         st = state_at_mark(symbol, P, now)
     except Exception as e:
