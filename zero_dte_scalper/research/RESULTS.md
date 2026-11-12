@@ -37,6 +37,14 @@ Win rate is about 30%: most trades lose a little, trend days pay for them. Expec
 
 Robustness (shares, QQQ): band ×0.7 / ×1.3, lookback 30 days, band-only stop all stay positive; long side carries most of it (Sharpe 1.26 vs 0.31 short); at 3 bp cost per trade SPY goes to zero.
 
+## Follow-up checks (2026-11-12, after v4 shipped)
+
+- **Holdout, never used in research (QQQ 2019–2020, frozen rule, `holdout.py`):** 448 trades, +0.87 bp per trade net (t = 0.33), Sharpe 0.26. 2019 flat, 2020 +3.8%. Modelled ATM option: PF 1.14 at 1.2× IV, 0.87 at 1.5×. **Positive but far weaker than 2021–2026 (Sharpe 1.10). Treat the true Sharpe as roughly 0.3–0.8, not 1.1.**
+- **Variant search (`improve.py`, chosen on 2021–23, checked on 2024–26):** nothing beats the base rule out-of-sample. Base QQQ Sharpe 1.37 → 0.83. "Long only" looked better in-sample (1.99) and was worse out-of-sample (0.60).
+- **SPY:** Sharpe 1.26 in 2021–23, 0.12 in 2024–26. v4.0.1 trades QQQ only.
+- **Breadth (`breadth.py`, 39 ETFs and stocks, hourly checks, 2.9 years, 2 bp cost):** 14 of 39 positive, median Sharpe −0.47. Works mainly on high-momentum tech (QQQ, SMH, XLK, MSTR, COIN). Not a general effect.
+- **Wide scalp search (`scalp_search.py`, ~480 combos per symbol):** none profitable out-of-sample after 0.5 bp cost.
+
 ## Honest limits
 
 - The option P&L is modelled. Real 0DTE IV runs 1.0–1.5× the VIX model through the day (`data/iv_calibration.jsonl`); at 1.4× the edge is thin. The shares result (Sharpe ~1.1) is the solid number; the options version is a leveraged bet on it.
