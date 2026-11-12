@@ -312,5 +312,26 @@
     "is_partial": false,
     "entry_spot_price": 757.73,
     "exit_spot_price": 760.35
+  },
+  {
+    "id": "bc857531",
+    "symbol": "SPY",
+    "action": "PUT",
+    "contract_symbol": "SPY261112P00757000",
+    "strike": 757.0,
+    "expiration": "2026-11-12",
+    "entry_timestamp": "2026-11-12 10:00:09 EST",
+    "exit_timestamp": "2026-11-12 11:00:10 EST",
+    "entry_date": "2026-11-12",
+    "entry_price": 2.02,
+    "exit_price": 1.37,
+    "quantity_closed": 1,
+    "realized_pnl_usd": -65.0,
+    "realized_pnl_pct": -32.18,
+    "exit_reason": "STAGNATION_TIME_EXIT",
+    "setup": "ORB Failed Breakout: lost 757.88 after closing above",
+    "is_partial": false,
+    "entry_spot_price": 757.72,
+    "exit_spot_price": 760.74
   }
 ]
