@@ -205,3 +205,10 @@
 {"ts": "2026-11-13T10:30:05", "symbol": "QQQ", "event": "ENTRY", "action": "PUT", "contract": "QQQ261113P00674000", "qty": 1, "entry_price": 1.88, "setup": "Momentum breakdown below noise band 682.51"}
 {"ts": "2026-11-13T10:30:13", "symbol": "QQQ", "event": "EXIT", "reason": "MOMENTUM_EXIT (price 675.43 back above 674.39)", "contract": "QQQ261113P00674000"}
 {"ts": "2026-11-13T10:35:06", "symbol": "QQQ", "signal": "WAIT", "conviction": "NONE", "setup": "Momentum: waiting for 30-min mark", "price": 675.3, "rsi": 41.9, "rel_vol": 1.92, "vetoes": [], "reason": "Between decision marks."}
+{"ts": "2026-11-13T11:00:15", "symbol": "QQQ", "signal": "PUT", "conviction": "HIGH", "setup": "Momentum breakdown below noise band 681.59", "price": 674.85, "rsi": 42.7, "rel_vol": 2.85, "vetoes": [], "reason": "12:00 price 674.85 < band 681.59 (sigma 95.6bp, 14d)"}
+{"ts": "2026-11-13T11:00:17", "symbol": "QQQ", "event": "ENTRY", "action": "PUT", "contract": "QQQ261113P00674000", "qty": 1, "entry_price": 1.94, "setup": "Momentum breakdown below noise band 681.59"}
+{"ts": "2026-11-13T11:00:25", "symbol": "QQQ", "event": "EXIT", "reason": "MOMENTUM_EXIT (price 674.85 back above 674.48)", "contract": "QQQ261113P00674000"}
+{"ts": "2026-11-13T11:05:01", "symbol": "QQQ", "signal": "WAIT", "conviction": "NONE", "setup": "Momentum: waiting for 30-min mark", "price": 675.03, "rsi": 43.6, "rel_vol": 1.35, "vetoes": [], "reason": "Between decision marks."}
+{"ts": "2026-11-13T11:30:11", "symbol": "QQQ", "signal": "PUT", "conviction": "HIGH", "setup": "Momentum breakdown below noise band 681.19", "price": 677.16, "rsi": 53.1, "rel_vol": 0.02, "vetoes": [], "reason": "12:30 price 677.16 < band 681.19 (sigma 101.5bp, 14d)"}
+{"ts": "2026-11-13T11:30:13", "symbol": "QQQ", "event": "ENTRY", "action": "PUT", "contract": "QQQ261113P00677000", "qty": 1, "entry_price": 2.07, "setup": "Momentum breakdown below noise band 681.19"}
+{"ts": "2026-11-13T11:30:22", "symbol": "QQQ", "event": "EXIT", "reason": "MOMENTUM_EXIT (price 677.16 back above 674.51)", "contract": "QQQ261113P00677000"}
