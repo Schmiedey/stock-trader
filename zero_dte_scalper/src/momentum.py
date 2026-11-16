@@ -19,7 +19,7 @@ from .config import get_current_ny_time
 from .market_data import get_intraday_data
 
 DEFAULTS = {"lookback": 14, "min_history": 10, "band_mult": 1.0, "step_minutes": 30,
-            "first_mark": "10:00", "last_entry_mark": "15:30", "use_vwap_stop": True}
+            "first_mark": "10:00", "last_entry_mark": "15:30", "use_vwap_stop": False}
 
 _BARS: dict = {}    # (symbol, mark) -> state, so each mark costs one data fetch per symbol
 _LAST: dict = {}    # symbol -> last computed state (for the dashboard between marks)
@@ -62,7 +62,7 @@ def compute_state(bars: pd.DataFrame, mark: pd.Timestamp, lookback: int = 14, ba
             "day_open": round(t_open, 2), "prev_close": round(prev_close, 2), "side": side, "history_days": len(moves)}
 
 
-def should_exit(action: str, st: dict, use_vwap_stop: bool = True) -> str | None:
+def should_exit(action: str, st: dict, use_vwap_stop: bool = False) -> str | None:
     """Exit reason for an open CALL/PUT given the band state at a mark, else None."""
     if action == "CALL":
         stop = max(st["upper"], st["vwap"]) if use_vwap_stop else st["upper"]
@@ -140,8 +140,10 @@ def momentum_signal(symbol: str, params: dict | None = None, now=None) -> dict:
     return out
 
 
-def momentum_exit(symbol: str, action: str, params: dict | None = None, now=None) -> str | None:
+def momentum_exit(symbol: str, action: str, params: dict | None = None, now=None, entry_mark: str | None = None) -> str | None:
     """Exit reason for an open position at the current mark, else None (also None between marks)."""
     P = {**DEFAULTS, **(params or {})}
     st = state_at_mark(symbol, P, now)
-    return should_exit(action, st, P["use_vwap_stop"]) if st else None
+    if not st or (entry_mark and st["mark"] == entry_mark):
+        return None             # never exit at the mark we entered on
+    return should_exit(action, st, P["use_vwap_stop"])

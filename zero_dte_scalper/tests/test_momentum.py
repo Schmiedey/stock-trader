@@ -59,7 +59,7 @@ def test_exit_rules():
     st = {"price": 100.0, "upper": 100.5, "lower": 99.0, "vwap": 99.8}
     assert should_exit("CALL", st) and should_exit("PUT", st)          # inside band: both sides flat
     assert should_exit("CALL", {**st, "price": 101.0}) is None
-    assert should_exit("CALL", {**st, "price": 101.0, "vwap": 101.5})  # VWAP trails above the band
+    assert should_exit("CALL", {**st, "price": 101.0, "vwap": 101.5}, use_vwap_stop=True)  # optional VWAP trail
     assert should_exit("CALL", {**st, "price": 101.0, "vwap": 101.5}, use_vwap_stop=False) is None
     assert should_exit("PUT", {**st, "price": 98.5}) is None
 
@@ -94,3 +94,20 @@ def test_watch_only_symbols_never_signal(monkeypatch):
     now = mark_of(up, "13:00") + pd.Timedelta(seconds=5)
     assert momentum_signal("SPY", {"symbols": ["QQQ"]}, now=now)["signal"] == "WAIT"
     assert momentum_signal("QQQ", {"symbols": ["QQQ"]}, now=now)["signal"] == "CALL"
+
+
+def test_band_stop_never_exits_a_fresh_breakout():
+    """v4.0.2: entry (price beyond band) and exit (price back inside) must be mutually exclusive."""
+    for st in ({"price": 99.0, "upper": 100.5, "lower": 99.5, "vwap": 98.0},      # put entry, VWAP below band
+               {"price": 101.0, "upper": 100.5, "lower": 99.5, "vwap": 102.0}):  # call entry, VWAP above band
+        action = "PUT" if st["price"] < st["lower"] else "CALL"
+        assert should_exit(action, st) is None
+
+
+def test_no_exit_on_entry_mark(monkeypatch):
+    up = make_bars(today_move_bps=40.0)
+    monkeypatch.setattr(M, "get_intraday_data", lambda **k: up)
+    M._BARS.clear()
+    now = mark_of(up, "13:00") + pd.Timedelta(seconds=5)
+    assert M.momentum_exit("QQQ", "PUT", now=now) is not None              # wrong side would exit...
+    assert M.momentum_exit("QQQ", "PUT", now=now, entry_mark=f"{up.index[-1].date()} 13:00") is None

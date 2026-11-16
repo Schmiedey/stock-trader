@@ -155,12 +155,15 @@ class ZeroDteScalperDaemon:
             if sp.get("mode") == "momentum":
                 # v4 signal exit: only evaluated at the 30-minute marks on completed bars
                 try:
-                    why = momentum_exit(pos["symbol"], pos["action"], sp.get("momentum", {}))
+                    why = momentum_exit(pos["symbol"], pos["action"], sp.get("momentum", {}), entry_mark=pos.get("entry_mark"))
                 except Exception as e:
                     why = None
                     log(f"Momentum exit check failed for {pos['symbol']}: {e}")
                 if why:
-                    close_position(position_id=pos_id, exit_price=pos.get("current_price", pos["entry_price"]), reason=why)
+                    # sell at the bid: mark minus half the spread seen at entry (marks are last/mid, not bid)
+                    mark = pos.get("current_price", pos["entry_price"])
+                    exit_px = round(max(0.01, mark - pos.get("entry_spread", 0.04) / 2), 2)
+                    close_position(position_id=pos_id, exit_price=exit_px, reason=why)
                     log(f"↩️ [{why}] | {contract_sym}")
                     journal({"symbol": pos["symbol"], "event": "EXIT", "reason": why, "contract": contract_sym})
                     continue
@@ -304,6 +307,8 @@ class ZeroDteScalperDaemon:
                     for p in active_now:
                         if p["id"] == pos["id"]:
                             p["underlying_stop"] = sig.get("underlying_stop", 0.0)
+                            p["entry_spread"] = float(c.get("spread") or 0.04)
+                            p["entry_mark"] = sig.get("timestamp")
                     save_active_positions(active_now)
 
                     log("=" * 70)
