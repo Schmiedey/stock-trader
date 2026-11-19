@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "id": "f12637e4",
+    "symbol": "QQQ",
+    "action": "PUT",
+    "contract_symbol": "QQQ261119P00649000",
+    "strike": 649.0,
+    "expiration": "2026-11-19",
+    "entry_timestamp": "2026-11-19 14:00:15 EST",
+    "entry_epoch": 1795114815.0997536,
+    "entry_date": "2026-11-19",
+    "entry_price": 1.94,
+    "entry_spot_price": 649.66,
+    "current_spot_price": 648.48,
+    "iv": 0.1511,
+    "initial_quantity": 1,
+    "current_quantity": 1,
+    "stop_loss_price": 0.1,
+    "tp1_price": 98.94,
+    "tp2_price": 195.94,
+    "tp1_hit": false,
+    "current_price": 3.08,
+    "unrealized_pnl_usd": 114.0,
+    "unrealized_pnl_pct": 58.76,
+    "elapsed_minutes": 12.0,
+    "status": "OPEN",
+    "setup": "Momentum breakdown below noise band 651.77",
+    "notes": "",
+    "underlying_stop": 651.77,
+    "entry_spread": 0.03,
+    "entry_mark": "2026-11-19 14:00",
+    "model_price": 3.08,
+    "quote_source": "MODEL (rejected print 2.08)"
+  }
+]
