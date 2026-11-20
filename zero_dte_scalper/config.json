@@ -1,6 +1,6 @@
 {
   "strategy": "0DTE_Intraday_Momentum",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "underlyings": [
     "QQQ",
     "SPY"

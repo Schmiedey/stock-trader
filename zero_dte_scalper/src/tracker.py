@@ -11,6 +11,33 @@ import yfinance as yf
 from .greeks import black_scholes_price
 from .market_data import calculate_time_to_expiration_years
 
+TRADING_YEAR_HOURS = 252.0 * 6.5   # same convention as calculate_time_to_expiration_years
+
+
+def tte_at(ts_str: str) -> float:
+    """Trading-hours TTE (years) to 16:00 ET on the same day, for a 'YYYY-mm-dd HH:MM:SS EST' stamp."""
+    ny = pytz.timezone("America/New_York")
+    t = ny.localize(datetime.strptime(ts_str.replace(" EST", "").replace(" EDT", ""), "%Y-%m-%d %H:%M:%S"))
+    secs = max(60.0, (t.replace(hour=16, minute=0, second=0) - t).total_seconds())
+    return secs / 3600.0 / TRADING_YEAR_HOURS
+
+
+def implied_vol(price: float, spot: float, strike: float, tte: float, kind: str) -> float:
+    """Vol (same TTE convention) that reproduces `price`; bisection, clamped to [0.01, 5]."""
+    lo, hi = 0.01, 5.0
+    if price <= black_scholes_price(spot, strike, tte, lo, option_type=kind):
+        return lo
+    if price >= black_scholes_price(spot, strike, tte, hi, option_type=kind):
+        return hi
+    for _ in range(60):
+        mid = (lo + hi) / 2
+        if black_scholes_price(spot, strike, tte, mid, option_type=kind) < price:
+            lo = mid
+        else:
+            hi = mid
+    return (lo + hi) / 2
+
+
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 ACTIVE_POSITIONS_FILE = DATA_DIR / "active_positions.json"
 TRADE_HISTORY_FILE = DATA_DIR / "trade_history.json"
@@ -139,6 +166,10 @@ def close_position(
 
     if pos_index == -1:
         raise ValueError(f"Position with ID {position_id} not found in active positions.")
+    if partial_qty is None and any(h.get("id") == position_id and not h.get("is_partial") for h in history):
+        positions.pop(pos_index)
+        save_active_positions(positions)
+        raise ValueError(f"Position {position_id} already closed in history; dropped stale copy.")
 
     pos = positions[pos_index]
     qty_to_close = pos["current_quantity"] if (partial_qty is None or partial_qty >= pos["current_quantity"]) else partial_qty
@@ -184,7 +215,7 @@ def close_position(
     return trade_record
 
 
-def update_active_positions_quotes() -> list[dict]:
+def update_active_positions_quotes(save: bool = True) -> list[dict]:
     """
     Fetch current quotes for active positions and calculate unrealized P&L.
     Uses robust real-time Black-Scholes valuation tied to live underlying spot price
@@ -263,10 +294,11 @@ def update_active_positions_quotes() -> list[dict]:
         entry_spot = pos["entry_spot_price"]
         model_px = pos["entry_price"]
         try:
-            bs_entry = black_scholes_price(spot=entry_spot, strike=strike, tte_years=tte_years,
-                                           volatility=iv, option_type=opt_type)
-            if bs_entry > 0.01:
-                model_px = pos["entry_price"] * (bs_price / bs_entry)
+            if not pos.get("implied_iv"):
+                pos["implied_iv"] = round(implied_vol(pos["entry_price"], entry_spot, strike,
+                                                      tte_at(pos["entry_timestamp"]), opt_type), 4)
+            model_px = black_scholes_price(spot=spot_px, strike=strike, tte_years=tte_years,
+                                           volatility=pos["implied_iv"], option_type=opt_type)
         except Exception:
             pass
         pos["model_price"] = round(model_px, 2)
@@ -295,7 +327,10 @@ def update_active_positions_quotes() -> list[dict]:
         pos["elapsed_minutes"] = round((now_epoch - entry_epoch) / 60.0, 1)
         updated = True
 
-    if updated:
+    if updated and save:
+        # re-read: a position closed while we were fetching quotes must not come back
+        live_ids = {p["id"] for p in load_active_positions()}
+        positions = [p for p in positions if p["id"] in live_ids]
         save_active_positions(positions)
 
     return positions
@@ -368,3 +403,33 @@ def calculate_performance_metrics() -> dict:
         "max_win_usd": round(max_win, 2),
         "max_loss_usd": round(max_loss, 2)
     }
+
+
+def remark_momentum_history(since: str = "2026-11-13") -> int:
+    """Correct paper trades closed with the old (broken) mark: exit = Black-Scholes at the exit spot using
+    the vol implied by the entry fill, minus half a 3% spread. Drops duplicate close records.
+    Originals are kept in orig_exit_price / orig_realized_pnl_usd. Idempotent. Returns records changed."""
+    history = load_trade_history()
+    out, seen, changed = [], set(), 0
+    for h in history:
+        if h.get("entry_timestamp", "") < since:
+            out.append(h); continue
+        key = (h.get("id"), "partial" if h.get("is_partial") else "full", h.get("exit_timestamp") if h.get("is_partial") else None)
+        if key in seen:
+            changed += 1; continue
+        seen.add(key)
+        if not h.get("remarked") and h.get("exit_spot_price"):
+            kind = "call" if h["action"] == "CALL" else "put"
+            iv = implied_vol(h["entry_price"], h["entry_spot_price"], h["strike"], tte_at(h["entry_timestamp"]), kind)
+            fair = black_scholes_price(h["exit_spot_price"], h["strike"], tte_at(h["exit_timestamp"]), iv, option_type=kind)
+            px = round(max(0.01, fair - max(0.01, 0.015 * fair)), 2)
+            qty = h.get("quantity_closed", 1)
+            h.update(orig_exit_price=h["exit_price"], orig_realized_pnl_usd=h["realized_pnl_usd"], exit_price=px,
+                     realized_pnl_usd=round((px - h["entry_price"]) * 100 * qty, 2),
+                     realized_pnl_pct=round((px - h["entry_price"]) / h["entry_price"] * 100, 2),
+                     remarked="v4.0.3 fair re-mark (old mark inflated near expiry)")
+            changed += 1
+        out.append(h)
+    if changed:
+        save_trade_history(out)
+    return changed

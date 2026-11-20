@@ -184,6 +184,8 @@ class ZeroDteScalperDaemon:
                 continue
             try:
                 curr_px = pos.get("current_price", pos["entry_price"])
+                if sp.get("mode") == "momentum":   # sell at the bid, not the mark
+                    curr_px = round(max(0.01, curr_px - pos.get("entry_spread", 0.04) / 2), 2)
                 if act["kind"] == "partial":
                     close_position(position_id=pos_id, exit_price=curr_px, reason=act["reason"], partial_qty=act["qty"])
                 else:
@@ -331,6 +333,13 @@ class ZeroDteScalperDaemon:
     def run_loop(self):
         """Main autonomous scalper loop."""
         log(f"⚡ 0DTE Autonomous Scalper Daemon v2.0 started. PID={os.getpid()}")
+        try:
+            from zero_dte_scalper.src.tracker import remark_momentum_history
+            n = remark_momentum_history()
+            if n:
+                log(f"[LEDGER] re-marked {n} momentum trade record(s) with the fixed option model")
+        except Exception as e:
+            log(f"[LEDGER] re-mark failed: {e}")
         log(f"Monitoring underlyings: {', '.join(self.underlyings)} | Stop: -{self.config.get('stop_loss_pct', 0.2)*100:.0f}% | TP: +{self.config.get('take_profit_1_pct', 0.3)*100:.0f}% / +{self.config.get('take_profit_2_pct', 0.8)*100:.0f}% | Max hold: {self.max_hold_time_minutes}m")
 
         loop_count = 0

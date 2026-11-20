@@ -232,7 +232,7 @@ def full_state() -> dict:
         state.update({
             "session": get_market_session_state(config),
             "config": _risk_config(config),
-            "active_positions": update_active_positions_quotes(),
+            "active_positions": update_active_positions_quotes(save=False),
             "history": load_trade_history(),
             "today_stats": get_today_stats(),
             "metrics": calculate_performance_metrics(),
