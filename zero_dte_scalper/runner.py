@@ -69,6 +69,30 @@ from zero_dte_scalper.src.signals import evaluate_scalp_signals
 from zero_dte_scalper.src.exits import decide_exit
 from zero_dte_scalper.src.premium_seller import tick as premium_tick
 from zero_dte_scalper.src.momentum import momentum_exit
+
+
+def reprice_delayed(c: dict, action: str, spot_q: float, spot_now: float, quote_time, expiration: str):
+    """Fair ask now for a contract whose quote is stale. None if inputs are unusable."""
+    from datetime import datetime
+    from zero_dte_scalper.src.tracker import implied_vol, TRADING_YEAR_HOURS
+    from zero_dte_scalper.src.greeks import black_scholes_price
+    from zero_dte_scalper.src.market_data import calculate_time_to_expiration_years
+    bid, ask = float(c.get("bid") or 0), float(c.get("ask") or 0)
+    if bid <= 0 or ask <= 0:
+        return None
+    kind = "call" if action == "CALL" else "put"
+    t_now = calculate_time_to_expiration_years(expiration)
+    t_q = t_now
+    try:
+        q = datetime.fromisoformat(str(quote_time)[:19])
+        secs = (q.replace(hour=16, minute=0, second=0) - q).total_seconds()
+        if 0 < secs < 7 * 3600:
+            t_q = max(t_now, max(60.0, secs) / 3600.0 / TRADING_YEAR_HOURS)
+    except Exception:
+        pass
+    iv = implied_vol((bid + ask) / 2, spot_q, float(c["strike"]), t_q, kind)
+    fair = black_scholes_price(spot_now, float(c["strike"]), t_now, iv, option_type=kind)
+    return round(max(0.05, fair + (ask - bid) / 2), 2)
 from zero_dte_scalper.src.options_selector import select_best_contract
 from zero_dte_scalper.src.risk_manager import check_trading_permissions
 from zero_dte_scalper.src.tracker import (
@@ -260,7 +284,7 @@ class ZeroDteScalperDaemon:
                 if action in ["CALL", "PUT"] and conviction in ["HIGH", "MEDIUM"]:
                     log(f"🔍 [SIGNAL DETECTED] {symbol} {action} ({conviction}) | Setup: {sig.get('primary_setup')}")
 
-                    rec = select_best_contract(symbol=symbol, action=action, config=self.config)
+                    rec = select_best_contract(symbol=symbol, action=action, config=self.config, spot=sig.get("current_price"))
                     if not rec or not rec.get("contract"):
                         continue
 
@@ -272,14 +296,15 @@ class ZeroDteScalperDaemon:
                         continue
 
                     entry_px = rec.get("entry_price", c.get("ask", 0.50))
-                    # CBOE quotes are ~15 min old. A momentum entry fires right after a move, so a stale
-                    # ask would be a free head start: shift it by delta x (spot now - spot in the quote).
+                    # CBOE quotes are ~15 min old. Re-price the stale quote to now: solve the vol from the
+                    # delayed mid at the delayed spot/time, then Black-Scholes at the current spot/time + half spread.
+                    # (The old delta-only shift ignored 15 min of theta and gamma, which overpriced entries.)
                     spot_now, spot_q = float(sig.get("current_price") or 0), float(rec.get("chain_spot") or 0)
                     if rec.get("chain_source") == "cboe_delayed" and spot_now > 0 and spot_q > 0:
-                        d = abs(float(c.get("delta") or 0.5)) * (1 if action == "CALL" else -1)
-                        adj = round(max(0.05, entry_px + d * (spot_now - spot_q)), 2)
-                        log(f"   Delayed-quote adjustment: ask ${entry_px:.2f} @ spot {spot_q:.2f} -> ${adj:.2f} @ spot {spot_now:.2f}")
-                        entry_px = adj
+                        adj = reprice_delayed(c, action, spot_q, spot_now, rec.get("chain_quote_time"), rec["expiration"])
+                        if adj:
+                            log(f"   Delayed-quote re-price: ask ${entry_px:.2f} @ {spot_q:.2f} -> ${adj:.2f} @ {spot_now:.2f}")
+                            entry_px = adj
                     qty = max(1, rec.get("sizing", {}).get("suggested_contracts", rec.get("sizing", {}).get("contracts", 1)))
 
                     t = rec.get("targets", {})

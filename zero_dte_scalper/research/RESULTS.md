@@ -45,6 +45,21 @@ Robustness (shares, QQQ): band ×0.7 / ×1.3, lookback 30 days, band-only stop a
 - **Breadth (`breadth.py`, 39 ETFs and stocks, hourly checks, 2.9 years, 2 bp cost):** 14 of 39 positive, median Sharpe −0.47. Works mainly on high-momentum tech (QQQ, SMH, XLK, MSTR, COIN). Not a general effect.
 - **Wide scalp search (`scalp_search.py`, ~480 combos per symbol):** none profitable out-of-sample after 0.5 bp cost.
 
+## v4.1 (2026-11-20): option structure and fill realism
+
+`structure.py`, QQQ, band-stop rule, profit factor by structure, holdout 2019–20 / 2021–26, at 1.0× / 1.2× / 1.5× IV:
+
+| Structure | 2019–20 holdout | 2021–26 |
+|---|---|---|
+| ATM long | 1.41 / 1.16 / 0.89 | 1.78 / 1.45 / 1.10 |
+| **0.5% ITM long (v4.1)** | 1.23 / 1.14 / **0.99** | 1.41 / 1.33 / **1.18** |
+| 0.3% OTM long | 1.65 / 1.24 / 0.86 | 2.08 / 1.51 / 1.01 |
+| Debit spread ATM / +2% | 1.25 / 1.05 / 0.85 | 1.57 / 1.28 / 0.98 |
+
+ITM gives up some upside when options are cheap but holds up best when they are expensive, which is the risk the live IV log shows. Debit spreads cap the trend days that pay for everything and are worse in every column.
+
+Live paper entries also re-price the ~15-minute-old CBOE quote properly (vol solved from the delayed mid, then Black-Scholes at the current spot and time, plus half the spread) instead of a delta-only shift that ignored 15 minutes of time decay and gamma.
+
 ## Honest limits
 
 - The option P&L is modelled. Real 0DTE IV runs 1.0–1.5× the VIX model through the day (`data/iv_calibration.jsonl`); at 1.4× the edge is thin. The shares result (Sharpe ~1.1) is the solid number; the options version is a leveraged bet on it.

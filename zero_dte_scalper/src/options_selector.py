@@ -8,7 +8,8 @@ def select_best_contract(
     symbol: str = "SPY",
     action: str = "CALL",
     chain_data: dict | None = None,
-    config: dict | None = None
+    config: dict | None = None,
+    spot: float | None = None
 ) -> dict | None:
     """
     Select the optimal 0DTE option contract based on delta sweet spot (0.35 - 0.55),
@@ -69,6 +70,16 @@ def select_best_contract(
     sorted_candidates = sorted(delta_filtered, key=score_candidate)
     best_contract = sorted_candidates[0]
 
+    # v4.1: pick by moneyness vs the CURRENT spot (delayed-chain deltas are ~15 min stale).
+    # research/structure.py: 0.5% ITM is the most robust 0DTE expression of the momentum signal.
+    mny = config.get("target_moneyness_pct")
+    if mny is not None and valid_candidates:
+        ref = float(spot or chain_data["spot_price"])
+        target = ref * (1 - mny / 100.0) if is_call else ref * (1 + mny / 100.0)
+        # nearest strike wins, but a strike whose spread is over the limit loses to its tight neighbour
+        best_contract = min(valid_candidates, key=lambda c: abs(c["strike"] - target)
+                            + 10.0 * max(0.0, c["spread"] - max_spread))
+
     # Sizing & Risk calculations
     entry_price = best_contract["ask"] if best_contract["ask"] > 0 else best_contract["last_price"]
     stop_loss_pct = config.get("stop_loss_pct", 0.20)
@@ -104,6 +115,7 @@ def select_best_contract(
         "entry_price": entry_price,
         "chain_spot": chain_data.get("spot_price", 0.0),
         "chain_source": chain_data.get("source", ""),
+        "chain_quote_time": chain_data.get("quote_time"),
         "sizing": {
             "suggested_contracts": suggested_qty,
             "contract_unit_cost": round(contract_unit_cost, 2),
