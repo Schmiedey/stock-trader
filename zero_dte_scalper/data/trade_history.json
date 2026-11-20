@@ -585,5 +585,26 @@
     "is_partial": false,
     "entry_spot_price": 654.07,
     "exit_spot_price": 653.34
+  },
+  {
+    "id": "f12637e4",
+    "symbol": "QQQ",
+    "action": "PUT",
+    "contract_symbol": "QQQ261119P00649000",
+    "strike": 649.0,
+    "expiration": "2026-11-19",
+    "entry_timestamp": "2026-11-19 14:00:15 EST",
+    "exit_timestamp": "2026-11-19 15:50:00 EST",
+    "entry_date": "2026-11-19",
+    "entry_price": 1.94,
+    "exit_price": 31.56,
+    "quantity_closed": 1,
+    "realized_pnl_usd": 2962.0,
+    "realized_pnl_pct": 1526.8,
+    "exit_reason": "MANDATORY_EOD_EXPIRATION_EXIT",
+    "setup": "Momentum breakdown below noise band 651.77",
+    "is_partial": false,
+    "entry_spot_price": 649.66,
+    "exit_spot_price": 646.58
   }
 ]

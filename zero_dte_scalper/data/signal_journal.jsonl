@@ -302,3 +302,4 @@
 {"ts": "2026-11-19T12:35:07", "symbol": "QQQ", "signal": "WAIT", "conviction": "NONE", "setup": "Momentum: waiting for 30-min mark", "price": 652.41, "rsi": 45.5, "rel_vol": 0.04, "vetoes": [], "reason": "Between decision marks."}
 {"ts": "2026-11-19T13:00:14", "symbol": "QQQ", "signal": "PUT", "conviction": "HIGH", "setup": "Momentum breakdown below noise band 651.77", "price": 649.66, "rsi": 40.0, "rel_vol": 0.11, "vetoes": [], "reason": "14:00 price 649.66 < band 651.77 (sigma 117.3bp, 14d)"}
 {"ts": "2026-11-19T13:00:15", "symbol": "QQQ", "event": "ENTRY", "action": "PUT", "contract": "QQQ261119P00649000", "qty": 1, "entry_price": 1.94, "setup": "Momentum breakdown below noise band 651.77"}
+{"ts": "2026-11-19T14:25:05", "symbol": "QQQ", "signal": "WAIT", "conviction": "NONE", "setup": "Momentum: waiting for 30-min mark", "price": 647.02, "rsi": 41.7, "rel_vol": 1.04, "vetoes": [], "reason": "Between decision marks."}

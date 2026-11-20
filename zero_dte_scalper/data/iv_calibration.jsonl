@@ -208,3 +208,9 @@
 {"ts": "2026-11-19T12:41:51", "symbol": "SPY", "source": "yahoo", "quote_time": null, "spot": 722.55, "strike": 723.0, "straddle_mid": 5.14, "model_at_index": 2.569, "ratio": 2.001, "index_iv": 0.2723}
 {"ts": "2026-11-19T13:11:55", "symbol": "QQQ", "source": "yahoo", "quote_time": null, "spot": 648.79, "strike": 649.0, "straddle_mid": 5.215, "model_at_index": 2.674, "ratio": 1.95, "index_iv": 0.3596}
 {"ts": "2026-11-19T13:11:57", "symbol": "SPY", "source": "yahoo", "quote_time": null, "spot": 719.01, "strike": 719.0, "straddle_mid": 4.46, "model_at_index": 2.242, "ratio": 1.989, "index_iv": 0.2727}
+{"ts": "2026-11-19T13:41:59", "symbol": "QQQ", "source": "yahoo", "quote_time": null, "spot": 650.37, "strike": 650.0, "straddle_mid": 4.755, "model_at_index": 2.281, "ratio": 2.084, "index_iv": 0.358}
+{"ts": "2026-11-19T13:42:00", "symbol": "SPY", "source": "yahoo", "quote_time": null, "spot": 720.8, "strike": 721.0, "straddle_mid": 3.825, "model_at_index": 1.913, "ratio": 2.0, "index_iv": 0.2722}
+{"ts": "2026-11-19T14:12:03", "symbol": "QQQ", "source": "yahoo", "quote_time": null, "spot": 644.55, "strike": 645.0, "straddle_mid": 5.025, "model_at_index": 1.799, "ratio": 2.793, "index_iv": 0.359}
+{"ts": "2026-11-19T14:12:04", "symbol": "SPY", "source": "yahoo", "quote_time": null, "spot": 715.93, "strike": 716.0, "straddle_mid": 4.08, "model_at_index": 1.505, "ratio": 2.711, "index_iv": 0.2758}
+{"ts": "2026-11-19T14:42:09", "symbol": "QQQ", "source": "yahoo", "quote_time": null, "spot": 646.6, "strike": 647.0, "straddle_mid": 3.435, "model_at_index": 1.13, "ratio": 3.041, "index_iv": 0.3604}
+{"ts": "2026-11-19T14:42:10", "symbol": "SPY", "source": "yahoo", "quote_time": null, "spot": 716.94, "strike": 717.0, "straddle_mid": 2.82, "model_at_index": 0.935, "ratio": 3.015, "index_iv": 0.2805}
