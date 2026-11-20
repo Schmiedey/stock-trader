@@ -289,6 +289,10 @@ class ZeroDteScalperDaemon:
                         continue
 
                     c = rec["contract"]
+                    if rec.get("chain_synthetic"):
+                        # never paper-fill on made-up quotes (same rule as the iron fly)
+                        log(f"⏸️ [NO REAL CHAIN] {symbol} {action} skipped: only a synthetic option chain is available")
+                        continue
                     # Ensure bid/ask spread is tight (<= $0.04)
                     max_spr = self.config.get("max_bid_ask_spread_usd", 0.04)
                     if c.get("spread", 0.04) > max_spr:

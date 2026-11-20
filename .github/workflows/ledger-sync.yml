@@ -8,6 +8,10 @@ on:
   schedule:
     - cron: "*/10 * * * *"
   workflow_dispatch:
+  # A push to main redeploys Render, which wipes its disk and restores from this branch.
+  # Sync right away so the old instance's latest trades are saved before it is replaced.
+  push:
+    branches: [main]
 
 permissions:
   contents: write
@@ -38,8 +42,10 @@ jobs:
               if rel.endswith(".jsonl"):
                   return len([l for l in text.splitlines() if l.strip()])
               if rel.endswith("_history.json"):
+                  # count distinct closes, so dropping a duplicate record isn't treated as data loss
                   try:
-                      return len(json.loads(text or "[]"))
+                      rows = json.loads(text or "[]")
+                      return len({(r.get("id"), r.get("exit_timestamp") if r.get("is_partial") else "full") for r in rows})
                   except Exception:
                       return 0
               return None

@@ -285,6 +285,9 @@ def calculate_time_to_expiration_years(expiration_date_str: str) -> float:
 
 
 _CBOE_CACHE: dict = {}
+_CBOE_HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) "
+                               "Chrome/130.0 Safari/537.36",
+                 "Accept": "application/json", "Referer": "https://www.cboe.com/"}
 _OCC = __import__("re").compile(r"^([A-Z]+)(\d{6})([CP])(\d{8})$")
 
 
@@ -300,8 +303,12 @@ def fetch_cboe_chain(symbol: str, exp_date_str: str, max_age_s: float = 60.0) ->
     if hit and now - hit[0] < max_age_s:
         data = hit[1]
     else:
-        r = requests.get(f"https://cdn.cboe.com/api/global/delayed_quotes/options/{symbol}.json",
-                         timeout=30, headers={"User-Agent": "Mozilla/5.0"})
+        # CBOE moved this feed to cdn-api.cboe.com (Nov 2026); the old host 307-redirects to an HTML page
+        r = requests.get(f"https://cdn-api.cboe.com/api/global/delayed_quotes/options/{symbol}.json",
+                         timeout=30, headers=_CBOE_HEADERS)
+        if "json" not in r.headers.get("content-type", ""):
+            r = requests.get(f"https://cdn.cboe.com/api/global/delayed_quotes/options/{symbol}.json",
+                             timeout=30, headers=_CBOE_HEADERS)
         r.raise_for_status()
         data = r.json()["data"]
         _CBOE_CACHE[symbol] = (now, data)

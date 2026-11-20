@@ -82,3 +82,12 @@ def test_moneyness_selection_skips_wide_spread_strike():
              "puts": [mk(652, 0.03), mk(653, 1.10), mk(654, 0.03)]}
     rec = select_best_contract("QQQ", "PUT", chain, {"target_moneyness_pct": 0.5, "max_bid_ask_spread_usd": 0.08}, spot=650.0)
     assert rec["contract"]["strike"] in (652.0, 654.0)
+
+
+def test_selector_flags_synthetic_chain():
+    from zero_dte_scalper.src.options_selector import select_best_contract
+    p = {"contract_symbol": "P650", "strike": 650.0, "bid": 1.0, "ask": 1.04, "spread": 0.04, "last_price": 1.02,
+         "delta": -0.5, "volume": 1, "open_interest": 1, "iv": 0.3}
+    chain = {"spot_price": 650.0, "expiration": "2026-11-20", "is_true_0dte": True, "synthetic": True,
+             "calls": [dict(p, contract_symbol="C650", delta=0.5)], "puts": [p]}
+    assert select_best_contract("QQQ", "PUT", chain, {})["chain_synthetic"] is True

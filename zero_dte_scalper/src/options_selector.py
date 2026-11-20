@@ -116,6 +116,7 @@ def select_best_contract(
         "chain_spot": chain_data.get("spot_price", 0.0),
         "chain_source": chain_data.get("source", ""),
         "chain_quote_time": chain_data.get("quote_time"),
+        "chain_synthetic": bool(chain_data.get("synthetic")),
         "sizing": {
             "suggested_contracts": suggested_qty,
             "contract_unit_cost": round(contract_unit_cost, 2),
