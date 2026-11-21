@@ -91,3 +91,17 @@ def test_selector_flags_synthetic_chain():
     chain = {"spot_price": 650.0, "expiration": "2026-11-20", "is_true_0dte": True, "synthetic": True,
              "calls": [dict(p, contract_symbol="C650", delta=0.5)], "puts": [p]}
     assert select_best_contract("QQQ", "PUT", chain, {})["chain_synthetic"] is True
+
+
+def test_remark_leaves_fixed_era_trades_alone_and_restores_them(tmp_path, monkeypatch):
+    rec = dict(id="n", symbol="QQQ", action="PUT", strike=618.0, entry_price=3.85, entry_spot_price=616.0,
+               entry_timestamp="2026-11-21 14:30:10 EST", exit_timestamp="2026-11-21 15:50:04 EST", exit_price=4.29,
+               exit_spot_price=615.0, quantity_closed=1, realized_pnl_usd=44.0)
+    f = _ledger(tmp_path, monkeypatch, [rec])
+    assert T.remark_momentum_history() == 0
+    assert json.loads(f.read_text())[0]["realized_pnl_usd"] == 44.0
+    hurt = dict(rec, exit_price=4.2, realized_pnl_usd=35.0, orig_exit_price=4.29, orig_realized_pnl_usd=44.0, remarked="x")
+    f.write_text(json.dumps([hurt]))
+    assert T.remark_momentum_history() == 1
+    r = json.loads(f.read_text())[0]
+    assert r["exit_price"] == 4.29 and r["realized_pnl_usd"] == 44.0 and "remarked" not in r

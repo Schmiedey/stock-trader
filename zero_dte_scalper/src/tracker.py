@@ -405,7 +405,7 @@ def calculate_performance_metrics() -> dict:
     }
 
 
-def remark_momentum_history(since: str = "2026-11-13") -> int:
+def remark_momentum_history(since: str = "2026-11-13", until: str = "2026-11-20") -> int:
     """Correct paper trades closed with the old (broken) mark: exit = Black-Scholes at the exit spot using
     the vol implied by the entry fill, minus half a 3% spread. Drops duplicate close records.
     Originals are kept in orig_exit_price / orig_realized_pnl_usd. Idempotent. Returns records changed."""
@@ -413,6 +413,16 @@ def remark_momentum_history(since: str = "2026-11-13") -> int:
     out, seen, changed = [], set(), 0
     for h in history:
         if h.get("entry_timestamp", "") < since:
+            out.append(h); continue
+        if h.get("entry_timestamp", "") >= until:
+            # trades from the fixed tracker (v4.0.3+) are priced correctly: undo any re-mark applied to them
+            if h.get("remarked") and "orig_exit_price" in h:
+                h.update(exit_price=h.pop("orig_exit_price"), realized_pnl_usd=h.pop("orig_realized_pnl_usd"))
+                h["realized_pnl_pct"] = round((h["exit_price"] - h["entry_price"]) / h["entry_price"] * 100, 2)
+                h.pop("remarked", None); changed += 1
+            if h.get("entry_timestamp", "").startswith("2026-11-20") and "note" not in h:
+                h["note"] = "Filled on a synthetic option chain (CBOE feed had moved); prices are modelled, not real quotes."
+                changed += 1
             out.append(h); continue
         key = (h.get("id"), "partial" if h.get("is_partial") else "full", h.get("exit_timestamp") if h.get("is_partial") else None)
         if key in seen:
