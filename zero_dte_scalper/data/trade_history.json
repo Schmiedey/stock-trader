@@ -633,17 +633,15 @@
     "exit_timestamp": "2026-11-20 15:50:04 EST",
     "entry_date": "2026-11-20",
     "entry_price": 3.85,
-    "exit_price": 4.23,
+    "exit_price": 4.29,
     "quantity_closed": 1,
-    "realized_pnl_usd": 38.0,
-    "realized_pnl_pct": 9.87,
+    "realized_pnl_usd": 44.0,
+    "realized_pnl_pct": 11.43,
     "exit_reason": "MANDATORY_EOD_EXPIRATION_EXIT",
     "setup": "Momentum breakdown below noise band 630.57",
     "is_partial": false,
     "entry_spot_price": 614.63,
     "exit_spot_price": 613.7,
-    "orig_exit_price": 4.29,
-    "orig_realized_pnl_usd": 44.0,
-    "remarked": "v4.0.3 fair re-mark (old mark inflated near expiry)"
+    "note": "Filled on a synthetic option chain (CBOE feed had moved); prices are modelled, not real quotes."
   }
 ]
