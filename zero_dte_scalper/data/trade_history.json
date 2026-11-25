@@ -643,5 +643,26 @@
     "entry_spot_price": 614.63,
     "exit_spot_price": 613.7,
     "note": "Filled on a synthetic option chain (CBOE feed had moved); prices are modelled, not real quotes."
+  },
+  {
+    "id": "a0642745",
+    "symbol": "QQQ",
+    "action": "PUT",
+    "contract_symbol": "QQQ261125P00614000",
+    "strike": 614.0,
+    "expiration": "2026-11-25",
+    "entry_timestamp": "2026-11-25 10:30:04 EST",
+    "exit_timestamp": "2026-11-25 11:00:03 EST",
+    "entry_date": "2026-11-25",
+    "entry_price": 6.24,
+    "exit_price": 5.41,
+    "quantity_closed": 1,
+    "realized_pnl_usd": -83.0,
+    "realized_pnl_pct": -13.3,
+    "exit_reason": "MOMENTUM_EXIT (price 610.41 back above 609.04)",
+    "setup": "Momentum breakdown below noise band 611.0",
+    "is_partial": false,
+    "entry_spot_price": 610.5,
+    "exit_spot_price": 610.55
   }
 ]
